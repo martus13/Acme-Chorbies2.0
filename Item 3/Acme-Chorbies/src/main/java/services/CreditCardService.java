@@ -12,6 +12,7 @@ import org.springframework.util.Assert;
 import repositories.CreditCardRepository;
 import domain.Chorbi;
 import domain.CreditCard;
+import forms.CreditCardForm;
 
 @Service
 @Transactional
@@ -128,5 +129,44 @@ public class CreditCardService {
 			result = result && (calendar.before(expirationCalendar) || calendar.equals(expirationCalendar));
 		}
 		return result;
+	}
+
+	public CreditCard reconstruct(final CreditCardForm creditCardForm, final String type) {
+		Assert.notNull(creditCardForm);
+
+		CreditCard creditCard = null;
+
+		if (type == "create")
+			creditCard = this.create();
+		else if (type == "edit") {
+			Chorbi chorbi;
+
+			chorbi = this.chorbiService.findByPrincipal();
+			creditCard = this.findByChorbi(chorbi.getId());
+		}
+
+		creditCard.setHolderName(creditCardForm.getHolderName());
+		creditCard.setBrandName(creditCardForm.getBrandName());
+		creditCard.setNumber(creditCardForm.getNumber());
+		creditCard.setExpirationMonth(creditCardForm.getExpirationMonth());
+		creditCard.setExpirationYear(creditCardForm.getExpirationYear());
+		creditCard.setCvv(creditCardForm.getCvv());
+
+		return creditCard;
+	}
+
+	public CreditCardForm desreconstruct(final CreditCard creditCard) {
+		CreditCardForm creditCardForm;
+
+		creditCardForm = new CreditCardForm();
+
+		creditCardForm.setHolderName(creditCard.getHolderName());
+		creditCardForm.setBrandName(creditCard.getBrandName());
+		creditCardForm.setNumber(creditCard.getNumber());
+		creditCardForm.setExpirationMonth(creditCard.getExpirationMonth());
+		creditCardForm.setExpirationYear(creditCard.getExpirationYear());
+		creditCardForm.setCvv(creditCard.getCvv());
+
+		return creditCardForm;
 	}
 }

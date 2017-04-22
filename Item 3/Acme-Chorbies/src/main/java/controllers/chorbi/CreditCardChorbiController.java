@@ -17,6 +17,7 @@ import services.CreditCardService;
 import controllers.AbstractController;
 import domain.Chorbi;
 import domain.CreditCard;
+import forms.CreditCardForm;
 
 @Controller
 @RequestMapping("/creditCard/chorbi")
@@ -58,33 +59,37 @@ public class CreditCardChorbiController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView result;
+		CreditCardForm creditCardForm;
 		CreditCard creditCard;
 
 		creditCard = this.creditCardService.create();
+		creditCardForm = this.creditCardService.desreconstruct(creditCard);
 
-		result = this.createEditModelAndView(creditCard);
+		result = this.createEditModelAndView(creditCardForm);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid CreditCard creditCard, final BindingResult binding) {
+	public ModelAndView save(@Valid final CreditCardForm creditCardForm, final BindingResult binding) {
 
 		ModelAndView result;
+		CreditCard creditCard;
 
 		if (binding.hasErrors()) {
 			System.out.println(binding.toString());
-			result = this.createEditModelAndView(creditCard);
+			result = this.createEditModelAndView(creditCardForm);
 
 		} else
 			try {
+				creditCard = this.creditCardService.reconstruct(creditCardForm, "create");
 				creditCard = this.creditCardService.save(creditCard);
-				result = new ModelAndView("redirect:../../creditCard/chorbi/list.do");
+				result = new ModelAndView("redirect:list.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
 
-				result = this.createEditModelAndView(creditCard, "creditCard.commit.error");
+				result = this.createEditModelAndView(creditCardForm, "creditCard.commit.error");
 
 			}
 		return result;
@@ -96,13 +101,42 @@ public class CreditCardChorbiController extends AbstractController {
 	public ModelAndView edit(@RequestParam final int creditCardId) {
 		ModelAndView result;
 		CreditCard creditCard;
+		CreditCardForm creditCardForm;
 
 		creditCard = this.creditCardService.findOne(creditCardId);
 		Assert.notNull(creditCard);
 
-		result = this.createEditModelAndView(creditCard);
+		creditCardForm = this.creditCardService.desreconstruct(creditCard);
+
+		result = this.createEditModelAndViewEdit(creditCardForm);
 
 		return result;
+	}
+
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+	public ModelAndView saveEdit(@Valid final CreditCardForm creditCardForm, final BindingResult binding) {
+
+		ModelAndView result;
+		CreditCard creditCard;
+
+		if (binding.hasErrors()) {
+			System.out.println(binding.toString());
+			result = this.createEditModelAndViewEdit(creditCardForm);
+
+		} else
+			try {
+				creditCard = this.creditCardService.reconstruct(creditCardForm, "edit");
+				creditCard = this.creditCardService.save(creditCard);
+				result = new ModelAndView("redirect:list.do");
+
+			} catch (final Throwable oops) {
+				System.out.println(oops);
+
+				result = this.createEditModelAndViewEdit(creditCardForm, "creditCard.commit.error");
+
+			}
+		return result;
+
 	}
 
 	//Delete ------------------------------------------------------------------------
@@ -117,7 +151,12 @@ public class CreditCardChorbiController extends AbstractController {
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
 			System.out.println(oops.getMessage());
-			result = this.createEditModelAndView(creditCard, "creditCard.commit.error");
+
+			CreditCardForm creditCardForm;
+
+			creditCardForm = this.creditCardService.desreconstruct(creditCard);
+
+			result = this.createEditModelAndView(creditCardForm, "creditCard.commit.error");
 		}
 		return result;
 	}
@@ -138,19 +177,39 @@ public class CreditCardChorbiController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final CreditCard creditCard) {
+	protected ModelAndView createEditModelAndView(final CreditCardForm creditCardForm) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(creditCard, null);
+		result = this.createEditModelAndView(creditCardForm, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final CreditCard creditCard, final String message) {
+	protected ModelAndView createEditModelAndView(final CreditCardForm creditCardForm, final String message) {
 		ModelAndView result;
 
 		result = new ModelAndView("creditCard/create");
-		result.addObject("creditCard", creditCard);
+		result.addObject("creditCard", creditCardForm);
+		result.addObject("requestURI", "creditCard/chorbi/create.do");
+		result.addObject("message", message);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewEdit(final CreditCardForm creditCardForm) {
+		ModelAndView result;
+
+		result = this.createEditModelAndViewEdit(creditCardForm, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndViewEdit(final CreditCardForm creditCardForm, final String message) {
+		ModelAndView result;
+
+		result = new ModelAndView("creditCard/create");
+		result.addObject("creditCard", creditCardForm);
+		result.addObject("requestURI", "creditCard/chorbi/edit.do");
 		result.addObject("message", message);
 
 		return result;

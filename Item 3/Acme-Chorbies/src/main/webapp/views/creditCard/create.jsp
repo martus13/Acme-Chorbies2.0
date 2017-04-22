@@ -7,11 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="creditCard/chorbi/create.do" modelAttribute="creditCard">
-	
-	<form:hidden path="id" />
-	<form:hidden path="version" />
-	<form:hidden path="chorbi" />
+<form:form action="${requestURI}" modelAttribute="creditCard">
 	
 	<acme:input path="holderName" code="creditCard.holderName" />
 	<div>

@@ -237,60 +237,6 @@ public class ChorbiService {
 
 		return results;
 	}
-	public Collection<Object[]> findGroupByCountryAndCity() {
-		Collection<Object[]> results;
-
-		results = this.chorbiRepository.findGroupByCountryAndCity();
-
-		return results;
-	}
-
-	public Double findRatioInvalidCreditCard() {
-		Double result;
-		Calendar calendar;
-
-		calendar = Calendar.getInstance();
-		result = this.chorbiRepository.findRatioInvalidCreditCard(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH));
-
-		return result;
-	}
-
-	public Object[] findMinMaxAvgAges() {
-		Object[] results;
-
-		results = this.chorbiRepository.findMinMaxAvgAges();
-
-		return results;
-	}
-
-	public Collection<Chorbi> findAllSortedByReceivedLikes() {
-		Collection<Chorbi> results;
-
-		results = this.chorbiRepository.findAllSortedByReceivedLikes();
-
-		return results;
-	}
-
-	public Collection<Object[]> findRatioActivitiesLoveFriendship() {
-		final Collection<Object[]> result = new ArrayList<Object[]>();
-		final Object[] auxActivities = new Object[2];
-		final Object[] auxLove = new Object[2];
-		final Object[] auxFriendship = new Object[2];
-
-		auxActivities[0] = RelationshipType.activities;
-		auxActivities[1] = this.chorbiRepository.findRatioActivities();
-		result.add(auxActivities);
-
-		auxLove[0] = RelationshipType.love;
-		auxLove[1] = this.chorbiRepository.findRatioLove();
-		result.add(auxLove);
-
-		auxFriendship[0] = RelationshipType.friendship;
-		auxFriendship[1] = this.chorbiRepository.findRatioFriendship();
-		result.add(auxFriendship);
-
-		return result;
-	}
 
 	public Chorbi reconstructCreate(final ChorbiForm chorbiForm) {
 		Assert.notNull(chorbiForm);
@@ -376,18 +322,81 @@ public class ChorbiService {
 		return password;
 	}
 
-	
-	public Collection<Object[]> findChorbiWithMostReceivedChirps(){
-		
-		Collection<Object[]> result = this.chorbiRepository.findChorbiWithMostReceivedChirps();
-		
+	// Queries -----
+
+	public Collection<Object[]> findGroupByCountryAndCity() {
+		Collection<Object[]> results;
+
+		results = this.chorbiRepository.findGroupByCountryAndCity();
+
+		return results;
+	}
+
+	public Object[] findMinMaxAvgAges() {
+		Object[] results;
+
+		results = this.chorbiRepository.findMinMaxAvgAges();
+
+		return results;
+	}
+
+	public Double findRatioInvalidCreditCard() {
+		Double result;
+		Calendar calendar;
+
+		calendar = Calendar.getInstance();
+		result = this.chorbiRepository.findRatioInvalidCreditCard(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH));
+
 		return result;
 	}
-	
-	public Collection<Object[]> findChorbiWithMostSentChirps(){
-		
-		Collection<Object[]> result = this.chorbiRepository.findChorbiWithMostSentChirps();
-		
+
+	public Collection<Object[]> findRatioActivitiesLoveFriendship() {
+		final Collection<Object[]> result = new ArrayList<Object[]>();
+		final Object[] auxActivities = new Object[2];
+		final Object[] auxLove = new Object[2];
+		final Object[] auxFriendship = new Object[2];
+
+		auxActivities[0] = RelationshipType.activities;
+		auxActivities[1] = this.chorbiRepository.findRatioActivities();
+		result.add(auxActivities);
+
+		auxLove[0] = RelationshipType.love;
+		auxLove[1] = this.chorbiRepository.findRatioLove();
+		result.add(auxLove);
+
+		auxFriendship[0] = RelationshipType.friendship;
+		auxFriendship[1] = this.chorbiRepository.findRatioFriendship();
+		result.add(auxFriendship);
+
+		return result;
+	}
+
+	public Collection<Chorbi> findAllSortedByReceivedLikes() {
+		Collection<Chorbi> results;
+
+		results = this.chorbiRepository.findAllSortedByReceivedLikes();
+
+		return results;
+	}
+
+	public Collection<Object[]> findChorbiWithMostReceivedChirps() {
+
+		final Collection<Object[]> result = this.chorbiRepository.findChorbiWithMostReceivedChirps();
+
+		return result;
+	}
+
+	public Collection<Object[]> findChorbiWithMostSentChirps() {
+
+		final Collection<Object[]> result = this.chorbiRepository.findChorbiWithMostSentChirps();
+
+		return result;
+	}
+
+	public Collection<Object[]> findOrderByRegisteredEvents() {
+
+		final Collection<Object[]> result = this.chorbiRepository.findOrderByRegisteredEvents();
+
 		return result;
 	}
 }

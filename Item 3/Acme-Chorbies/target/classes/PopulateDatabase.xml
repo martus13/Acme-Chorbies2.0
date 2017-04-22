@@ -90,15 +90,36 @@
 	</bean>
 
 	<bean id="userAccount7" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
+		<property name="username" value="manager1" />
+		<property name="password" value="c240642ddef994358c96da82c0361a58" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
+					<property name="authority" value="MANAGER" />
 				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount8" class="security.UserAccount">
+		<property name="username" value="manager2" />
+		<property name="password" value="8df5127cd164b5bc2d2b78410a7eea0c" />
+		<property name="authorities">
+			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CHORBI" />
+					<property name="authority" value="MANAGER" />
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="userAccount9" class="security.UserAccount">
+		<property name="username" value="manager3" />
+		<property name="password" value="2d3a5db4a2a9717b43698520a8de57d0" />
+		<property name="authorities">
+			<list>
+				<bean class="security.Authority">
+					<property name="authority" value="MANAGER" />
 				</bean>
 			</list>
 		</property>
@@ -110,6 +131,8 @@
 	
 	<bean id="configuration1" class="domain.Configuration">
 		<property name="cachedTime" value="01/01/2017 12:00:00" />
+		<property name="managerFee" value="1.00" />
+		<property name="chorbiFee" value="1.00" />
 	</bean>
 	
 	<!-- Administrator -->
@@ -136,6 +159,116 @@
 	
 	<bean id="banner3" class="domain.Banner">
 		<property name="picture" value="https://pbs.twimg.com/media/C8PjEe9XoAAeJC6.jpg"/>
+	</bean>
+	
+	<!-- Manager -->
+	
+	<bean id="manager1" class="domain.Manager">
+		<property name="name" value="Manager 1"/>
+		<property name="surname" value="Surname Manager 1"/>
+		<property name="email" value="manager1@gmail.com"/>
+		<property name="phoneNumber" value="+34 (954) 15948"/>
+		<property name="userAccount" ref="userAccount7"/>
+		
+		<property name="company" value="Company 1"/>
+		<property name="vatNumber" value="ES99999999R"/>
+		<property name="fee" value="2.0"/>
+	</bean>
+	
+	<bean id="manager2" class="domain.Manager">
+		<property name="name" value="Manager 2"/>
+		<property name="surname" value="Surname Manager 2"/>
+		<property name="email" value="manager2@gmail.com"/>
+		<property name="phoneNumber" value="+34 (954) 98514"/>
+		<property name="userAccount" ref="userAccount8"/>
+		
+		<property name="company" value="Company 2"/>
+		<property name="vatNumber" value="IE1234567TW"/>
+		<property name="fee" value="2.0"/>
+	</bean>
+	
+	<bean id="manager3" class="domain.Manager">
+		<property name="name" value="Manager 3"/>
+		<property name="surname" value="Surname Manager 3"/>
+		<property name="email" value="manager3@gmail.com"/>
+		<property name="phoneNumber" value="+34 (954) 32615"/>
+		<property name="userAccount" ref="userAccount9"/>
+		
+		<property name="company" value="Company 1"/>
+		<property name="vatNumber" value="ES99999999R"/>
+		<property name="fee" value="0"/>
+	</bean>
+	
+	<!-- Event -->
+	
+	<bean id="event1" class="domain.Event">
+		<property name="title" value="Event 1"/>
+		<property name="organisedMoment" value="31/10/2017 12:30"/>
+		<property name="description" value="Description of event1"/>
+		<property name="picture" value="https://1dj7ia2prpz93pxo7t32a2j1-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/special-event.jpg"/>
+		<property name="seatsNumber" value="10"/>
+		<property name="availableSeats" value="10"/>
+		
+		<property name="manager" ref="manager1"/>
+		<property name="chorbies">
+			<list>
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="event2" class="domain.Event">
+		<property name="title" value="Event 2"/>
+		<property name="organisedMoment" value="05/07/2017 10:00"/>
+		<property name="description" value="Description of event2"/>
+		<property name="picture" value="http://www.aal-europe.eu/wp-content/uploads/2013/12/events_medium.jpg"/>
+		<property name="seatsNumber" value="2"/>
+		<property name="availableSeats" value="1"/>
+		
+		<property name="manager" ref="manager1"/>
+		<property name="chorbies">
+			<list>
+				<ref bean="chorbi1" /> 
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="event3" class="domain.Event">
+		<property name="title" value="Event 3"/>
+		<property name="organisedMoment" value="20/05/2017 18:15"/>
+		<property name="description" value="Description of event3"/>
+		<property name="picture" value="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/The_Event_2010_Intertitle.svg/1200px-The_Event_2010_Intertitle.svg.png"/>
+		<property name="seatsNumber" value="2"/>
+		<property name="availableSeats" value="0"/>
+		
+		<property name="manager" ref="manager2"/>
+		<property name="chorbies">
+			<list>
+				<ref bean="chorbi1" /> 
+				<ref bean="chorbi2" /> 
+			</list>
+		</property>
+		
+	</bean>
+	
+	<bean id="event4" class="domain.Event">
+		<property name="title" value="Event 3"/>
+		<property name="organisedMoment" value="14/04/2017 17:45"/>
+		<property name="description" value="Description of event4"/>
+		<property name="picture" value="http://www.hutdogs.com/ext/blog/wp-content/uploads/2013/05/EventIcon.jpg"/>
+		<property name="seatsNumber" value="6"/>
+		<property name="availableSeats" value="3"/>
+		
+		<property name="manager" ref="manager2"/>
+		<property name="chorbies">
+			<list>
+				<ref bean="chorbi1" /> 
+				<ref bean="chorbi2" /> 
+				<ref bean="chorbi3" /> 
+			</list>
+		</property>
+		
 	</bean>
 	
 	<!-- Coordinates -->

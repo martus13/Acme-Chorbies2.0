@@ -8,6 +8,7 @@ import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -24,6 +25,8 @@ public class Configuration extends DomainEntity {
 
 	// Attributes -------------------------------------------------------------
 	private Date	cachedTime;
+	private Double	managerFee;
+	private Double	chorbiFee;
 
 
 	@NotNull
@@ -36,5 +39,27 @@ public class Configuration extends DomainEntity {
 	public void setCachedTime(final Date cachedTime) {
 		this.cachedTime = cachedTime;
 	}
+
+	@NotNull
+	@Min(0)
+	public Double getManagerFee() {
+		return this.managerFee;
+	}
+
+	public void setManagerFee(final Double managerFee) {
+		this.managerFee = managerFee;
+	}
+
+	@NotNull
+	@Min(0)
+	public Double getChorbiFee() {
+		return this.chorbiFee;
+	}
+
+	public void setChorbiFee(final Double chorbiFee) {
+		this.chorbiFee = chorbiFee;
+	}
+
+	// Relationships ----------------------------------------------------------
 
 }
