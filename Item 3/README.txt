@@ -1,1 +1,0 @@
-An Eclipse/Maven project that fulfils the requirements in version 2.0 of project “Acme Chorbies”.
