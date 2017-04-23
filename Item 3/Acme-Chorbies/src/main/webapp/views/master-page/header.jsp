@@ -21,6 +21,25 @@
 	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		
+		<security:authorize access="permitAll">
+			<li><a class="fNiv"><spring:message	code="master.page.events" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<security:authorize access="isAnonymous()">
+						<li><a href="event/list.do"><spring:message code="master.page.event.listAll" /> </a></li>
+						<li><a href="event/listOrganisedLessOneMonth.do"><spring:message code="master.page.event.lessOneMonth" /> </a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('CHORBI')">
+						<li><a href="event/chorbi/listByChorbi.do"><spring:message code="master.page.event.listByChorbi" /> </a></li>
+					</security:authorize>
+					<security:authorize access="hasRole('MANAGER')">
+						<li><a href="event/manager/listByManager.do"><spring:message code="master.page.event.listByManager" /> </a></li>
+					</security:authorize>
+					
+				</ul>
+			</li>
+		</security:authorize>
+		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="chorbi/register.do"><spring:message code="master.page.chorbi.register" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>

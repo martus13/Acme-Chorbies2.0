@@ -15,6 +15,7 @@
 <%@ attribute name="properties" required="true" %>
 
 <%@ attribute name="maxHeight" required="false" %>
+<%@ attribute name="style" required="false" %>
 
 <jstl:if test="${maxHeight == null}">
 	<jstl:set var="maxHeight" value="200px" />
@@ -23,7 +24,7 @@
 <%-- Definition --%>
 
 <spring:message code="${code}" var="titleHeader" />
-<display:column title="${titleHeader}" sortable="false">
+<display:column title="${titleHeader}" sortable="false" style="${style}" >
 	<jstl:forEach items="${properties}" var="picture">
 		<img src="${picture }" style="max-height: ${maxHeight};" />
 	</jstl:forEach>

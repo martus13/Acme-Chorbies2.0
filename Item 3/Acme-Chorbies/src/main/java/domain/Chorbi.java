@@ -15,6 +15,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
@@ -44,6 +45,7 @@ public class Chorbi extends Actor {
 	private Date				birthDate;
 	private RelationshipType	relationshipEngage;
 	private Coordinates			coordinates;
+	private Double				fee;
 
 
 	@NotBlank
@@ -116,6 +118,16 @@ public class Chorbi extends Actor {
 
 	public void setCoordinates(final Coordinates coordinates) {
 		this.coordinates = coordinates;
+	}
+
+	@NotNull
+	@Min(0)
+	public Double getFee() {
+		return this.fee;
+	}
+
+	public void setFee(final Double fee) {
+		this.fee = fee;
 	}
 
 

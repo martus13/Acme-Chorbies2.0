@@ -203,7 +203,7 @@
 	
 	<bean id="event1" class="domain.Event">
 		<property name="title" value="Event 1"/>
-		<property name="organisedMoment" value="31/10/2017 12:30"/>
+		<property name="organisedMoment" value="10/31/2017 12:30"/>
 		<property name="description" value="Description of event1"/>
 		<property name="picture" value="https://1dj7ia2prpz93pxo7t32a2j1-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/special-event.jpg"/>
 		<property name="seatsNumber" value="10"/>
@@ -219,7 +219,7 @@
 	
 	<bean id="event2" class="domain.Event">
 		<property name="title" value="Event 2"/>
-		<property name="organisedMoment" value="05/07/2017 10:00"/>
+		<property name="organisedMoment" value="07/05/2017 10:00"/>
 		<property name="description" value="Description of event2"/>
 		<property name="picture" value="http://www.aal-europe.eu/wp-content/uploads/2013/12/events_medium.jpg"/>
 		<property name="seatsNumber" value="2"/>
@@ -236,11 +236,11 @@
 	
 	<bean id="event3" class="domain.Event">
 		<property name="title" value="Event 3"/>
-		<property name="organisedMoment" value="20/05/2017 18:15"/>
+		<property name="organisedMoment" value="05/20/2017 18:15"/>
 		<property name="description" value="Description of event3"/>
 		<property name="picture" value="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/The_Event_2010_Intertitle.svg/1200px-The_Event_2010_Intertitle.svg.png"/>
 		<property name="seatsNumber" value="2"/>
-		<property name="availableSeats" value="0"/>
+		<property name="availableSeats" value="3"/>
 		
 		<property name="manager" ref="manager2"/>
 		<property name="chorbies">
@@ -253,12 +253,12 @@
 	</bean>
 	
 	<bean id="event4" class="domain.Event">
-		<property name="title" value="Event 3"/>
-		<property name="organisedMoment" value="14/04/2017 17:45"/>
+		<property name="title" value="Event 4"/>
+		<property name="organisedMoment" value="04/14/2017 17:45"/>
 		<property name="description" value="Description of event4"/>
 		<property name="picture" value="http://www.hutdogs.com/ext/blog/wp-content/uploads/2013/05/EventIcon.jpg"/>
 		<property name="seatsNumber" value="6"/>
-		<property name="availableSeats" value="3"/>
+		<property name="availableSeats" value="0"/>
 		
 		<property name="manager" ref="manager2"/>
 		<property name="chorbies">
@@ -300,6 +300,7 @@
 		<property name="birthDate" value="10/31/1992" />
 		<property name="relationshipEngage" value="love" />
 		<property name="coordinates" ref="coordinates1" />
+		<property name="fee" value="3.0" />
 		<property name="givenLikes">
 			<list>
 				<ref bean="like1" /> 
@@ -339,6 +340,7 @@
 		<property name="birthDate" value="12/12/1989" />
 		<property name="relationshipEngage" value="activities" />
 		<property name="coordinates" ref="coordinates2" />
+		<property name="fee" value="2.0" />
 		<property name="givenLikes">
 			<list>
 			</list>
@@ -376,6 +378,7 @@
 		<property name="birthDate" value="11/04/1995" />
 		<property name="relationshipEngage" value="love" />
 		<property name="coordinates" ref="coordinates2" />
+		<property name="fee" value="2.0" />
 		<property name="givenLikes">
 			<list>
 				<ref bean="like4" /> 
@@ -415,6 +418,7 @@
 		<property name="birthDate" value="10/21/1991" />
 		<property name="relationshipEngage" value="friendship" />
 		<property name="coordinates" ref="coordinates2" />
+		<property name="fee" value="0.0" />
 		<property name="givenLikes">
 			<list>
 			</list>
@@ -451,6 +455,7 @@
 		<property name="birthDate" value="12/11/1990" />
 		<property name="relationshipEngage" value="love" />
 		<property name="coordinates" ref="coordinates1" />
+		<property name="fee" value="1.0" />
 		<property name="givenLikes">
 			<list>
 			</list>

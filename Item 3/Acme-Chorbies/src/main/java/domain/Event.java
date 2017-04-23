@@ -126,4 +126,12 @@ public class Event extends DomainEntity {
 		this.chorbies = chorbies;
 	}
 
+	public void addChorbi(final Chorbi chorbi) {
+		this.chorbies.add(chorbi);
+	}
+
+	public void removeChorbi(final Chorbi chorbi) {
+		this.chorbies.remove(chorbi);
+	}
+
 }

@@ -91,6 +91,7 @@ public class ChorbiService {
 		result.setReceivedLikes(receivedLikes);
 		result.setReceivedChirps(receivedChirps);
 		result.setSentChirps(sentChirps);
+		result.setFee(0.0);
 
 		return result;
 	}

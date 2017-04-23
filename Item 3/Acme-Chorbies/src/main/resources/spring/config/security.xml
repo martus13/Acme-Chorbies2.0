@@ -42,16 +42,23 @@
 		<security:intercept-url pattern="/welcome/index.do" access="permitAll" /> 
 		<security:intercept-url pattern="/misc/conditions.do" access="permitAll" /> 
 
-		<!-- Permit All -->
+		<!-- permitAll -->
 		
 		<!-- isAnonymous() -->
 		
 		<security:intercept-url pattern="/chorbi/register.do" access="isAnonymous()" /> 
 		
+		<security:intercept-url pattern="/event/listOrganisedLessOneMonth.do" access="isAnonymous()" /> 
+		<security:intercept-url pattern="/event/list.do" access="isAnonymous()" /> 
+		
 		<!-- isAuthenticated() -->
 		
 		<security:intercept-url pattern="/chorbi/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/chorbi/actor/display.do" access="isAuthenticated()" /> 
+		
+		<!-- MANAGER -->
+		
+		<security:intercept-url pattern="/event/manager/listByManager.do" access="hasRole('MANAGER')" />
 		
 		<!-- CHORBI -->
 		
@@ -59,6 +66,8 @@
 		<security:intercept-url pattern="/creditCard/chorbi/create.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/creditCard/chorbi/edit.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/creditCard/chorbi/delete.do" access="hasRole('CHORBI')" />
+		
+		<security:intercept-url pattern="/event/chorbi/listByChorbi.do" access="hasRole('CHORBI')" />
 		
 		<security:intercept-url pattern="/like/chorbi/create.do" access="hasRole('CHORBI')" /> 
 		<security:intercept-url pattern="/like/chorbi/cancel.do" access="hasRole('CHORBI')" /> 
