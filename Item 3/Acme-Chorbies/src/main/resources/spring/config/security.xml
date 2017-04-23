@@ -44,12 +44,12 @@
 
 		<!-- permitAll -->
 		
+		<security:intercept-url pattern="/event/listOrganisedLessOneMonth.do" access="permitAll" /> 
+		<security:intercept-url pattern="/event/list.do" access="permitAll" /> 
+		
 		<!-- isAnonymous() -->
 		
 		<security:intercept-url pattern="/chorbi/register.do" access="isAnonymous()" /> 
-		
-		<security:intercept-url pattern="/event/listOrganisedLessOneMonth.do" access="isAnonymous()" /> 
-		<security:intercept-url pattern="/event/list.do" access="isAnonymous()" /> 
 		
 		<!-- isAuthenticated() -->
 		
@@ -59,6 +59,8 @@
 		<!-- MANAGER -->
 		
 		<security:intercept-url pattern="/event/manager/listByManager.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/event/manager/create.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/event/manager/edit.do" access="hasRole('MANAGER')" />
 		
 		<!-- CHORBI -->
 		
@@ -68,6 +70,8 @@
 		<security:intercept-url pattern="/creditCard/chorbi/delete.do" access="hasRole('CHORBI')" />
 		
 		<security:intercept-url pattern="/event/chorbi/listByChorbi.do" access="hasRole('CHORBI')" />
+		<security:intercept-url pattern="/event/chorbi/register.do" access="hasRole('CHORBI')" />
+		<security:intercept-url pattern="/event/chorbi/unregister.do" access="hasRole('CHORBI')" />
 		
 		<security:intercept-url pattern="/like/chorbi/create.do" access="hasRole('CHORBI')" /> 
 		<security:intercept-url pattern="/like/chorbi/cancel.do" access="hasRole('CHORBI')" /> 
@@ -100,6 +104,7 @@
 		
 		<security:intercept-url pattern="/chorbi/administrator/ban.do" access="hasRole('ADMIN')" /> 
 		<security:intercept-url pattern="/chorbi/administrator/unban.do" access="hasRole('ADMIN')" /> 
+		<security:intercept-url pattern="/chorbi/administrator/updateFee.do" access="hasRole('ADMIN')" /> 
 		
 		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMIN')" /> 
 		

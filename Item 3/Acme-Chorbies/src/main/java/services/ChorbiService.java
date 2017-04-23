@@ -18,6 +18,7 @@ import security.UserAccount;
 import domain.Administrator;
 import domain.Chirp;
 import domain.Chorbi;
+import domain.Configuration;
 import domain.Like;
 import domain.RelationshipType;
 import domain.SearchTemplate;
@@ -37,6 +38,9 @@ public class ChorbiService {
 
 	@Autowired
 	private AdministratorService	administratorService;
+
+	@Autowired
+	private ConfigurationService	configurationService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -146,6 +150,24 @@ public class ChorbiService {
 		chorbi = this.chorbiRepository.save(chorbi);
 
 		return chorbi;
+	}
+
+	public void updateAllFees() {
+
+		Administrator administrator;
+		Collection<Chorbi> chorbies;
+		Configuration configuration;
+
+		administrator = this.administratorService.findByPrincipal();
+		Assert.notNull(administrator);
+
+		chorbies = this.findAll();
+		configuration = this.configurationService.findConfiguration();
+
+		for (Chorbi c : chorbies) {
+			c.setFee(c.getFee() + configuration.getChorbiFee());
+			c = this.save(c);
+		}
 	}
 
 	// Other business methods -------------------------------------------------

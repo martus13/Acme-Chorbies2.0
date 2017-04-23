@@ -19,6 +19,7 @@ import services.CreditCardService;
 import services.SearchTemplateService;
 import controllers.AbstractController;
 import domain.Chorbi;
+import domain.CreditCard;
 import domain.Genre;
 import domain.RelationshipType;
 import domain.SearchTemplate;
@@ -82,11 +83,13 @@ public class SearchTemplateChorbiController extends AbstractController {
 		ModelAndView result;
 		SearchTemplate searchTemplate;
 		Collection<Chorbi> chorbies;
+		CreditCard creditCard;
 
 		searchTemplate = this.searchTemplateService.findOne(searchTemplateId);
 		Assert.notNull(searchTemplate);
 
-		if ((this.creditCardService.checkValidation(this.creditCardService.findByChorbi(this.chorbiService.findByPrincipal().getId()))) == false || (this.creditCardService.findByChorbi(this.chorbiService.findByPrincipal().getId())) == null) {
+		creditCard = this.creditCardService.findByChorbi(this.chorbiService.findByPrincipal().getId());
+		if (this.creditCardService.checkValidation(creditCard) == false || creditCard == null) {
 			System.out.println("Invalid Credit Card");
 			result = new ModelAndView("master.page");
 			result.addObject("message", "searchTemplate.commit.errorCC");

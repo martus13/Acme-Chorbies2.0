@@ -63,9 +63,13 @@ public class EventService {
 		Event result;
 		Manager manager;
 		Collection<Chorbi> chorbies;
+		//CreditCard creditCard;
 
 		manager = this.managerService.findByPrincipal();
 		Assert.notNull(manager);
+		// TODO: comprobar la validez de la creditCard:
+		//creditCard = creditCardService.findByActorId(manager.getId());
+		//Assert.isTrue(creditCardService.checkValidation(creditCard));
 
 		chorbies = new ArrayList<Chorbi>();
 
@@ -89,6 +93,11 @@ public class EventService {
 			create = true;
 			event.setAvailableSeats(event.getSeatsNumber());
 
+		} else {
+			Collection<Chorbi> chorbies;
+
+			chorbies = event.getChorbies();
+			event.setAvailableSeats(event.getSeatsNumber() - chorbies.size());
 		}
 
 		event = this.eventRepository.save(event);

@@ -58,4 +58,17 @@ public class ChorbiAdministratorController extends AbstractController {
 
 		return result;
 	}
+
+	// UpdateFee --------------------------------------------------------------		
+
+	@RequestMapping(value = "/updateFee", method = RequestMethod.GET)
+	public ModelAndView updateFee() {
+		ModelAndView result;
+
+		this.chorbiService.updateAllFees();
+
+		result = new ModelAndView("redirect:../actor/list.do");
+
+		return result;
+	}
 }

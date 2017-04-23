@@ -25,15 +25,14 @@
 			<li><a class="fNiv"><spring:message	code="master.page.events" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<security:authorize access="isAnonymous()">
-						<li><a href="event/list.do"><spring:message code="master.page.event.listAll" /> </a></li>
-						<li><a href="event/listOrganisedLessOneMonth.do"><spring:message code="master.page.event.lessOneMonth" /> </a></li>
-					</security:authorize>
+					<li><a href="event/list.do"><spring:message code="master.page.event.listAll" /> </a></li>
+					<li><a href="event/listOrganisedLessOneMonth.do"><spring:message code="master.page.event.lessOneMonth" /> </a></li>
 					<security:authorize access="hasRole('CHORBI')">
 						<li><a href="event/chorbi/listByChorbi.do"><spring:message code="master.page.event.listByChorbi" /> </a></li>
 					</security:authorize>
 					<security:authorize access="hasRole('MANAGER')">
 						<li><a href="event/manager/listByManager.do"><spring:message code="master.page.event.listByManager" /> </a></li>
+						<li><a href="event/manager/create.do"><spring:message code="master.page.event.create" /> </a></li>
 					</security:authorize>
 					
 				</ul>

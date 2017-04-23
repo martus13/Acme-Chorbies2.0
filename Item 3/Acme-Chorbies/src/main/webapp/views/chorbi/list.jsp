@@ -10,6 +10,12 @@
 <%@ taglib prefix="f" uri="http://example.com/functions" %>
 
 <security:authentication var="principalUserAccount" property="principal" />
+<security:authorize access="hasRole('ADMIN')">
+	<a href="chorbi/administrator/updateFee.do">
+		<spring:message code="chorbi.updateFee" />
+	</a>
+	<br>
+</security:authorize>
 <display:table name="chorbies" id="row" requestURI="${requestURI }">
 	
 	<spring:message code="chorbi.name" var="nameHeader" />
@@ -64,6 +70,10 @@
 		</ul>
 	</display:column>  
 	
+	<security:authorize access="hasRole('ADMIN')">
+		<acme:column code="chorbi.fee" property="fee" />
+	</security:authorize>
+	
 	<display:column>
 		<a href="chorbi/actor/display.do?chorbiId=${row.id }">
 			<spring:message code="chorbi.display" />
@@ -112,12 +122,12 @@
 			<jstl:choose>
 				<jstl:when test="${row.banned }">
 					<form:form action="chorbi/administrator/unban.do?chorbiId=${row.id}" modelAttribute="chorbi">
-						<acme:submit name="unban" code="booking.unban" />
+						<acme:submit name="unban" code="chorbi.unban" />
 					</form:form>
 				</jstl:when>
 				<jstl:otherwise>
 					<form:form action="chorbi/administrator/ban.do?chorbiId=${row.id}" modelAttribute="chorbi">
-						<acme:submit name="ban" code="booking.ban" />
+						<acme:submit name="ban" code="chorbi.ban" />
 					</form:form>
 				</jstl:otherwise>
 			</jstl:choose>

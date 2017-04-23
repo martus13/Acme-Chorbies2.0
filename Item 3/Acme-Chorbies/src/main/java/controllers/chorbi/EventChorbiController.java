@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ChorbiService;
@@ -33,7 +34,7 @@ public class EventChorbiController extends AbstractController {
 		super();
 	}
 
-	// ListingByManager -------------------------------------------------------		
+	// ListingByChorbi --------------------------------------------------------		
 	@RequestMapping(value = "/listByChorbi", method = RequestMethod.GET)
 	public ModelAndView listByChorbi() {
 		ModelAndView result;
@@ -47,6 +48,36 @@ public class EventChorbiController extends AbstractController {
 		result = new ModelAndView("event/list");
 		result.addObject("requestURI", "event/listByChorbi.do");
 		result.addObject("events", events);
+
+		return result;
+	}
+
+	// Register ---------------------------------------------------------------		
+
+	@RequestMapping(value = "/register", method = RequestMethod.POST, params = "register")
+	public ModelAndView register(@RequestParam final int eventId) {
+		ModelAndView result;
+		Event event;
+
+		event = this.eventService.findOne(eventId);
+		this.eventService.register(event);
+
+		result = new ModelAndView("redirect:../list.do");
+
+		return result;
+	}
+
+	// Unregister -------------------------------------------------------------		
+
+	@RequestMapping(value = "/unregister", method = RequestMethod.POST, params = "unregister")
+	public ModelAndView unregister(@RequestParam final int eventId) {
+		ModelAndView result;
+		Event event;
+
+		event = this.eventService.findOne(eventId);
+		this.eventService.unregister(event);
+
+		result = new ModelAndView("redirect:../list.do");
 
 		return result;
 	}
