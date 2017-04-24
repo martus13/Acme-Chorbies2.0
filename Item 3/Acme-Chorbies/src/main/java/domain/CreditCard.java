@@ -91,18 +91,18 @@ public class CreditCard extends DomainEntity {
 
 
 	// Relationships ----------------------------------------------------------
-	private Chorbi	chorbi;
+	private Actor	actor;
 
 
 	@NotNull
 	@Valid
 	@OneToOne(optional = false)
-	public Chorbi getChorbi() {
-		return this.chorbi;
+	public Actor getActor() {
+		return this.actor;
 	}
 
-	public void setChorbi(final Chorbi chorbi) {
-		this.chorbi = chorbi;
+	public void setActor(final Actor actor) {
+		this.actor = actor;
 	}
 
 	//	public static String maskNumber(final String number) {
