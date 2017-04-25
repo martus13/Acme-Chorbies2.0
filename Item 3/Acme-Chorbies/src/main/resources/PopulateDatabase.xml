@@ -602,6 +602,38 @@
 		</property>
 	</bean>
 	
+	<!-- MonthlyFee -->
+	
+	<bean id="monthlyFee1" class="domain.MonthlyFee">
+		<property name="creationMoment" value="03/05/2017 09:00" />
+		<property name="fee" value="1.0" />
+		<property name="chorbi" ref="chorbi1" />
+	</bean>
+	
+	<bean id="monthlyFee2" class="domain.MonthlyFee">
+		<property name="creationMoment" value="02/02/2017 12:30" />
+		<property name="fee" value="1.0" />
+		<property name="chorbi" ref="chorbi2" />
+	</bean>
+	
+	<bean id="monthlyFee3" class="domain.MonthlyFee">
+		<property name="creationMoment" value="03/20/2017 10:30" />
+		<property name="fee" value="1.0" />
+		<property name="chorbi" ref="chorbi2" />
+	</bean>
+	
+	<bean id="monthlyFee4" class="domain.MonthlyFee">
+		<property name="creationMoment" value="04/01/2017 10:30" />
+		<property name="fee" value="1.0" />
+		<property name="chorbi" ref="chorbi2" />
+	</bean>
+	
+	<bean id="monthlyFee5" class="domain.MonthlyFee">
+		<property name="creationMoment" value="04/01/2017 10:30" />
+		<property name="fee" value="1.0" />
+		<property name="chorbi" ref="chorbi3" />
+	</bean>
+	
 	<!-- Like -->
 	
 	<bean id="like1" class="domain.Like">
