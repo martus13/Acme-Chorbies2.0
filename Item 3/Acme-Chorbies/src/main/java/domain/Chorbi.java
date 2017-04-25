@@ -135,9 +135,6 @@ public class Chorbi extends Actor {
 
 	private Collection<Like>	givenLikes;
 	private Collection<Like>	receivedLikes;
-	private Collection<Chirp>	receivedChirps;
-	private Collection<Chirp>	sentChirps;
-
 
 	@Valid
 	@NotNull
@@ -160,27 +157,4 @@ public class Chorbi extends Actor {
 	public void setReceivedLikes(final Collection<Like> receivedLikes) {
 		this.receivedLikes = receivedLikes;
 	}
-
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "recipient")
-	public Collection<Chirp> getReceivedChirps() {
-		return this.receivedChirps;
-	}
-
-	public void setReceivedChirps(final Collection<Chirp> receivedChirps) {
-		this.receivedChirps = receivedChirps;
-	}
-
-	@Valid
-	@NotNull
-	@OneToMany(mappedBy = "sender")
-	public Collection<Chirp> getSentChirps() {
-		return this.sentChirps;
-	}
-
-	public void setSentChirps(final Collection<Chirp> sentChirps) {
-		this.sentChirps = sentChirps;
-	}
-
 }
