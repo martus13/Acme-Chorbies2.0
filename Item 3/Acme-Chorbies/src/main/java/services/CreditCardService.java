@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import repositories.CreditCardRepository;
-import domain.Chorbi;
+import domain.Actor;
 import domain.CreditCard;
 import forms.CreditCardForm;
 
@@ -24,7 +24,7 @@ public class CreditCardService {
 
 	// Supporting services ----------------------------------------------------
 	@Autowired
-	private ChorbiService			chorbiService;
+	private ActorService			actorService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -53,13 +53,13 @@ public class CreditCardService {
 
 	public CreditCard create() {
 		CreditCard result;
-		Chorbi chorbi;
+		Actor actor;
 
 		result = new CreditCard();
 
-		chorbi = this.chorbiService.findByPrincipal();
+		actor = this.actorService.findByPrincipal();
 
-		result.setChorbi(chorbi);
+		result.setActor(actor);
 
 		return result;
 	}
@@ -72,8 +72,8 @@ public class CreditCardService {
 		calendar = Calendar.getInstance();
 		expirationCalendar = Calendar.getInstance();
 
-		// chorbi de CC = chorbi logueado
-		Assert.isTrue(creditCard.getChorbi().equals(this.chorbiService.findByPrincipal()));
+		// actor de CC = actor logueado
+		Assert.isTrue(creditCard.getActor().equals(this.actorService.findByPrincipal()));
 
 		// brand name
 		Assert.isTrue(creditCard.getBrandName().equals("VISA") || creditCard.getBrandName().equals("MASTERCARD") || creditCard.getBrandName().equals("DISCOVER") || creditCard.getBrandName().equals("DINNERS") || creditCard.getBrandName().equals("AMEX"));
@@ -91,20 +91,20 @@ public class CreditCardService {
 
 	public void delete(final CreditCard creditCard) {
 		Assert.notNull(creditCard);
-		Chorbi chorbi;
+		Actor actor;
 
-		chorbi = this.chorbiService.findByPrincipal();
-		Assert.isTrue(chorbi.equals(creditCard.getChorbi()));
+		actor = this.actorService.findByPrincipal();
+		Assert.isTrue(actor.equals(creditCard.getActor()));
 
 		this.creditCardRepository.delete(creditCard);
 	}
 
 	// Other business methods -------------------------------------------------
 
-	public CreditCard findByChorbi(final int chorbiId) {
+	public CreditCard findByActor(final int actorId) {
 		CreditCard result;
 
-		result = this.creditCardRepository.findByChorbi(chorbiId);
+		result = this.creditCardRepository.findByActor(actorId);
 
 		return result;
 	}
@@ -139,10 +139,10 @@ public class CreditCardService {
 		if (type == "create")
 			creditCard = this.create();
 		else if (type == "edit") {
-			Chorbi chorbi;
+			Actor actor;
 
-			chorbi = this.chorbiService.findByPrincipal();
-			creditCard = this.findByChorbi(chorbi.getId());
+			actor = this.actorService.findByPrincipal();
+			creditCard = this.findByActor(actor.getId());
 		}
 
 		creditCard.setHolderName(creditCardForm.getHolderName());

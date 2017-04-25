@@ -136,7 +136,7 @@ public class SearchTemplateService {
 		chorbi = this.chorbiService.findByPrincipal();
 
 		// primero: comprobar que tiene creditCard y que es valida
-		Assert.isTrue(this.creditCardService.checkValidation(this.creditCardService.findByChorbi(chorbi.getId())));
+		Assert.isTrue(this.creditCardService.checkValidation(this.creditCardService.findByActor(chorbi.getId())));
 
 		// segundo: comprobar la fecha en que se hizo la busqueda
 		if (searchTemplate.getSearchTime() == null) {

@@ -13,6 +13,7 @@ import org.springframework.util.Assert;
 import repositories.EventRepository;
 import domain.Chorbi;
 import domain.Configuration;
+import domain.CreditCard;
 import domain.Event;
 import domain.Manager;
 
@@ -33,6 +34,9 @@ public class EventService {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+
+	@Autowired
+	private CreditCardService		creditCardService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -63,13 +67,14 @@ public class EventService {
 		Event result;
 		Manager manager;
 		Collection<Chorbi> chorbies;
-		//CreditCard creditCard;
+		CreditCard creditCard;
 
 		manager = this.managerService.findByPrincipal();
 		Assert.notNull(manager);
-		// TODO: comprobar la validez de la creditCard:
-		//creditCard = creditCardService.findByActorId(manager.getId());
-		//Assert.isTrue(creditCardService.checkValidation(creditCard));
+
+		// comprobar la validez de la creditCard:
+		creditCard = this.creditCardService.findByActor(manager.getId());
+		Assert.isTrue(this.creditCardService.checkValidation(creditCard));
 
 		chorbies = new ArrayList<Chorbi>();
 

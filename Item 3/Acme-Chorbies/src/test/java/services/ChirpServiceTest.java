@@ -42,7 +42,7 @@ public class ChirpServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{
-				50, null
+				68, null
 			}
 		};
 
@@ -60,11 +60,11 @@ public class ChirpServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{	// Bien
-				"chorbi1", 52, "Asunto test", "Test save", null
+				"chorbi1", 70, "Asunto test", "Test save", null
 			}, {// No se puede enviar chirps a sí mismo
-				"chorbi1", 50, "Asunto test", "Test save", IllegalArgumentException.class
+				"chorbi1", 68, "Asunto test", "Test save", IllegalArgumentException.class
 			}, {// Debe estar logueado
-				null, 50, "Asunto test", "Test save", IllegalArgumentException.class
+				null, 68, "Asunto test", "Test save", IllegalArgumentException.class
 			}
 		};
 
@@ -82,11 +82,11 @@ public class ChirpServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{	// Bien
-				"chorbi1", "chorbi2", 69, 70, null
+				"chorbi1", "chorbi2", 87, 88, null
 			}, {// Debe estar logueado
-				null, null, 69, 70, IllegalArgumentException.class
+				null, null, 87, 88, IllegalArgumentException.class
 			}, {// El chorbi que realiza la acción debe coresponder con el que envía o recibe el chirp en cuestión
-				"chorbi1", "chorbi2", 71, 72, IllegalArgumentException.class
+				"chorbi1", "chorbi2", 89, 90, IllegalArgumentException.class
 			}
 
 		};

@@ -77,9 +77,9 @@ public class ChorbiServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{ // Bien
-				"admin", 53, null
+				"admin", 68, null
 			}, { // Error autenticación
-				null, 53, IllegalArgumentException.class
+				null, 68, IllegalArgumentException.class
 			}
 		};
 

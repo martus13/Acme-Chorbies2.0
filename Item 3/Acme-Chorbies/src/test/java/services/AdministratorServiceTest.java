@@ -1,3 +1,4 @@
+
 package services;
 
 import java.util.Collection;
@@ -14,83 +15,78 @@ import org.springframework.util.Assert;
 import utilities.AbstractTest;
 import domain.Administrator;
 
-
 @ContextConfiguration(locations = {
-		"classpath:spring/junit.xml"
-	})
-	@RunWith(SpringJUnit4ClassRunner.class)
-	@Transactional
+	"classpath:spring/junit.xml"
+})
+@RunWith(SpringJUnit4ClassRunner.class)
+@Transactional
 public class AdministratorServiceTest extends AbstractTest {
 
 	// System under test ------------------------------------------------------
 
-		@Autowired
-		private AdministratorService	administratorService;
+	@Autowired
+	private AdministratorService	administratorService;
 
 
-		// Tests ------------------------------------------------------------------
+	// Tests ------------------------------------------------------------------
 
-		@Test
-		public void driverFind() {
-			final Object testingData[][] = {
-				{
-					46, 38, null
-				}, {
-					0, 0, IllegalArgumentException.class
-				}
-			};
-
-			for (int i = 0; i < testingData.length; i++) {
-				this.testFindOne((int) testingData[i][0], (Class<?>) testingData[i][2]);
-				this.testFindUserAccount((int) testingData[i][1], (Class<?>) testingData[i][2]);
-				
+	@Test
+	public void driverFind() {
+		final Object testingData[][] = {
+			{
+				57, 47, null
+			}, {
+				0, 0, IllegalArgumentException.class
 			}
+		};
+
+		for (int i = 0; i < testingData.length; i++) {
+			this.testFindOne((int) testingData[i][0], (Class<?>) testingData[i][2]);
+			this.testFindUserAccount((int) testingData[i][1], (Class<?>) testingData[i][2]);
+
 		}
-		
-		
-		protected void testFindOne(final int adminId, final Class<?> expected) {
-			Class<?> caught;
+	}
 
-			caught = null;
-			try {
-				Administrator admin;
+	protected void testFindOne(final int adminId, final Class<?> expected) {
+		Class<?> caught;
 
-				admin = this.administratorService.findOne(adminId);
-				Assert.notNull(admin);
+		caught = null;
+		try {
+			Administrator admin;
 
-			} catch (final Throwable oops) {
-				caught = oops.getClass();
-			}
+			admin = this.administratorService.findOne(adminId);
+			Assert.notNull(admin);
 
-			this.checkExceptions(expected, caught);
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
 		}
-		
-	protected void testFindUserAccount(final int userAccountId, final Class<?> expected){
-			Class<?> caught;
 
-			caught = null;
-			try {
-				Administrator admin;
+		this.checkExceptions(expected, caught);
+	}
 
-				admin = this.administratorService.findByUserAccountId(userAccountId);
-				Assert.notNull(admin);
-				
-			}catch (final Throwable oops) {
-					caught = oops.getClass();
-				}
+	protected void testFindUserAccount(final int userAccountId, final Class<?> expected) {
+		Class<?> caught;
 
-			this.checkExceptions(expected, caught);
+		caught = null;
+		try {
+			Administrator admin;
+
+			admin = this.administratorService.findByUserAccountId(userAccountId);
+			Assert.notNull(admin);
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
 		}
-		
-		@Test
-		public void testFindAll() {
-			Collection<Administrator> admins;
 
-			admins = this.administratorService.findAll();
-			Assert.isTrue(admins.size() == 1);
-		}
-		
-		
-		
-		
+		this.checkExceptions(expected, caught);
+	}
+
+	@Test
+	public void testFindAll() {
+		Collection<Administrator> admins;
+
+		admins = this.administratorService.findAll();
+		Assert.isTrue(admins.size() == 1);
+	}
+
 }

@@ -20,13 +20,13 @@
 			<acme:column code="creditCard.number" property="number" />
 			
 			<display:column>
-				<jstl:if test="${row.chorbi.id==principalId }">
+				<jstl:if test="${row.actor.id==principalId }">
 					<a href="creditCard/chorbi/edit.do?creditCardId=${row.id }"><spring:message code="creditCard.edit" /></a>
 				</jstl:if>
 			</display:column>
 			
 			<display:column>
-				<jstl:if test="${row.chorbi.id==principalId }">
+				<jstl:if test="${row.actor.id==principalId }">
 						<form:form action="creditCard/chorbi/delete.do?creditCardId=${row.id }" modelAttribute="delete">
 								<input type="submit" name="delete" value="<spring:message code="creditCard.delete" />" />
 						</form:form>

@@ -45,7 +45,7 @@ public class CreditCardChorbiController extends AbstractController {
 		Chorbi chorbi;
 
 		chorbi = this.chorbiService.findByPrincipal();
-		creditCard = this.creditCardService.findByChorbi(chorbi.getId());
+		creditCard = this.creditCardService.findByActor(chorbi.getId());
 
 		result = new ModelAndView("creditCard/list");
 		result.addObject("requestURI", "creditCard/chorbi/list.do");

@@ -34,7 +34,7 @@ public class ActorServiceTest extends AbstractTest {
 	public void driverFind() {
 		final Object testingData[][] = {
 			{
-				50, "CHORBI", null
+				68, "CHORBI", null
 			}
 		};
 
@@ -107,6 +107,6 @@ public class ActorServiceTest extends AbstractTest {
 		Collection<Actor> actors;
 
 		actors = this.actorService.findAll();
-		Assert.isTrue(actors.size() == 6);
+		Assert.isTrue(actors.size() == 9);
 	}
 }

@@ -27,7 +27,7 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	Object[] findMinMaxAvgAges();
 
 	// C3: The ratio of chorbies who have not registered a credit card or have registered an invalid credit card.
-	@Query("select 100*count(c)/(select count(c1) from Chorbi c1) from Chorbi c where c not in (select d.chorbi from CreditCard d) or c in (select d1.chorbi from CreditCard d1 where d1.expirationYear<?1 or (d1.expirationYear=?1 and d1.expirationMonth<=?2))")
+	@Query("select 100*count(c)/(select count(c1) from Chorbi c1) from Chorbi c where c.id not in (select d.actor.id from CreditCard d) or c.id in (select d1.actor.id from CreditCard d1 where d1.expirationYear<?1 or (d1.expirationYear=?1 and d1.expirationMonth<=?2))")
 	Double findRatioInvalidCreditCard(Integer year, Integer month);
 
 	// C4: The ratios of chorbies who search for "activities", "friendship", and "love".

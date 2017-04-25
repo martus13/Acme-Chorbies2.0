@@ -38,9 +38,9 @@ public class BannerServiceTest extends AbstractTest {
 	public void driverCreateAndSave() {
 		final Object testingData[][] = {
 			{	// Bien
-				"admin", "http://chefyan.ca/files/2014/07/pad-thai-Banner-1020-x-400-588x230.jpg", 47, null
+				"admin", "http://chefyan.ca/files/2014/07/pad-thai-Banner-1020-x-400-588x230.jpg", 58, null
 			}, {// Error no autenticado
-				null, "http://chefyan.ca/files/2014/07/pad-thai-Banner-1020-x-400-588x230.jpg", 47, IllegalArgumentException.class
+				null, "http://chefyan.ca/files/2014/07/pad-thai-Banner-1020-x-400-588x230.jpg", 58, IllegalArgumentException.class
 			}
 		};
 
@@ -55,7 +55,7 @@ public class BannerServiceTest extends AbstractTest {
 	public void driverDelete() {
 		final Object testingData[][] = {
 			{
-				"admin", 47, null
+				"admin", 58, null
 			}
 		};
 
