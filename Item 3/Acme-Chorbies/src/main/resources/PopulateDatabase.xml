@@ -164,9 +164,9 @@
 	<!-- Manager -->
 	
 	<bean id="manager1" class="domain.Manager">
-		<property name="name" value="Manager 1"/>
-		<property name="surname" value="Surname Manager 1"/>
-		<property name="email" value="manager1@gmail.com"/>
+		<property name="name" value="Rogelio"/>
+		<property name="surname" value="Rosa Retorcido"/>
+		<property name="email" value="rorore@gmail.com"/>
 		<property name="phoneNumber" value="+34 (954) 15948"/>
 		<property name="userAccount" ref="userAccount7"/>
 		
@@ -176,9 +176,9 @@
 	</bean>
 	
 	<bean id="manager2" class="domain.Manager">
-		<property name="name" value="Manager 2"/>
-		<property name="surname" value="Surname Manager 2"/>
-		<property name="email" value="manager2@gmail.com"/>
+		<property name="name" value="Jorge"/>
+		<property name="surname" value="Martínez León"/>
+		<property name="email" value="jormarle@gmail.com"/>
 		<property name="phoneNumber" value="+34 (954) 98514"/>
 		<property name="userAccount" ref="userAccount8"/>
 		
@@ -518,6 +518,26 @@
 		<property name="expirationYear" value="2019" />
 		<property name="cvv" value="270" />
 		<property name="actor" ref="chorbi2" />
+	</bean>
+	
+	<bean id="creditCard5" class="domain.CreditCard">
+		<property name="holderName" value="Rogelio Rosa Retorcido" />
+		<property name="brandName" value="MASTERCARD" />
+		<property name="number" value="5723934378353861" />
+		<property name="expirationMonth" value="11" />
+		<property name="expirationYear" value="2019" />
+		<property name="cvv" value="370" />
+		<property name="actor" ref="manager1" />
+	</bean>
+	
+	<bean id="creditCard6" class="domain.CreditCard">
+		<property name="holderName" value="Jorge Martínez León" />
+		<property name="brandName" value="VISA" />
+		<property name="number" value="4563555368560045" />
+		<property name="expirationMonth" value="10" />
+		<property name="expirationYear" value="2021" />
+		<property name="cvv" value="210" />
+		<property name="actor" ref="manager2" />
 	</bean>
 	
 	<!-- SearchTemplate -->
