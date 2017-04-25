@@ -102,4 +102,14 @@ public class ManagerService {
 		return result;
 	}
 
+	// Queries -----
+
+	public Collection<Object[]> findByNumberEvents() {
+		return this.managerRepository.findByNumberEvents();
+	}
+
+	public Collection<Object[]> findByAmountFee() {
+		return this.managerRepository.findByAmountFee();
+	}
+
 }
