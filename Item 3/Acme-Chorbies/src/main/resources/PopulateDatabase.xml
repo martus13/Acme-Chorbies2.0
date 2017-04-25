@@ -629,6 +629,12 @@
 	</bean>
 	
 	<bean id="monthlyFee5" class="domain.MonthlyFee">
+		<property name="creationMoment" value="02/02/2017 12:30" />
+		<property name="fee" value="1.0" />
+		<property name="chorbi" ref="chorbi3" />
+	</bean>
+	
+	<bean id="monthlyFee6" class="domain.MonthlyFee">
 		<property name="creationMoment" value="04/01/2017 10:30" />
 		<property name="fee" value="1.0" />
 		<property name="chorbi" ref="chorbi3" />

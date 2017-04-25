@@ -422,4 +422,11 @@ public class ChorbiService {
 
 		return result;
 	}
+
+	public Collection<Object[]> findAllWithAmount() {
+
+		final Collection<Object[]> result = this.chorbiRepository.findAllWithAmount();
+
+		return result;
+	}
 }
