@@ -68,6 +68,9 @@
 	
 </display:table>
 
-<a href="event/manager/create.do">
-	<spring:message code="event.create" />
-</a>
+<security:authorize access="hasRole('MANAGER')">
+	<a href="event/manager/create.do">
+		<spring:message code="event.create" />
+	</a>
+</security:authorize>
+
