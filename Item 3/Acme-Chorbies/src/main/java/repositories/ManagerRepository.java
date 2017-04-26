@@ -21,6 +21,6 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
 	Collection<Object[]> findByNumberEvents();
 
 	//C2: A listing of managers that includes the amount that they due in fees.
-	@Query("select m, m.fee from Manager m;")
+	@Query("select m, m.fee from Manager m")
 	Collection<Object[]> findByAmountFee();
 }
