@@ -32,30 +32,6 @@ public class ManagerService {
 
 	// Simple CRUD methods ----------------------------------------------------
 
-	// Other business methods -------------------------------------------------
-	public Manager findByPrincipal() {
-		Manager result;
-		UserAccount userAccount;
-
-		userAccount = LoginService.getPrincipal();
-		Assert.notNull(userAccount);
-
-		result = this.findByUserAccountId(userAccount.getId());
-		Assert.notNull(result);
-
-		return result;
-	}
-
-	public Manager findByUserAccountId(final int userAccountId) {
-		Assert.notNull(userAccountId);
-
-		Manager result;
-
-		result = this.managerRepository.findByUserAccountId(userAccountId);
-
-		return result;
-	}
-
 	public Manager findOne(final int managerId) {
 		Assert.isTrue(managerId != 0);
 
@@ -98,6 +74,30 @@ public class ManagerService {
 
 		Manager result;
 		result = this.managerRepository.save(manager);
+
+		return result;
+	}
+
+	// Other business methods -------------------------------------------------
+	public Manager findByPrincipal() {
+		Manager result;
+		UserAccount userAccount;
+
+		userAccount = LoginService.getPrincipal();
+		Assert.notNull(userAccount);
+
+		result = this.findByUserAccountId(userAccount.getId());
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Manager findByUserAccountId(final int userAccountId) {
+		Assert.notNull(userAccountId);
+
+		Manager result;
+
+		result = this.managerRepository.findByUserAccountId(userAccountId);
 
 		return result;
 	}
