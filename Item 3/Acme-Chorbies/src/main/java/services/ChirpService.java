@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -12,8 +13,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ChirpRepository;
+import domain.Actor;
 import domain.Chirp;
 import domain.Chorbi;
+import domain.Event;
+import domain.Manager;
 
 @Service
 @Transactional
@@ -28,7 +32,12 @@ public class ChirpService {
 	@Autowired
 	private ChorbiService	chorbiService;
 
-
+	@Autowired
+	private ManagerService 	managerService;
+	
+	@Autowired
+	private EventService 	eventService;
+	
 	//Constructors----------------------------------------
 
 	public ChirpService() {
@@ -58,7 +67,7 @@ public class ChirpService {
 		Assert.notNull(receiver);
 
 		final Chirp result = new Chirp();
-		Chorbi sender;
+		Actor sender;
 		Collection<String> attachments;
 
 		final Calendar thisMoment = Calendar.getInstance();
@@ -124,7 +133,7 @@ public class ChirpService {
 		chorbi = this.chorbiService.findByPrincipal();
 		Assert.isTrue(chirp.getRecipient().equals(chorbi));
 
-		result = this.create(chirp.getSender());
+		result = this.create((Chorbi)chirp.getSender());
 
 		result.setSubject("Re: " + chirp.getSubject());
 
@@ -216,5 +225,22 @@ public class ChirpService {
 			res = true;
 
 		return res;
+	}
+	
+	public void broadcastChirp(final Chirp chirp){
+		Assert.notNull(chirp);	
+		
+		Manager manager = this.managerService.findByPrincipal();
+		Assert.notNull(manager);
+	
+		Collection<Event> events = eventService.findByManagerId(manager.getId());
+		
+		for(Event e:events){
+			for(Chorbi c: e.getChorbies()){
+				
+				chirp.setRecipient(c);
+				this.chirpRepository.save(chirp);
+			}
+		}
 	}
 }

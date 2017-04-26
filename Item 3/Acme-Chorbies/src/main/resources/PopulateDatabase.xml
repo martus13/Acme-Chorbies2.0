@@ -313,17 +313,7 @@
 				<ref bean="like4" /> 
 			</list>
 		</property>
-		<property name="sentChirps">
-			<list>
-				
-			</list>
-		</property>
-		<property name="receivedChirps">
-			<list>
-				<ref bean="chirp1"/>
-				<ref bean="chirp2"/>
-			</list>
-		</property>
+	
 	</bean>
 	
 	<bean id="chorbi2" class="domain.Chorbi">
@@ -349,17 +339,6 @@
 			<list>
 				<ref bean="like1" /> 
 				<ref bean="like5" /> 
-			</list>
-		</property>
-		<property name="sentChirps">
-			<list>
-				<ref bean="chirp1"/>
-				<ref bean="chirp2"/>
-			</list>
-		</property>
-		<property name="receivedChirps">
-			<list>
-				
 			</list>
 		</property>
 	</bean>
@@ -389,19 +368,6 @@
 			<list>
 			</list>
 		</property>
-		<property name="sentChirps">
-			<list>
-				<ref bean="chirp3"/>
-				<ref bean="chirp4"/>
-				<ref bean="chirp5"/>
-				<ref bean="chirp6"/>
-			</list>
-		</property>
-		<property name="receivedChirps">
-			<list>
-				
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="chorbi4" class="domain.Chorbi">
@@ -428,17 +394,6 @@
 				<ref bean="like3" /> 
 			</list>
 		</property>
-		<property name="sentChirps">
-			<list>
-				
-			</list>
-		</property>
-		<property name="receivedChirps">
-			<list>
-				<ref bean="chirp3"/>
-				<ref bean="chirp4"/>
-			</list>
-		</property>
 	</bean>
 	
 	<bean id="chorbi5" class="domain.Chorbi">
@@ -463,17 +418,6 @@
 		<property name="receivedLikes">
 			<list>
 				<ref bean="like2" /> 
-			</list>
-		</property>
-		<property name="sentChirps">
-			<list>
-				
-			</list>
-		</property>
-		<property name="receivedChirps">
-			<list>
-				<ref bean="chirp5"/>
-				<ref bean="chirp6"/>
 			</list>
 		</property>
 	</bean>
@@ -644,13 +588,16 @@
 	
 	<bean id="like1" class="domain.Like">
 		<property name="likeMoment" value="04/01/2017 10:30" />
+		<property name="starsNumber" value="1"/>
 		<property name="givenBy" ref="chorbi1" />
 		<property name="givenTo" ref="chorbi2" />
+		
 	</bean>
 	
 	<bean id="like2" class="domain.Like">
 		<property name="likeMoment" value="03/08/2017 16:15" />
 		<property name="comment" value="Hola he visto tu perfil y me interesa conocerte." />
+		<property name="starsNumber" value="3"/>
 		<property name="givenBy" ref="chorbi1" />
 		<property name="givenTo" ref="chorbi5" />
 	</bean>
@@ -658,6 +605,7 @@
 	<bean id="like3" class="domain.Like">
 		<property name="likeMoment" value="02/28/2017 00:00" />
 		<property name="comment" value="He visto que te gustan los animales como a mí, ¿quieres que paseemos algún dia al perro juntos? ;)" />
+		<property name="starsNumber" value="2"/>
 		<property name="givenBy" ref="chorbi1" />
 		<property name="givenTo" ref="chorbi4" />
 	</bean>
@@ -665,12 +613,14 @@
 	<bean id="like4" class="domain.Like">
 		<property name="likeMoment" value="01/02/2017 13:59" />
 		<property name="comment" value="Tu libro favorito es el último que leí, ¿me recomendarías alguno mas?. Me gusta la lectura, podríamos hacer una quedada para hablar de los libros y lo que surja jeje" />
+		<property name="starsNumber" value="3"/>
 		<property name="givenBy" ref="chorbi3" />
 		<property name="givenTo" ref="chorbi1" />
 	</bean>
 	
 	<bean id="like5" class="domain.Like">
 		<property name="likeMoment" value="01/20/2017 16:30" />
+		<property name="starsNumber" value="1"/>
 		<property name="givenBy" ref="chorbi3" />
 		<property name="givenTo" ref="chorbi2" />
 	</bean>
@@ -760,5 +710,60 @@
 		<property name="sender" ref="chorbi3"/>
 		<property name="recipient" ref="chorbi5"/>		
 	</bean>
+	
+	<bean id="chirp7" class="domain.Chirp">
+		<property name="sentMoment" value="04/24/2017 14:24" />
+		<property name="subject" value="Invitación"/>
+		<property name="text" value="Hola, me gustaría invitarte a mi evento. ¿Te apuntas?"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+		<property name="copy" value="false"/>
+		
+		<property name="sender" ref="manager1"/>
+		<property name="recipient" ref="chorbi5"/>		
+	</bean>
 
+	<bean id="chirp8" class="domain.Chirp">
+		<property name="sentMoment" value="04/24/2017 14:24" />
+		<property name="subject" value="Invitación"/>
+		<property name="text" value="Hola, me gustaría invitarte a mi evento. ¿Te apuntas?"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+		<property name="copy" value="true"/>
+		
+		<property name="sender" ref="manager1"/>
+		<property name="recipient" ref="chorbi5"/>		
+	</bean>
+	
+	<bean id="chirp9" class="domain.Chirp">
+		<property name="sentMoment" value="04/17/2017 17:34" />
+		<property name="subject" value="Valoración"/>
+		<property name="text" value="Vi que asististe a nuestro evento ¿Qué te pareció?"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+		<property name="copy" value="false"/>
+		
+		<property name="sender" ref="manager2"/>
+		<property name="recipient" ref="chorbi3"/>		
+	</bean>
+	
+		<bean id="chirp10" class="domain.Chirp">
+		<property name="sentMoment" value="04/17/2017 17:34" />
+		<property name="subject" value="Valoración"/>
+		<property name="text" value="Vi que asististe a nuestro evento ¿Qué te pareció?"/>
+		<property name="attachments">
+			<list>
+			</list>
+		</property>
+		<property name="copy" value="true"/>
+		
+		<property name="sender" ref="manager2"/>
+		<property name="recipient" ref="chorbi3"/>		
+	</bean>
 </beans>

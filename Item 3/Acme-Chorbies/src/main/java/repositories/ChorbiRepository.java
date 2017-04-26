@@ -17,6 +17,9 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
 	@Query("select c from Chorbi c where c.banned=false")
 	Collection<Chorbi> findNotBanned();
+	
+	@Query("select l.givenBy from Like l where l.givenTo.id = ?1")
+	Collection<Chorbi> findChorbiesLikedMe(int myId);
 
 	// C1: A listing with the number of chorbies per country and city.
 	@Query("select c.coordinates.country, c.coordinates.city, count(c) from Chorbi c group by c.coordinates.country, c.coordinates.city")

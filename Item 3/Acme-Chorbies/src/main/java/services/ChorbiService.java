@@ -16,7 +16,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import domain.Administrator;
-import domain.Chirp;
 import domain.Chorbi;
 import domain.Configuration;
 import domain.Like;
@@ -41,6 +40,9 @@ public class ChorbiService {
 
 	@Autowired
 	private ConfigurationService	configurationService;
+	
+	@Autowired
+	private CreditCardService 		creditCardService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -74,8 +76,6 @@ public class ChorbiService {
 		Authority authority;
 		Collection<Like> givenLikes;
 		Collection<Like> receivedLikes;
-		Collection<Chirp> receivedChirps;
-		Collection<Chirp> sentChirps;
 
 		result = new Chorbi();
 
@@ -83,8 +83,6 @@ public class ChorbiService {
 		authority = new Authority();
 		givenLikes = new ArrayList<Like>();
 		receivedLikes = new ArrayList<Like>();
-		receivedChirps = new ArrayList<Chirp>();
-		sentChirps = new ArrayList<Chirp>();
 
 		authority.setAuthority("CHORBI");
 		userAccount.getAuthorities().add(authority);
@@ -93,8 +91,6 @@ public class ChorbiService {
 		result.setBanned(false);
 		result.setGivenLikes(givenLikes);
 		result.setReceivedLikes(receivedLikes);
-		result.setReceivedChirps(receivedChirps);
-		result.setSentChirps(sentChirps);
 		result.setFee(0.0);
 
 		return result;
@@ -343,6 +339,18 @@ public class ChorbiService {
 		password = encoder.encodePassword(password, null);
 
 		return password;
+	}
+	
+	public Collection<Chorbi> findChorbiesLikedMe(){
+		
+		Chorbi principal = this.findByPrincipal();
+		
+		Assert.isTrue(this.creditCardService.checkValidation(this.creditCardService.findByActor(principal.getId())));
+		
+		Collection<Chorbi> result = this.chorbiRepository.findChorbiesLikedMe(principal.getId());
+		
+		return result;
+		
 	}
 
 	// Queries -----

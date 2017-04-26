@@ -76,6 +76,7 @@ public class LikeService {
 		like.setGivenBy(principal);
 		like.setGivenTo(givenTo);
 		like.setLikeMoment(calendar.getTime());
+		like.setStarsNumber(0);
 
 		return like;
 	}
