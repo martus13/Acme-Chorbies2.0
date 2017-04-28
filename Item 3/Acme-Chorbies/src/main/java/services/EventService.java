@@ -113,7 +113,7 @@ public class EventService {
 			configuration = this.configurationService.findConfiguration();
 
 			manager.setFee(manager.getFee() + configuration.getManagerFee());
-			//this.managerService.save(manager); // TODO: descomentar cuando se haga el save de manager
+			this.managerService.save(manager);
 		}
 
 		return event;

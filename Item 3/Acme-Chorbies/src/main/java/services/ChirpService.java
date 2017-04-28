@@ -4,10 +4,12 @@ package services;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -182,6 +184,55 @@ public class ChirpService {
 
 	}
 
+	public void sendChorbiesRegistered(final Event event, final String subject, final String text) {
+		int i = 0;
+		Page<Chorbi> pagesChorbies;
+		List<Chorbi> chorbies;
+		Actor actor;
+
+		actor = this.actorService.findByPrincipal();
+		Assert.isTrue(this.actorService.checkAuthority(actor, "MANAGER")); // Esto solo pueden hacerlo los managers
+
+		pagesChorbies = this.chorbiService.findByEventIdPaged(event.getId(), i, 2);
+		chorbies = pagesChorbies.getContent();
+
+		for (final Chorbi c : chorbies) {
+			Chirp chirp;
+
+			chirp = this.create(actor);
+			chirp.setSubject(subject);
+			chirp.setText(text);
+			chirp.setRecipient(c);
+
+			chirp = this.save(chirp);
+
+		}
+
+		while (pagesChorbies.hasNextPage()) {
+			i++;
+			Page<Chorbi> nextPageChorbiesPages;
+			List<Chorbi> nextPageChorbiesList;
+
+			nextPageChorbiesPages = this.chorbiService.findByEventIdPaged(event.getId(), i, 2);
+			nextPageChorbiesList = nextPageChorbiesPages.getContent();
+
+			if (!nextPageChorbiesList.isEmpty())
+				for (final Chorbi c : nextPageChorbiesList) {
+					Chirp chirp;
+
+					chirp = this.create(actor);
+					chirp.setSubject(subject);
+					chirp.setText(text);
+					chirp.setRecipient(c);
+
+					chirp = this.save(chirp);
+				}
+			else
+				break;
+
+		}
+
+	}
 	//Other business methods------------------------------
 
 	public Collection<Chirp> findAllMySentChirps(final Chorbi chorbi) {

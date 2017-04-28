@@ -85,11 +85,11 @@ public class SearchTemplateServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{ 	 // Bien
-				"chorbi1", this.chorbiService.findByUserAccountId(48), null
+				"chorbi1", this.chorbiService.findByUserAccountId(54), null
 			}, { // Bien
-				"chorbi2", this.chorbiService.findByUserAccountId(49), null
+				"chorbi2", this.chorbiService.findByUserAccountId(55), null
 			}, { // Error: El usuario no es un chorbi 
-				"admin", this.chorbiService.findByUserAccountId(57), IllegalArgumentException.class
+				"admin", this.chorbiService.findByUserAccountId(53), IllegalArgumentException.class
 			}
 		};
 

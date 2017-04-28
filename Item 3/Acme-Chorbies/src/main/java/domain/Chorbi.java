@@ -10,6 +10,7 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Index;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -45,6 +46,7 @@ public class Chorbi extends Actor {
 	private Date				birthDate;
 	private RelationshipType	relationshipEngage;
 	private Coordinates			coordinates;
+	private Date				lastFeeDate;
 	private Double				fee;
 
 
@@ -121,6 +123,18 @@ public class Chorbi extends Actor {
 	}
 
 	@NotNull
+	@Past
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+	public Date getLastFeeDate() {
+		return this.lastFeeDate;
+	}
+
+	public void setLastFeeDate(final Date lastFeeDate) {
+		this.lastFeeDate = lastFeeDate;
+	}
+
+	@NotNull
 	@Min(0)
 	public Double getFee() {
 		return this.fee;
@@ -135,6 +149,8 @@ public class Chorbi extends Actor {
 
 	private Collection<Like>	givenLikes;
 	private Collection<Like>	receivedLikes;
+	private Collection<Event>	events;
+
 
 	@Valid
 	@NotNull
@@ -156,5 +172,16 @@ public class Chorbi extends Actor {
 
 	public void setReceivedLikes(final Collection<Like> receivedLikes) {
 		this.receivedLikes = receivedLikes;
+	}
+
+	@Valid
+	@NotNull
+	@ManyToMany(mappedBy = "chorbies")
+	public Collection<Event> getEvents() {
+		return this.events;
+	}
+
+	public void setEvents(final Collection<Event> events) {
+		this.events = events;
 	}
 }

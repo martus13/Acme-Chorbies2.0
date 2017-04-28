@@ -300,6 +300,7 @@
 		<property name="birthDate" value="10/31/1992" />
 		<property name="relationshipEngage" value="love" />
 		<property name="coordinates" ref="coordinates1" />
+		<property name="lastFeeDate" value="03/05/2017 09:00" />
 		<property name="fee" value="3.0" />
 		<property name="givenLikes">
 			<list>
@@ -311,6 +312,13 @@
 		<property name="receivedLikes">
 			<list>
 				<ref bean="like4" /> 
+			</list>
+		</property>
+		<property name="events">
+			<list>
+				<ref bean="event1" /> 
+				<ref bean="event2" /> 
+				<ref bean="event3" /> 
 			</list>
 		</property>
 	
@@ -330,6 +338,7 @@
 		<property name="birthDate" value="12/12/1989" />
 		<property name="relationshipEngage" value="activities" />
 		<property name="coordinates" ref="coordinates2" />
+		<property name="lastFeeDate" value="04/01/2017 10:30" />
 		<property name="fee" value="2.0" />
 		<property name="givenLikes">
 			<list>
@@ -339,6 +348,12 @@
 			<list>
 				<ref bean="like1" /> 
 				<ref bean="like5" /> 
+			</list>
+		</property>
+		<property name="events">
+			<list>
+				<ref bean="event2" /> 
+				<ref bean="event3" />  
 			</list>
 		</property>
 	</bean>
@@ -357,6 +372,7 @@
 		<property name="birthDate" value="11/04/1995" />
 		<property name="relationshipEngage" value="love" />
 		<property name="coordinates" ref="coordinates2" />
+		<property name="lastFeeDate" value="04/01/2017 10:30" />
 		<property name="fee" value="2.0" />
 		<property name="givenLikes">
 			<list>
@@ -366,6 +382,11 @@
 		</property>
 		<property name="receivedLikes">
 			<list>
+			</list>
+		</property>
+		<property name="events">
+			<list>
+				<ref bean="event3" /> 
 			</list>
 		</property>
 	</bean>
@@ -384,6 +405,7 @@
 		<property name="birthDate" value="10/21/1991" />
 		<property name="relationshipEngage" value="friendship" />
 		<property name="coordinates" ref="coordinates2" />
+		<property name="lastFeeDate" value="01/01/2017 09:00" />
 		<property name="fee" value="0.0" />
 		<property name="givenLikes">
 			<list>
@@ -392,6 +414,10 @@
 		<property name="receivedLikes">
 			<list>
 				<ref bean="like3" /> 
+			</list>
+		</property>
+		<property name="events">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -410,6 +436,7 @@
 		<property name="birthDate" value="12/11/1990" />
 		<property name="relationshipEngage" value="love" />
 		<property name="coordinates" ref="coordinates1" />
+		<property name="lastFeeDate" value="02/10/2017 09:00" />
 		<property name="fee" value="1.0" />
 		<property name="givenLikes">
 			<list>
@@ -418,6 +445,10 @@
 		<property name="receivedLikes">
 			<list>
 				<ref bean="like2" /> 
+			</list>
+		</property>
+		<property name="events">
+			<list>
 			</list>
 		</property>
 	</bean>
@@ -544,44 +575,6 @@
 			<list>
 			</list>
 		</property>
-	</bean>
-	
-	<!-- MonthlyFee -->
-	
-	<bean id="monthlyFee1" class="domain.MonthlyFee">
-		<property name="creationMoment" value="03/05/2017 09:00" />
-		<property name="fee" value="1.0" />
-		<property name="chorbi" ref="chorbi1" />
-	</bean>
-	
-	<bean id="monthlyFee2" class="domain.MonthlyFee">
-		<property name="creationMoment" value="02/02/2017 12:30" />
-		<property name="fee" value="1.0" />
-		<property name="chorbi" ref="chorbi2" />
-	</bean>
-	
-	<bean id="monthlyFee3" class="domain.MonthlyFee">
-		<property name="creationMoment" value="03/20/2017 10:30" />
-		<property name="fee" value="1.0" />
-		<property name="chorbi" ref="chorbi2" />
-	</bean>
-	
-	<bean id="monthlyFee4" class="domain.MonthlyFee">
-		<property name="creationMoment" value="04/01/2017 10:30" />
-		<property name="fee" value="1.0" />
-		<property name="chorbi" ref="chorbi2" />
-	</bean>
-	
-	<bean id="monthlyFee5" class="domain.MonthlyFee">
-		<property name="creationMoment" value="02/02/2017 12:30" />
-		<property name="fee" value="1.0" />
-		<property name="chorbi" ref="chorbi3" />
-	</bean>
-	
-	<bean id="monthlyFee6" class="domain.MonthlyFee">
-		<property name="creationMoment" value="04/01/2017 10:30" />
-		<property name="fee" value="1.0" />
-		<property name="chorbi" ref="chorbi3" />
 	</bean>
 	
 	<!-- Like -->

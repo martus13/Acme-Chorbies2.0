@@ -3,6 +3,8 @@ package repositories;
 
 import java.util.Collection;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,12 +14,15 @@ import domain.Chorbi;
 @Repository
 public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
+	@Query("select c from Chorbi c join c.events e on e.id=?1")
+	Page<Chorbi> findByEventIdPaged(int eventId, Pageable pageRequest);
+
 	@Query("select c from Chorbi c where c.userAccount.id = ?1")
 	Chorbi findByUserAccountId(int userAccountId);
 
 	@Query("select c from Chorbi c where c.banned=false")
 	Collection<Chorbi> findNotBanned();
-	
+
 	@Query("select l.givenBy from Like l where l.givenTo.id = ?1")
 	Collection<Chorbi> findChorbiesLikedMe(int myId);
 

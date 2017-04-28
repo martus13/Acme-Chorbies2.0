@@ -41,13 +41,13 @@ public class LikeServiceTest extends AbstractTest {
 	public void driverCreateAndSave() {
 		final Object testingData[][] = {
 			{	// Bien
-				"chorbi1", 70, "Test save", null
+				"chorbi1", 76, "Test save", null
 			}, {// No se puede dar like dos veces al mismo chorbi
-				"chorbi1", 69, "Test save", IllegalArgumentException.class
+				"chorbi1", 75, "Test save", IllegalArgumentException.class
 			}, {// No se puede dar like a sí mismo
-				"chorbi1", 68, "Test save", IllegalArgumentException.class
+				"chorbi1", 74, "Test save", IllegalArgumentException.class
 			}, {// Debe estar logueado
-				null, 68, "Test save", IllegalArgumentException.class
+				null, 74, "Test save", IllegalArgumentException.class
 			}
 		};
 
@@ -62,11 +62,11 @@ public class LikeServiceTest extends AbstractTest {
 	public void driverDelete() {
 		final Object testingData[][] = {
 			{	// Bien
-				"chorbi1", 84, null
+				"chorbi1", 90, null
 			}, {// Un chorbi solo puede eliminar los likes que ha dado
-				"chorbi1", 85, IllegalArgumentException.class
+				"chorbi1", 93, IllegalArgumentException.class
 			}, {// Debe estar logueado
-				null, 84, IllegalArgumentException.class
+				null, 90, IllegalArgumentException.class
 			}
 		};
 
@@ -79,7 +79,7 @@ public class LikeServiceTest extends AbstractTest {
 	public void driverFind() {
 		final Object testingData[][] = {
 			{
-				68, 69, null
+				74, 75, null
 			}
 		};
 

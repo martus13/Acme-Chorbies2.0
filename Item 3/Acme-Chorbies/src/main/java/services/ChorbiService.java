@@ -6,6 +6,9 @@ import java.util.Calendar;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,6 +21,7 @@ import security.UserAccount;
 import domain.Administrator;
 import domain.Chorbi;
 import domain.Configuration;
+import domain.Event;
 import domain.Like;
 import domain.RelationshipType;
 import domain.SearchTemplate;
@@ -40,9 +44,9 @@ public class ChorbiService {
 
 	@Autowired
 	private ConfigurationService	configurationService;
-	
+
 	@Autowired
-	private CreditCardService 		creditCardService;
+	private CreditCardService		creditCardService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -76,6 +80,8 @@ public class ChorbiService {
 		Authority authority;
 		Collection<Like> givenLikes;
 		Collection<Like> receivedLikes;
+		Collection<Event> events;
+		Calendar calendar;
 
 		result = new Chorbi();
 
@@ -83,15 +89,21 @@ public class ChorbiService {
 		authority = new Authority();
 		givenLikes = new ArrayList<Like>();
 		receivedLikes = new ArrayList<Like>();
+		events = new ArrayList<Event>();
 
 		authority.setAuthority("CHORBI");
 		userAccount.getAuthorities().add(authority);
+
+		calendar = Calendar.getInstance();
+		calendar.add(Calendar.MILLISECOND, -10);
 
 		result.setUserAccount(userAccount);
 		result.setBanned(false);
 		result.setGivenLikes(givenLikes);
 		result.setReceivedLikes(receivedLikes);
+		result.setEvents(events);
 		result.setFee(0.0);
+		result.setLastFeeDate(calendar.getTime());
 
 		return result;
 	}
@@ -161,13 +173,31 @@ public class ChorbiService {
 		configuration = this.configurationService.findConfiguration();
 
 		for (Chorbi c : chorbies) {
+			Calendar calendar;
+
+			calendar = Calendar.getInstance();
+			calendar.add(Calendar.MILLISECOND, -10);
+
+			// TODO: comprobar que ha pasado mas de un mes de la ultima factura
+			c.setLastFeeDate(calendar.getTime());
 			c.setFee(c.getFee() + configuration.getChorbiFee());
+
 			c = this.save(c);
 		}
 	}
 
 	// Other business methods -------------------------------------------------
 
+	public Page<Chorbi> findByEventIdPaged(final Integer eventId, final Integer pageNumber, final Integer pageSize) {
+		Pageable request;
+		Page<Chorbi> result;
+
+		request = new PageRequest(pageNumber, pageSize);
+
+		result = this.chorbiRepository.findByEventIdPaged(eventId, request);
+
+		return result;
+	}
 	public Chorbi findByPrincipal() {
 		Chorbi result;
 		UserAccount userAccount;
@@ -340,17 +370,17 @@ public class ChorbiService {
 
 		return password;
 	}
-	
-	public Collection<Chorbi> findChorbiesLikedMe(){
-		
-		Chorbi principal = this.findByPrincipal();
-		
+
+	public Collection<Chorbi> findChorbiesLikedMe() {
+
+		final Chorbi principal = this.findByPrincipal();
+
 		Assert.isTrue(this.creditCardService.checkValidation(this.creditCardService.findByActor(principal.getId())));
-		
-		Collection<Chorbi> result = this.chorbiRepository.findChorbiesLikedMe(principal.getId());
-		
+
+		final Collection<Chorbi> result = this.chorbiRepository.findChorbiesLikedMe(principal.getId());
+
 		return result;
-		
+
 	}
 
 	// Queries -----

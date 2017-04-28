@@ -47,10 +47,10 @@ public class ChorbiServiceTest extends AbstractTest {
 		Calendar wrongCalendar;
 
 		correctCalendar = Calendar.getInstance();
-		correctCalendar.set(1992, 9, 31, 6, 0, 0);
+		correctCalendar.set(1992, 9, 31);
 
 		wrongCalendar = Calendar.getInstance();
-		wrongCalendar.set(Calendar.YEAR, wrongCalendar.get(Calendar.YEAR) - 17); // Hace 17 años
+		wrongCalendar.add(Calendar.YEAR, -17); // Hace 17 años
 
 		wrongCalendar = Calendar.getInstance();
 
@@ -77,9 +77,9 @@ public class ChorbiServiceTest extends AbstractTest {
 
 		final Object testingData[][] = {
 			{ // Bien
-				"admin", 68, null
+				"admin", 74, null
 			}, { // Error autenticación
-				null, 68, IllegalArgumentException.class
+				null, 74, IllegalArgumentException.class
 			}
 		};
 
