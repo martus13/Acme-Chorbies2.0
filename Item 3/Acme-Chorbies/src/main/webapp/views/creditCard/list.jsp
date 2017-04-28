@@ -21,13 +21,13 @@
 			
 			<display:column>
 				<jstl:if test="${row.actor.id==principalId }">
-					<a href="creditCard/chorbi/edit.do?creditCardId=${row.id }"><spring:message code="creditCard.edit" /></a>
+					<a href="creditCard/actor/edit.do?creditCardId=${row.id }"><spring:message code="creditCard.edit" /></a>
 				</jstl:if>
 			</display:column>
 			
 			<display:column>
 				<jstl:if test="${row.actor.id==principalId }">
-						<form:form action="creditCard/chorbi/delete.do?creditCardId=${row.id }" modelAttribute="delete">
+						<form:form action="creditCard/actor/delete.do?creditCardId=${row.id }" modelAttribute="delete">
 								<input type="submit" name="delete" value="<spring:message code="creditCard.delete" />" />
 						</form:form>
 				</jstl:if>
@@ -36,7 +36,7 @@
 		</display:table>
 	</jstl:when>
 	<jstl:otherwise>
-		<a href="creditCard/chorbi/create.do">
+		<a href="creditCard/actor/create.do">
 			<spring:message code="creditCard.create" />
 		</a>
 	</jstl:otherwise>

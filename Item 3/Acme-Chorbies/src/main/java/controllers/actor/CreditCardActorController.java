@@ -1,5 +1,5 @@
 
-package controllers.chorbi;
+package controllers.actor;
 
 import javax.validation.Valid;
 
@@ -20,8 +20,8 @@ import domain.CreditCard;
 import forms.CreditCardForm;
 
 @Controller
-@RequestMapping("/creditCard/chorbi")
-public class CreditCardChorbiController extends AbstractController {
+@RequestMapping("/creditCard/actor")
+public class CreditCardActorController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
@@ -33,7 +33,7 @@ public class CreditCardChorbiController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public CreditCardChorbiController() {
+	public CreditCardActorController() {
 		super();
 	}
 
@@ -42,15 +42,15 @@ public class CreditCardChorbiController extends AbstractController {
 	public ModelAndView list() {
 		ModelAndView result;
 		CreditCard creditCard;
-		Actor chorbi;
+		Actor actor;
 
-		chorbi = this.actorService.findByPrincipal();
-		creditCard = this.creditCardService.findByActor(chorbi.getId());
+		actor = this.actorService.findByPrincipal();
+		creditCard = this.creditCardService.findByActor(actor.getId());
 
 		result = new ModelAndView("creditCard/list");
-		result.addObject("requestURI", "creditCard/chorbi/list.do");
+		result.addObject("requestURI", "creditCard/actor/list.do");
 		result.addObject("creditCard", creditCard);
-		result.addObject("principalId", chorbi.getId());
+		result.addObject("principalId", actor.getId());
 
 		return result;
 	}
@@ -190,7 +190,7 @@ public class CreditCardChorbiController extends AbstractController {
 
 		result = new ModelAndView("creditCard/create");
 		result.addObject("creditCard", creditCardForm);
-		result.addObject("requestURI", "creditCard/chorbi/create.do");
+		result.addObject("requestURI", "creditCard/actor/create.do");
 		result.addObject("message", message);
 
 		return result;
@@ -209,7 +209,7 @@ public class CreditCardChorbiController extends AbstractController {
 
 		result = new ModelAndView("creditCard/create");
 		result.addObject("creditCard", creditCardForm);
-		result.addObject("requestURI", "creditCard/chorbi/edit.do");
+		result.addObject("requestURI", "creditCard/actor/edit.do");
 		result.addObject("message", message);
 
 		return result;
