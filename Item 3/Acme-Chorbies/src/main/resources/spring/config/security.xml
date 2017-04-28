@@ -62,17 +62,12 @@
 		<security:intercept-url pattern="/event/manager/create.do" access="hasRole('MANAGER')" />
 		<security:intercept-url pattern="/event/manager/edit.do" access="hasRole('MANAGER')" />
 		
-		<security:intercept-url pattern="/creditCard/actor/list.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/creditCard/actor/create.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/creditCard/actor/edit.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/creditCard/actor/delete.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/creditCard/actor/list.do" access="hasAnyRole('MANAGER','CHORBI')" />
+		<security:intercept-url pattern="/creditCard/actor/create.do" access="hasAnyRole('MANAGER','CHORBI')" />
+		<security:intercept-url pattern="/creditCard/actor/edit.do" access="hasAnyRole('MANAGER','CHORBI')" />
+		<security:intercept-url pattern="/creditCard/actor/delete.do" access="hasAnyRole('MANAGER','CHORBI')" />
 		
 		<!-- CHORBI -->
-			
-		<security:intercept-url pattern="/creditCard/actor/list.do" access="hasRole('CHORBI')" />
-		<security:intercept-url pattern="/creditCard/actor/create.do" access="hasRole('CHORBI')" />
-		<security:intercept-url pattern="/creditCard/actor/edit.do" access="hasRole('CHORBI')" />
-		<security:intercept-url pattern="/creditCard/actor/delete.do" access="hasRole('CHORBI')" />
 		
 		<security:intercept-url pattern="/event/chorbi/listByChorbi.do" access="hasRole('CHORBI')" />
 		<security:intercept-url pattern="/event/chorbi/register.do" access="hasRole('CHORBI')" />
