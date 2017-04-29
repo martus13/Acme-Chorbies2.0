@@ -14,7 +14,7 @@ import domain.Chorbi;
 @Repository
 public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
-	@Query("select c from Chorbi c join c.events e on e.id=?1")
+	@Query("select c from Chorbi c join c.events e where e.id=?1")
 	Page<Chorbi> findByEventIdPaged(int eventId, Pageable pageRequest);
 
 	@Query("select c from Chorbi c where c.userAccount.id = ?1")
@@ -25,6 +25,9 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
 	@Query("select l.givenBy from Like l where l.givenTo.id = ?1")
 	Collection<Chorbi> findChorbiesLikedMe(int myId);
+
+	@Query("select 0.1*e.chorbies.size from Event e where e.id=?1")
+	Double find10percentChorbiesByEventId(int eventId);
 
 	// C1: A listing with the number of chorbies per country and city.
 	@Query("select c.coordinates.country, c.coordinates.city, count(c) from Chorbi c group by c.coordinates.country, c.coordinates.city")
@@ -66,16 +69,15 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	//// Acme-Chorbies 2.0:
 
 	// C3: A listing of chorbies sorted by the number of events to wich they have registered.
-	@Query("select c, count(e) from Event e join e.chorbies c group by c order by count(e)")
+	@Query("select count(e), c from Event e join e.chorbies c group by c order by count(e)")
 	Collection<Object[]> findOrderByRegisteredEvents();
 
 	// C4: A listing of chorbies that includes the amount that they due in fees.
 	@Query("select c, c.fee from Chorbi c")
-	Collection<Object[]> findAllWithAmount();
-	
-	//B2: The list of chorbies, sorted by the average number of stars that they've got
-	@Query("select c from Chorbi c left join c.receivedLikes l group by c order by avg(l.starsNumber) desc")
-	Collection<Chorbi> findChorbisSortedByAvgStars();
-	
-}
+	Collection<Object[]> findAllWithAmountFee();
 
+	//B2: The list of chorbies, sorted by the average number of stars that they've got
+	@Query("select c, avg(l.starsNumber) from Chorbi c left join c.receivedLikes l group by c order by avg(l.starsNumber) desc")
+	Collection<Object[]> findChorbisSortedByAvgStars();
+
+}

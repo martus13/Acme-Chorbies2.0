@@ -10,7 +10,6 @@ import org.joda.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -200,8 +199,8 @@ public class ChorbiService {
 	}
 	// Other business methods -------------------------------------------------
 
-	public Page<Chorbi> findByEventIdPaged(final Integer eventId, final Integer pageNumber, final Integer pageSize) {
-		Pageable request;
+	public Page<Chorbi> findByEventIdPaged(final int eventId, final Integer pageNumber, final Integer pageSize) {
+		PageRequest request;
 		Page<Chorbi> result;
 
 		request = new PageRequest(pageNumber, pageSize);
@@ -473,17 +472,17 @@ public class ChorbiService {
 		return result;
 	}
 
-	public Collection<Object[]> findAllWithAmount() {
+	public Collection<Object[]> findAllWithAmountFee() {
 
-		final Collection<Object[]> result = this.chorbiRepository.findAllWithAmount();
+		final Collection<Object[]> result = this.chorbiRepository.findAllWithAmountFee();
 
 		return result;
 	}
-	
-	public Collection<Chorbi> findChorbiesSortedByAvgStars(){
-		
-		final Collection<Chorbi> result = this.chorbiRepository.findChorbisSortedByAvgStars();
-		
+
+	public Collection<Object[]> findChorbiesSortedByAvgStars() {
+
+		final Collection<Object[]> result = this.chorbiRepository.findChorbisSortedByAvgStars();
+
 		return result;
 	}
 }

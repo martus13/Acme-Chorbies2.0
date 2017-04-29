@@ -212,6 +212,7 @@
 		<property name="manager" ref="manager1"/>
 		<property name="chorbies">
 			<list>
+				<ref bean="chorbi1" /> 
 			</list>
 		</property>
 		
@@ -229,6 +230,7 @@
 		<property name="chorbies">
 			<list>
 				<ref bean="chorbi1" /> 
+				<ref bean="chorbi2" /> 
 			</list>
 		</property>
 		
@@ -247,6 +249,7 @@
 			<list>
 				<ref bean="chorbi1" /> 
 				<ref bean="chorbi2" /> 
+				<ref bean="chorbi3" /> 
 			</list>
 		</property>
 		
@@ -263,9 +266,6 @@
 		<property name="manager" ref="manager2"/>
 		<property name="chorbies">
 			<list>
-				<ref bean="chorbi1" /> 
-				<ref bean="chorbi2" /> 
-				<ref bean="chorbi3" /> 
 			</list>
 		</property>
 		

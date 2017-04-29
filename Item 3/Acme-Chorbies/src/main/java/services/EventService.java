@@ -38,6 +38,9 @@ public class EventService {
 	@Autowired
 	private CreditCardService		creditCardService;
 
+	@Autowired
+	private ChirpService			chirpService;
+
 
 	// Constructors -----------------------------------------------------------
 	public EventService() {
@@ -85,30 +88,36 @@ public class EventService {
 
 		return result;
 	}
+
 	public Event save(Event event) {
 		Assert.notNull(event);
 
 		Manager manager;
+		CreditCard creditCard;
 		Boolean create = false;
+		Calendar calendar;
 
 		manager = this.managerService.findByPrincipal();
 		Assert.isTrue(manager.equals(event.getManager()));
+		// comprobar la validez de la creditCard:
+		creditCard = this.creditCardService.findByActor(manager.getId());
+		Assert.isTrue(this.creditCardService.checkValidation(creditCard));
+
+		calendar = Calendar.getInstance();
+		calendar.add(Calendar.MILLISECOND, -10);
+
+		Assert.isTrue(event.getOrganisedMoment().after(calendar.getTime())); // Comprueba que se organice en el futuro
 
 		if (event.getId() == 0) {
-			Calendar calendar;
-
 			create = true;
 			event.setAvailableSeats(event.getSeatsNumber());
-
-			calendar = Calendar.getInstance();
-			calendar.add(Calendar.MILLISECOND, -10);
-			Assert.isTrue(event.getOrganisedMoment().after(calendar.getTime())); // Comprueba que se organice en el futuro
 
 		} else {
 			Collection<Chorbi> chorbies;
 
 			chorbies = event.getChorbies();
 			event.setAvailableSeats(event.getSeatsNumber() - chorbies.size());
+
 		}
 
 		event = this.eventRepository.save(event);
@@ -120,10 +129,11 @@ public class EventService {
 
 			manager.setFee(manager.getFee() + configuration.getManagerFee());
 			this.managerService.save(manager);
-		}
-
+		} else
+			this.chirpService.sendChorbiesRegistered(event, event.getTitle() + " changed.", "The event " + event.getTitle() + " has been modified by the manager who organizes it.");
 		return event;
 	}
+
 	public void delete(final Event event) {
 		Assert.notNull(event);
 		Manager manager;
@@ -167,6 +177,16 @@ public class EventService {
 	}
 
 	public Event unregisterAll(Event event) {
+
+		this.chirpService.sendChorbiesRegistered(event, event.getTitle() + " deleted.", "The event " + event.getTitle() + " has been deleted by the manager who organizes it.");
+
+		Collection<Chorbi> chorbies;
+
+		chorbies = event.getChorbies();
+		for (final Chorbi c : chorbies) {
+			c.getEvents().remove(event);
+			this.chorbiService.save(c);
+		}
 
 		event.setChorbies(new ArrayList<Chorbi>());
 		event.setAvailableSeats(event.getSeatsNumber());

@@ -17,7 +17,7 @@ public interface ManagerRepository extends JpaRepository<Manager, Integer> {
 
 	//C1: A listing of managers sorted by the number of events that they organise.
 
-	@Query("select count(e),e.manager.name from Event e group by e.manager order by count(e)")
+	@Query("select count(e),e.manager from Event e group by e.manager order by count(e)")
 	Collection<Object[]> findByNumberEvents();
 
 	//C2: A listing of managers that includes the amount that they due in fees.

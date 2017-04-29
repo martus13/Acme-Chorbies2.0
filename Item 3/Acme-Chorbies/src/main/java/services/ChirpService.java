@@ -80,14 +80,22 @@ public class ChirpService {
 
 		attachments = new ArrayList<String>();
 
-		sender = this.chorbiService.findByPrincipal();
+		sender = this.actorService.findByPrincipal();
 		Assert.notNull(sender);
 		Assert.isTrue(sender.getId() != receiver.getId());
 
+		// Comprobamos que no lo envia un chorbi que este baneado
 		if (this.actorService.checkAuthority(sender, "CHORBI")) {
 			Chorbi chorbi;
 
 			chorbi = this.chorbiService.findOne(sender.getId());
+			Assert.isTrue(!chorbi.getBanned());
+		}
+		// Comprobamos que no se envia a un chorbi que este baneado
+		if (this.actorService.checkAuthority(receiver, "CHORBI")) {
+			Chorbi chorbi;
+
+			chorbi = this.chorbiService.findOne(receiver.getId());
 			Assert.isTrue(!chorbi.getBanned());
 		}
 
@@ -103,14 +111,23 @@ public class ChirpService {
 	public Chirp save(final Chirp chirp) {
 
 		Assert.notNull(chirp);
-		Assert.isTrue(chirp.getSender().equals(this.chorbiService.findByPrincipal()));
+		Assert.isTrue(chirp.getSender().equals(this.actorService.findByPrincipal()));
 		Assert.isTrue(chirp.getSender().getId() != chirp.getRecipient().getId());
 		Assert.isTrue(this.validatorURL(chirp.getAttachments()));
 
+		// Comprobamos que no lo envia un chorbi que este baneado
 		if (this.actorService.checkAuthority(chirp.getSender(), "CHORBI")) {
 			Chorbi chorbi;
 
 			chorbi = this.chorbiService.findOne(chirp.getSender().getId());
+			Assert.isTrue(!chorbi.getBanned());
+		}
+
+		// Comprobamos que no se envia a un chorbi que este baneado
+		if (this.actorService.checkAuthority(chirp.getRecipient(), "CHORBI")) {
+			Chorbi chorbi;
+
+			chorbi = this.chorbiService.findOne(chirp.getRecipient().getId());
 			Assert.isTrue(!chorbi.getBanned());
 		}
 
@@ -143,14 +160,13 @@ public class ChirpService {
 		Assert.notNull(chirp);
 		Assert.isTrue(chirp.getCopy() == true);
 		Assert.isTrue(chirp.getRecipient().equals(this.chorbiService.findByPrincipal()));
-		
+
 		if (this.actorService.checkAuthority(chirp.getSender(), "CHORBI")) {
 			Chorbi chorbi;
 
 			chorbi = this.chorbiService.findOne(chirp.getSender().getId());
 			Assert.isTrue(!chorbi.getBanned());
 		}
-
 
 		this.chirpRepository.delete(chirp);
 	}
@@ -163,7 +179,7 @@ public class ChirpService {
 		chorbi = this.chorbiService.findByPrincipal();
 		Assert.isTrue(chirp.getRecipient().equals(chorbi));
 
-		result = this.create((Chorbi) chirp.getSender());
+		result = this.create(chirp.getSender());
 
 		result.setSubject("Re: " + chirp.getSubject());
 
@@ -193,6 +209,7 @@ public class ChirpService {
 
 	public void sendChorbiesRegistered(final Event event, final String subject, final String text) {
 		int i = 0;
+		Integer pageSize;
 		Page<Chorbi> pagesChorbies;
 		List<Chorbi> chorbies;
 		Actor actor;
@@ -200,16 +217,16 @@ public class ChirpService {
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(this.actorService.checkAuthority(actor, "MANAGER")); // Esto solo pueden hacerlo los managers
 
-		pagesChorbies = this.chorbiService.findByEventIdPaged(event.getId(), i, 2);
+		pageSize = Math.min(1000, 2); // TODO: esto hay que cambiarlo por el minimo entre 1.000 y el 10% de los chorbies
+		pagesChorbies = this.chorbiService.findByEventIdPaged(event.getId(), i, pageSize);
 		chorbies = pagesChorbies.getContent();
 
 		for (final Chorbi c : chorbies) {
 			Chirp chirp;
 
-			chirp = this.create(actor);
+			chirp = this.create(this.actorService.findOne(c.getId()));
 			chirp.setSubject(subject);
 			chirp.setText(text);
-			chirp.setRecipient(c);
 
 			chirp = this.save(chirp);
 
@@ -220,17 +237,16 @@ public class ChirpService {
 			Page<Chorbi> nextPageChorbiesPages;
 			List<Chorbi> nextPageChorbiesList;
 
-			nextPageChorbiesPages = this.chorbiService.findByEventIdPaged(event.getId(), i, 2);
+			nextPageChorbiesPages = this.chorbiService.findByEventIdPaged(event.getId(), i, pageSize);
 			nextPageChorbiesList = nextPageChorbiesPages.getContent();
 
 			if (!nextPageChorbiesList.isEmpty())
 				for (final Chorbi c : nextPageChorbiesList) {
 					Chirp chirp;
 
-					chirp = this.create(actor);
+					chirp = this.create(this.actorService.findOne(c.getId()));
 					chirp.setSubject(subject);
 					chirp.setText(text);
-					chirp.setRecipient(c);
 
 					chirp = this.save(chirp);
 				}
@@ -314,9 +330,7 @@ public class ChirpService {
 
 		final Collection<Event> events = this.eventService.findByManagerId(manager.getId());
 
-		for (final Event e : events){
-			
+		for (final Event e : events)
 			this.sendChorbiesRegistered(e, chirp.getSubject(), chirp.getText());
-		}
 	}
 }

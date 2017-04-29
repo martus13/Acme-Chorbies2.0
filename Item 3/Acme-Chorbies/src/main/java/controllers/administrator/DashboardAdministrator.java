@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ChirpService;
 import services.ChorbiService;
 import services.LikeService;
+import services.ManagerService;
 import controllers.AbstractController;
 import domain.Chorbi;
 
@@ -30,6 +31,9 @@ public class DashboardAdministrator extends AbstractController {
 	@Autowired
 	private ChirpService	chirpService;
 
+	@Autowired
+	private ManagerService	managerService;
+
 
 	// Constructors -----------------------------------------------------------
 
@@ -43,6 +47,7 @@ public class DashboardAdministrator extends AbstractController {
 	public ModelAndView list() {
 		final ModelAndView result;
 
+		/////////// Chorbies
 		// C
 
 		Collection<Object[]> numChorbiesPerCountryAndCity;
@@ -67,16 +72,34 @@ public class DashboardAdministrator extends AbstractController {
 		ratioInvalidCreditCard = this.chorbiService.findRatioInvalidCreditCard();
 		ratioActivitiesLoveFriendship = this.chorbiService.findRatioActivitiesLoveFriendship();
 
-		
 		chorbiesSortedByNumLikes = this.chorbiService.findAllSortedByReceivedLikes();
 		minMaxAvgLikesPerChorbi = this.likeService.findMinMaxAvgReceivedPerChorbi();
 
 		minMaxAvgReceivedChirps = this.chirpService.findMinMaxAvgReceived();
-		
+
 		minMaxAvgChirpsSentPerChorbi = this.chirpService.findMinMaxAvgSent();
 		chorbiWithMostReceivedChirps = this.chorbiService.findChorbiWithMostReceivedChirps();
-		chorbiWithMostSentChirps	= this.chorbiService.findChorbiWithMostSentChirps();
-		
+		chorbiWithMostSentChirps = this.chorbiService.findChorbiWithMostSentChirps();
+
+		/////////// Chorbies 2.0
+		// C
+		Collection<Object[]> managersSortedByEvents;
+		Collection<Object[]> managersAndFee;
+		Collection<Object[]> chorbiesSortedByEvents;
+		Collection<Object[]> chorbiesAndFee;
+
+		// B
+		Object[] minMaxAvgStarsPerChorbi;
+		final Collection<Object[]> chorbiesSortedByAvgStars;
+
+		managersSortedByEvents = this.managerService.findByNumberEvents();
+		managersAndFee = this.managerService.findByAmountFee();
+		chorbiesSortedByEvents = this.chorbiService.findOrderByRegisteredEvents();
+		chorbiesAndFee = this.chorbiService.findAllWithAmountFee();
+
+		minMaxAvgStarsPerChorbi = this.likeService.findMinMaxAvgStarsPerChorbi();
+		chorbiesSortedByAvgStars = this.chorbiService.findChorbiesSortedByAvgStars();
+
 		result = new ModelAndView("administrator/dashboard");
 		result.addObject("requestURI", "administrator/dashboard.do");
 		result.addObject("numChorbiesPerCountryAndCity", numChorbiesPerCountryAndCity);
@@ -91,6 +114,15 @@ public class DashboardAdministrator extends AbstractController {
 		result.addObject("minMaxAvgChirpsSentPerChorbi", minMaxAvgChirpsSentPerChorbi);
 		result.addObject("chorbiWithMostReceivedChirps", chorbiWithMostReceivedChirps);
 		result.addObject("chorbiWithMostSentChirps", chorbiWithMostSentChirps);
+
+		/////////// Chorbies 2.0
+		result.addObject("managersSortedByEvents", managersSortedByEvents);
+		result.addObject("managersAndFee", managersAndFee);
+		result.addObject("chorbiesSortedByEvents", chorbiesSortedByEvents);
+		result.addObject("chorbiesAndFee", chorbiesAndFee);
+
+		result.addObject("minMaxAvgStarsPerChorbi", minMaxAvgStarsPerChorbi);
+		result.addObject("chorbiesSortedByAvgStars", chorbiesSortedByAvgStars);
 
 		return result;
 	}

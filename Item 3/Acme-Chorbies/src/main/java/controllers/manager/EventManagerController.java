@@ -13,9 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CreditCardService;
 import services.EventService;
 import services.ManagerService;
 import controllers.AbstractController;
+import domain.CreditCard;
 import domain.Event;
 import domain.Manager;
 
@@ -25,10 +27,13 @@ public class EventManagerController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
-	private EventService	eventService;
+	private EventService		eventService;
 
 	@Autowired
-	private ManagerService	managerService;
+	private ManagerService		managerService;
+
+	@Autowired
+	private CreditCardService	creditCardService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -60,10 +65,19 @@ public class EventManagerController extends AbstractController {
 	public ModelAndView register() {
 		ModelAndView result;
 		Event event;
+		CreditCard creditCard;
 
-		event = this.eventService.create();
+		creditCard = this.creditCardService.findByActor(this.managerService.findByPrincipal().getId());
+		if (this.creditCardService.checkValidation(creditCard) == false || creditCard == null) {
+			System.out.println("Invalid Credit Card");
+			result = new ModelAndView("master.page");
+			result.addObject("message", "searchTemplate.commit.errorCC");
+		} else {
 
-		result = this.createEditModelAndView(event);
+			event = this.eventService.create();
+
+			result = this.createEditModelAndView(event);
+		}
 
 		return result;
 	}

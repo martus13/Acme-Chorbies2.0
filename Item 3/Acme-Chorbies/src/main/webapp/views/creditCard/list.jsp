@@ -19,6 +19,10 @@
 			
 			<acme:column code="creditCard.number" property="number" />
 			
+			<acme:column code="creditCard.expirationMonth" property="expirationMonth" />
+			
+			<acme:column code="creditCard.expirationYear" property="expirationYear" />
+			
 			<display:column>
 				<jstl:if test="${row.actor.id==principalId }">
 					<a href="creditCard/actor/edit.do?creditCardId=${row.id }"><spring:message code="creditCard.edit" /></a>

@@ -48,9 +48,11 @@
 					</form:form>
 				</jstl:when>
 				<jstl:otherwise>
-					<form:form action="event/chorbi/register.do?eventId=${row.id}" modelAttribute="event">
-						<acme:submit name="register" code="event.register" />
-					</form:form>
+					<jstl:if test="${row.availableSeats>0 }">
+						<form:form action="event/chorbi/register.do?eventId=${row.id}" modelAttribute="event">
+							<acme:submit name="register" code="event.register" />
+						</form:form>
+					</jstl:if>
 				</jstl:otherwise>
 			</jstl:choose>
 		</display:column>
