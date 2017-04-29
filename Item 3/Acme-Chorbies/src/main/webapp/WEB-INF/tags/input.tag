@@ -26,6 +26,7 @@
 <%@ attribute name="code" required="true"%>
 
 <%@ attribute name="type" required="false"%>
+<%@ attribute name="placeholder" required="false"%>
 <%@ attribute name="step" required="false"%>
 <%@ attribute name="min" required="false"%>
 <%@ attribute name="max" required="false"%>
@@ -40,6 +41,6 @@
 	<form:label path="${path}">
 		<spring:message code="${code}" />:
 	</form:label>
-	<form:input path="${path}" type="${type }" step="${step }" min="${min }" max="${max }" />
+	<form:input path="${path}" type="${type }" placeholder="${placeholder }" step="${step }" min="${min }" max="${max }" />
 	<form:errors class="error" cssClass="error" path="${path}" />
 </div>

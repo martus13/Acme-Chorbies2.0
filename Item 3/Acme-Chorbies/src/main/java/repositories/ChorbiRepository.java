@@ -70,6 +70,6 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	Collection<Object[]> findOrderByRegisteredEvents();
 
 	// C4: A listing of chorbies that includes the amount that they due in fees.
-	@Query("select c, (select coalesce(sum(m.fee), 0) from MonthlyFee m where m.chorbi=c) from Chorbi c")
+	@Query("select c, c.fee from Chorbi c")
 	Collection<Object[]> findAllWithAmount();
 }

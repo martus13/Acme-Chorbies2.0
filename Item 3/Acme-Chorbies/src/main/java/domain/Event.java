@@ -49,7 +49,7 @@ public class Event extends DomainEntity {
 
 	@NotNull
 	@Temporal(TemporalType.TIMESTAMP)
-	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm:ss")
 	public Date getOrganisedMoment() {
 		return this.organisedMoment;
 	}

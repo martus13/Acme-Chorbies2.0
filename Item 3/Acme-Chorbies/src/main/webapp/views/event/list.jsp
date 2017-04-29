@@ -8,21 +8,21 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authentication var="principalUserAccount" property="principal" />
-<display:table name="events" id="row" requestURI="${requestURI }">
+<display:table name="events" id="row" requestURI="${requestURI }" class="table">
 	
-	<jstl:set var="style" value="null" />
-	<security:authorize access="isAnonymous()">
-		<jstl:if test="${currentDate != null && currentPlusOneMonthDate!=null}">
-			<jstl:choose>
-				<jstl:when test="${row.organisedMoment lt currentDate }">
-					<jstl:set var="style" value="background-color:#A4A4A4" />
-				</jstl:when>
-				<jstl:when test="${row.organisedMoment lt currentPlusOneMonthDate || row.organisedMoment == currentPlusOneMonthDate}">
-					<jstl:set var="style" value="background-color:#F3F781" />
-				</jstl:when>
-			</jstl:choose>
-		</jstl:if>
-	</security:authorize>
+	<jstl:set var="style" value="background-color:#FFFFFF" />
+	<jstl:if test="${currentDate != null && currentPlusOneMonthDate!=null}">
+		<jstl:choose>
+			<jstl:when test="${row.organisedMoment lt currentDate }">
+				 <!-- Pasado -->
+				 <jstl:set var="style" value="background-color:#A4A4A4" />
+			</jstl:when>
+			<jstl:when test="${(row.organisedMoment lt currentPlusOneMonthDate || row.organisedMoment == currentPlusOneMonthDate) && row.availableSeats>0}">
+				 <!-- Disponibles en mas de un mes -->
+				 <jstl:set var="style" value="background-color:#F3F781" />
+			</jstl:when>
+		</jstl:choose>
+	</jstl:if>
 	
 	<acme:column code="event.title" property="title" style="${style }" />
 	<acme:column code="event.organisedMoment" property="organisedMoment" format="{0,date,dd/MM/yyyy}" style="${style }" />
@@ -40,7 +40,7 @@
 			</jstl:if>
 		</jstl:forEach>
 		
-		<display:column sortable="false" >
+		<display:column sortable="false" style="${style}" >
 			<jstl:choose>
 				<jstl:when test="${registered}">
 					<form:form action="event/chorbi/unregister.do?eventId=${row.id}" modelAttribute="event">
@@ -57,7 +57,7 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('MANAGER')">
-		<display:column sortable="false" >
+		<display:column sortable="false" style="${style}" >
 			<jstl:if test="${row.manager.userAccount.id==principalUserAccount.id }">
 				<a href="event/manager/edit.do?eventId=${row.id}">
 					<spring:message code="event.edit" />

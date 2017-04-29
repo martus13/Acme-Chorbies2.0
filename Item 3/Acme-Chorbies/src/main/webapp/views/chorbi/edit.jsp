@@ -37,7 +37,7 @@
 		
 		<acme:textarea path="description" code="chorbi.description" rows="3" />
 		
-		<acme:input path="birthDate" code="chorbi.birthDate" />
+		<acme:input path="birthDate" code="chorbi.birthDate" placeholder="dd/mm/yyyy" />
 		
 		<div>
 			<form:label path="genre">

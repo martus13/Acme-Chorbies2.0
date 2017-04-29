@@ -71,6 +71,7 @@
 	</display:column>  
 	
 	<security:authorize access="hasRole('ADMIN')">
+		<acme:column code="chorbi.lastFeeDate" property="lastFeeDate" format="{0,date,dd/MM/yyyy HH:mm:ss}" />
 		<acme:column code="chorbi.fee" property="fee" />
 	</security:authorize>
 	

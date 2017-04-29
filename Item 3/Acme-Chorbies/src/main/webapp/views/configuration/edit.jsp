@@ -13,7 +13,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	
-	<acme:input code="configuration.cachedTime" path="cachedTime" />
+	<acme:input code="configuration.cachedTime" path="cachedTime" placeholder="HH:mm:ss" />
 	<acme:input code="configuration.chorbiFee" path="chorbiFee" min="0" step="0.01" />
 	<acme:input code="configuration.managerFee" path="managerFee" min="0" step="0.01" />
 	

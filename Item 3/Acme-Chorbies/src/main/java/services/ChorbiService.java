@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 
+import org.joda.time.DateTime;
+import org.joda.time.Period;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -174,18 +176,28 @@ public class ChorbiService {
 
 		for (Chorbi c : chorbies) {
 			Calendar calendar;
+			DateTime startTime;
+			DateTime endTime;
+			Period period;
+			long monthsDiff;
 
 			calendar = Calendar.getInstance();
 			calendar.add(Calendar.MILLISECOND, -10);
 
-			// TODO: comprobar que ha pasado mas de un mes de la ultima factura
-			c.setLastFeeDate(calendar.getTime());
-			c.setFee(c.getFee() + configuration.getChorbiFee());
+			startTime = new DateTime(c.getLastFeeDate());
+			endTime = new DateTime(calendar.getTime());
 
-			c = this.save(c);
+			period = new Period(startTime, endTime);
+			monthsDiff = period.getMonths();
+			if (monthsDiff > 0) {
+				c.setLastFeeDate(calendar.getTime());
+				c.setFee(c.getFee() + (monthsDiff * configuration.getChorbiFee()));
+
+				c = this.save(c);
+			}
+
 		}
 	}
-
 	// Other business methods -------------------------------------------------
 
 	public Page<Chorbi> findByEventIdPaged(final Integer eventId, final Integer pageNumber, final Integer pageSize) {

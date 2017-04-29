@@ -16,7 +16,7 @@
 	<form:hidden path="chorbies" />
 	
 	<acme:input code="event.title" path="title" />
-	<acme:input code="event.organisedMoment" path="organisedMoment" />
+	<acme:input code="event.organisedMoment" path="organisedMoment" placeholder="dd/mm/yyyy HH:mm:ss" />
 	<acme:textarea code="event.description" path="description" rows="3" />
 	<acme:textarea code="event.picture" path="picture" rows="3" />
 	<acme:input code="event.seatsNumber" path="seatsNumber" type="number" />

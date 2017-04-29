@@ -95,8 +95,14 @@ public class EventService {
 		Assert.isTrue(manager.equals(event.getManager()));
 
 		if (event.getId() == 0) {
+			Calendar calendar;
+
 			create = true;
 			event.setAvailableSeats(event.getSeatsNumber());
+
+			calendar = Calendar.getInstance();
+			calendar.add(Calendar.MILLISECOND, -10);
+			Assert.isTrue(event.getOrganisedMoment().after(calendar.getTime())); // Comprueba que se organice en el futuro
 
 		} else {
 			Collection<Chorbi> chorbies;
@@ -137,6 +143,8 @@ public class EventService {
 
 		chorbi = this.chorbiService.findByPrincipal();
 		Assert.notNull(chorbi);
+
+		Assert.isTrue(event.getAvailableSeats() > 0);
 
 		event.addChorbi(chorbi);
 		event.setAvailableSeats(event.getAvailableSeats() - 1);
