@@ -71,13 +71,12 @@ public class ManagerService {
 		return result;
 	}
 
-	public Manager save(final Manager manager) {
+	public Manager save(Manager manager) {
 		Assert.notNull(manager);
 
-		Manager result;
-		result = this.managerRepository.save(manager);
+		manager = this.managerRepository.save(manager);
 
-		return result;
+		return manager;
 	}
 
 	// Other business methods -------------------------------------------------
@@ -122,9 +121,8 @@ public class ManagerService {
 		manager.setSurname(managerForm.getSurname());
 		manager.setEmail(managerForm.getEmail());
 		manager.setPhoneNumber(managerForm.getPhoneNumber());
-		managerForm.setCompany(manager.getCompany());
-		managerForm.setVatNumber(manager.getVatNumber());
-		managerForm.setFee(manager.getFee());
+		manager.setCompany(managerForm.getCompany());
+		manager.setVatNumber(managerForm.getVatNumber());
 
 		return manager;
 	}
@@ -141,7 +139,6 @@ public class ManagerService {
 		managerForm.setPhoneNumber(manager.getPhoneNumber());
 		managerForm.setCompany(manager.getCompany());
 		managerForm.setVatNumber(manager.getVatNumber());
-		managerForm.setFee(manager.getFee());
 
 		return managerForm;
 	}

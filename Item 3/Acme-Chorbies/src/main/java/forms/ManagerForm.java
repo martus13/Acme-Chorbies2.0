@@ -1,7 +1,6 @@
 
 package forms;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
@@ -22,7 +21,6 @@ public class ManagerForm {
 	private String	phoneNumber;
 	private String	company;
 	private String	vatNumber;
-	private Double	fee;
 	private boolean	isAgree;
 
 
@@ -126,16 +124,6 @@ public class ManagerForm {
 
 	public void setVatNumber(final String vatNumber) {
 		this.vatNumber = vatNumber;
-	}
-
-	@NotNull
-	@Min(0)
-	public Double getFee() {
-		return this.fee;
-	}
-
-	public void setFee(final Double fee) {
-		this.fee = fee;
 	}
 
 	public boolean getIsAgree() {

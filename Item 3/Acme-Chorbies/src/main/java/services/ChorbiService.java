@@ -394,6 +394,16 @@ public class ChorbiService {
 
 	}
 
+	public Integer find10percentChorbiesByEventId(final int eventId) {
+
+		Double result;
+
+		result = this.chorbiRepository.find10percentChorbiesByEventId(eventId);
+
+		return (int) Math.round(result);
+		//return Integer.valueOf(""+Math.round(result));
+
+	}
 	// Queries -----
 
 	public Collection<Object[]> findGroupByCountryAndCity() {

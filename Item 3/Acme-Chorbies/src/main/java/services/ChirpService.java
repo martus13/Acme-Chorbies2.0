@@ -217,7 +217,7 @@ public class ChirpService {
 		actor = this.actorService.findByPrincipal();
 		Assert.isTrue(this.actorService.checkAuthority(actor, "MANAGER")); // Esto solo pueden hacerlo los managers
 
-		pageSize = Math.min(1000, 2); // TODO: esto hay que cambiarlo por el minimo entre 1.000 y el 10% de los chorbies
+		pageSize = Math.min(1000, Math.max(10, this.chorbiService.find10percentChorbiesByEventId(event.getId())));
 		pagesChorbies = this.chorbiService.findByEventIdPaged(event.getId(), i, pageSize);
 		chorbies = pagesChorbies.getContent();
 

@@ -43,8 +43,6 @@
 		<acme:input path="company" code="manager.company" />
 		
 		<acme:input path="vatNumber" code="manager.vatNumber" />
-
-		<acme:input path="fee" code="manager.fee" />
 					
 	</fieldset>
 	<br>
