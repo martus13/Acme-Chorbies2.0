@@ -1,0 +1,14 @@
++Quitar color naranja a tablas por defecto X
+
++Arreglar problemas con color cuando no hay asientos disponibles X
+
++placeholder en el formato de la fecha X
+
++Comprobar Credit card también en el create de Event
+
++No permitir crear eventos en pasado 
+
++Almacenar fecha último pago en una tabla X
+
++Comprobar que hay más de 0 asientos disponibles al registrarse X
+
