@@ -140,4 +140,12 @@ public class LikeService {
 
 		return result;
 	}
+	
+	public Object[] findMinMaxAvgStarsPerChorbi() {
+		Object[] result;
+
+		result = this.likeRepository.findMinMaxAvgStatsPerChorbi();
+
+		return result;
+	}
 }

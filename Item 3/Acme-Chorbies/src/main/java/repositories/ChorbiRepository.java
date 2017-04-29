@@ -72,4 +72,10 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	// C4: A listing of chorbies that includes the amount that they due in fees.
 	@Query("select c, c.fee from Chorbi c")
 	Collection<Object[]> findAllWithAmount();
+	
+	//B2: The list of chorbies, sorted by the average number of stars that they've got
+	@Query("select c from Chorbi c left join c.receivedLikes l group by c order by avg(l.starsNumber) desc")
+	Collection<Chorbi> findChorbisSortedByAvgStars();
+	
 }
+

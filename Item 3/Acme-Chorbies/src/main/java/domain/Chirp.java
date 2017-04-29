@@ -91,7 +91,7 @@ public class Chirp extends DomainEntity {
 	//Relationships --------------------------------------------------
 
 	private Actor	sender;
-	private Chorbi	recipient;
+	private Actor	recipient;
 
 
 	@NotNull
@@ -107,10 +107,10 @@ public class Chirp extends DomainEntity {
 	@Valid
 	@NotNull
 	@ManyToOne(optional = false)
-	public Chorbi getRecipient() {
+	public Actor getRecipient() {
 		return this.recipient;
 	}
-	public void setRecipient(final Chorbi recipient) {
+	public void setRecipient(final Actor recipient) {
 		this.recipient = recipient;
 	}
 

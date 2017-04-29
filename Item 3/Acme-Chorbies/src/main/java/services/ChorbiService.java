@@ -479,4 +479,11 @@ public class ChorbiService {
 
 		return result;
 	}
+	
+	public Collection<Chorbi> findChorbiesSortedByAvgStars(){
+		
+		final Collection<Chorbi> result = this.chorbiRepository.findChorbisSortedByAvgStars();
+		
+		return result;
+	}
 }

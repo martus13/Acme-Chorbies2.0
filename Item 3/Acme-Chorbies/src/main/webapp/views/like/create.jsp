@@ -15,6 +15,18 @@
 	<form:hidden path="givenTo" />
 	<form:hidden path="likeMoment" />
 	
+	<form:label path="starsNumber">
+			<spring:message code="like.stars" />
+	</form:label>	
+	<form:select path="starsNumber">
+			<form:option value="0" label="0" />		
+			<form:option value="1" label="1" />
+			<form:option value="2" label="2" />
+			<form:option value="3" label="3" />
+	</form:select>
+	<form:errors path="starsNumber" cssClass="error" />
+	
+	
 	<acme:textarea code="like.comment" path="comment" rows="3" />
 	
 	<acme:submit name="save" code="like.save" />

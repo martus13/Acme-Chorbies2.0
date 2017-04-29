@@ -6,7 +6,6 @@ import java.util.Collection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
-
 import domain.Like;
 
 @Repository
@@ -24,4 +23,12 @@ public interface LikeRepository extends JpaRepository<Like, Integer> {
 	// B2: The minimum, the maximum, and the average number of likes per chorbi.
 	@Query("select min(c.receivedLikes.size), max(c.receivedLikes.size), avg(c.receivedLikes.size) from Chorbi c")
 	Object[] findMinMaxAvgReceivedPerChorbi();
+	
+	
+	////Chorbies 2.0
+	
+	//B1: The minimum, the maximum, and the average number of stars per chorbi
+	@Query("select min(l.starsNumber),max(l.starsNumber), 1.0*sum(l.starsNumber)/(select count(distinct l1.givenTo) from Like l1) from Like l")
+	Object[] findMinMaxAvgStatsPerChorbi();
+	
 }

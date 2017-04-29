@@ -68,7 +68,7 @@ public class ChirpService {
 		return result;
 	}
 
-	public Chirp create(final Chorbi receiver) {
+	public Chirp create(final Actor receiver) {
 		Assert.notNull(receiver);
 
 		final Chirp result = new Chirp();
@@ -143,7 +143,14 @@ public class ChirpService {
 		Assert.notNull(chirp);
 		Assert.isTrue(chirp.getCopy() == true);
 		Assert.isTrue(chirp.getRecipient().equals(this.chorbiService.findByPrincipal()));
-		Assert.isTrue(!chirp.getRecipient().getBanned());
+		
+		if (this.actorService.checkAuthority(chirp.getSender(), "CHORBI")) {
+			Chorbi chorbi;
+
+			chorbi = this.chorbiService.findOne(chirp.getSender().getId());
+			Assert.isTrue(!chorbi.getBanned());
+		}
+
 
 		this.chirpRepository.delete(chirp);
 	}
@@ -307,11 +314,9 @@ public class ChirpService {
 
 		final Collection<Event> events = this.eventService.findByManagerId(manager.getId());
 
-		for (final Event e : events)
-			for (final Chorbi c : e.getChorbies()) {
-
-				chirp.setRecipient(c);
-				this.chirpRepository.save(chirp);
-			}
+		for (final Event e : events){
+			
+			this.sendChorbiesRegistered(e, chirp.getSubject(), chirp.getText());
+		}
 	}
 }
