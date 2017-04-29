@@ -4,9 +4,9 @@
 
 +placeholder en el formato de la fecha X
 
-+Comprobar Credit card también en el create de Event
++Comprobar Credit card también en el create de Event X
 
-+No permitir crear eventos en pasado 
++No permitir crear eventos en pasado X
 
 +Almacenar fecha último pago en una tabla X
 
