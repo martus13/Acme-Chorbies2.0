@@ -50,22 +50,21 @@
 		</security:authorize>
 		
 		<security:authorize access="hasRole('CHORBI')">
-			<li><a class="fNiv" href="creditCard/actor/list.do"><spring:message code="master.page.actor.creditCard" /></a></li>
 			<li><a class="fNiv" href="searchTemplate/chorbi/display.do"><spring:message code="master.page.chorbi.searchTemplate" /></a></li>
 			<li><a class="fNiv" href="chorbi/listWhoLikeMe.do"><spring:message code="master.page.chorbi.likedMe" /></a></li>
+		</security:authorize>
+		
+		<security:authorize access="hasAnyRole('MANAGER','CHORBI')">
+			<li><a class="fNiv" href="creditCard/actor/list.do"><spring:message code="master.page.actor.creditCard" /></a></li>
 			
-			<li><a class="fNiv"><spring:message	code="master.page.chorbi.chirps" /></a>
+			<li><a class="fNiv"><spring:message	code="master.page.actor.chirps" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="chirp/chorbi/receivedChirps.do"><spring:message code="master.page.chorbi.receivedChirps" /> </a></li>
-					<li><a href="chirp/chorbi/sentChirps.do"><spring:message code="master.page.chorbi.sentChirps" /> </a></li>
+					<li><a href="chirp/actor/receivedChirps.do"><spring:message code="master.page.actor.receivedChirps" /> </a></li>
+					<li><a href="chirp/actor/sentChirps.do"><spring:message code="master.page.actor.sentChirps" /> </a></li>
 					
 				</ul>
 			</li>
-		</security:authorize>
-		
-		<security:authorize access="hasRole('MANAGER')">
-		<li><a class="fNiv" href="creditCard/actor/list.do"><spring:message code="master.page.actor.creditCard" /></a></li>
 		</security:authorize>
 		
 		<security:authorize access="hasRole('ADMIN')">

@@ -35,7 +35,7 @@
 				</a>
 			</display:column>
 			<display:column>
-				<form:form action="chirp/chorbi/resend.do?chirpId=${row.id}" modelAttribute="chirp">
+				<form:form action="chirp/actor/resend.do?chirpId=${row.id}" modelAttribute="chirp">
 					<acme:submit name="resend" code="chirp.resend" />
 				</form:form>
 			</display:column>
@@ -50,7 +50,7 @@
 			</display:column>
 			
 			<display:column>
-				<form:form action="chirp/chorbi/reply.do?chirpId=${row.id}" modelAttribute="chirp">
+				<form:form action="chirp/actor/reply.do?chirpId=${row.id}" modelAttribute="chirp">
 					<acme:submit name="reply" code="chirp.reply" />
 				</form:form>
 			</display:column>
@@ -58,9 +58,9 @@
 	</jstl:choose>
 	
 	<display:column>
-			<form:form action="chirp/chorbi/delete.do?chirpId=${row.id}" modelAttribute="chirp">
-				<acme:submit name="delete" code="chirp.delete" />
-			</form:form>
+		<form:form action="chirp/actor/delete.do?chirpId=${row.id}" modelAttribute="chirp">
+			<acme:submit name="delete" code="chirp.delete" />
+		</form:form>
 	</display:column>
 	
 

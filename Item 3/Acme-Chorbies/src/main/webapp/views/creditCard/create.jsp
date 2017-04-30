@@ -30,6 +30,6 @@
 	<acme:input path="cvv" code="creditCard.cvv" type="number" />
 	
 	<acme:submit name="save" code="creditCard.save" />
-	<acme:cancel url="creditCard/chorbi/list.do" code="creditCard.cancel" />
+	<acme:cancel url="creditCard/actor/list.do" code="creditCard.cancel" />
 		
 </form:form>

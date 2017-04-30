@@ -20,16 +20,7 @@
 	<acme:textarea code="chirp.text" path="text"/>
 	<acme:textarea code="chirp.attachments" path="attachments"/>
 	
-	<security:authorize access="hasRole('CHORBI')">
 	<acme:submit name="save" code="chirp.save" />
-	</security:authorize>
-	
-	<security:authorize access="hasRole('MANAGER')">
-	<form:form action="chirp/manager/create?eventId=${eventId}" modelAttribute="chirp">
-		<acme:submit name="broadcast" code="chirp.save" />
-	</form:form>
-	</security:authorize>
-	
 	<acme:cancel url="chorbi/actor/list.do" code="chirp.cancel" />
 	
 </form:form>

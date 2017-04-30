@@ -111,7 +111,7 @@
 			
 		<display:column>
 		<jstl:if test="${principalUserAccount.id != row.userAccount.id }">
-			<a href="chirp/chorbi/create.do?receiverId=${row.id}">
+			<a href="chirp/actor/create.do?receiverId=${row.id}">
 				<spring:message code="chorbi.chirp" />
 			</a>
 		</jstl:if>

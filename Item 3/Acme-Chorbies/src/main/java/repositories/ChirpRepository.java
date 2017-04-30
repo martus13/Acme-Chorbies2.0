@@ -13,10 +13,10 @@ import domain.Chirp;
 public interface ChirpRepository extends JpaRepository<Chirp, Integer> {
 
 	@Query("select c from Chirp c where c.sender.id=?1 and c.copy=false")
-	Collection<Chirp> findAllMySentChirps(int myId);
+	Collection<Chirp> findAllSentByActorId(int myId);
 
 	@Query("select c from Chirp c where c.recipient.id=?1 and c.copy=true")
-	Collection<Chirp> findAllMyReceivedChirps(int myId);
+	Collection<Chirp> findAllReceivedByActorId(int myId);
 
 	// A1: The minimum, the maximum, and the average number of chirps that a chorbi receives from other chorbies.
 	////Min:

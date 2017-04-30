@@ -130,7 +130,7 @@ public class EventService {
 			manager.setFee(manager.getFee() + configuration.getManagerFee());
 			this.managerService.save(manager);
 		} else
-			this.chirpService.sendChorbiesRegistered(event, event.getTitle() + " changed.", "The event " + event.getTitle() + " has been modified by the manager who organizes it.");
+			this.chirpService.sendChorbiesRegistered(event, event.getTitle() + " changed.", "The event " + event.getTitle() + " has been modified by the manager who organizes it.", new ArrayList<String>());
 		return event;
 	}
 
@@ -178,7 +178,7 @@ public class EventService {
 
 	public Event unregisterAll(Event event) {
 
-		this.chirpService.sendChorbiesRegistered(event, event.getTitle() + " deleted.", "The event " + event.getTitle() + " has been deleted by the manager who organizes it.");
+		this.chirpService.sendChorbiesRegistered(event, event.getTitle() + " deleted.", "The event " + event.getTitle() + " has been deleted by the manager who organizes it.", new ArrayList<String>());
 
 		Collection<Chorbi> chorbies;
 

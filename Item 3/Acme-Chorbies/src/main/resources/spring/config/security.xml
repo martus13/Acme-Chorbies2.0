@@ -46,6 +46,7 @@
 		
 		<security:intercept-url pattern="/event/listOrganisedLessOneMonth.do" access="permitAll" /> 
 		<security:intercept-url pattern="/event/list.do" access="permitAll" /> 
+		<security:intercept-url pattern="/event/display.do" access="permitAll" /> 
 		
 		<!-- isAnonymous() -->
 		
@@ -57,19 +58,27 @@
 		<security:intercept-url pattern="/chorbi/actor/list.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/chorbi/actor/display.do" access="isAuthenticated()" /> 
 		
-		<!-- MANAGER -->
+		<!-- MANAGER AND CHORBI -->
 		
-		<security:intercept-url pattern="/event/manager/listByManager.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/event/manager/create.do" access="hasRole('MANAGER')" />
-		<security:intercept-url pattern="/event/manager/edit.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/chirp/actor/receivedChirps.do" access="hasAnyRole('MANAGER','CHORBI')" /> 
+		<security:intercept-url pattern="/chirp/actor/sentChirps.do" access="hasAnyRole('MANAGER','CHORBI')" />   
+		<security:intercept-url pattern="/chirp/actor/delete.do" access="hasAnyRole('MANAGER','CHORBI')" /> 
+		<security:intercept-url pattern="/chirp/actor/resend.do" access="hasAnyRole('MANAGER','CHORBI')" /> 
+		<security:intercept-url pattern="/chirp/actor/reply.do" access="hasAnyRole('MANAGER','CHORBI')" /> 
+		<security:intercept-url pattern="/chirp/actor/create.do" access="hasAnyRole('MANAGER','CHORBI')" /> 
 		
 		<security:intercept-url pattern="/creditCard/actor/list.do" access="hasAnyRole('MANAGER','CHORBI')" />
 		<security:intercept-url pattern="/creditCard/actor/create.do" access="hasAnyRole('MANAGER','CHORBI')" />
 		<security:intercept-url pattern="/creditCard/actor/edit.do" access="hasAnyRole('MANAGER','CHORBI')" />
 		<security:intercept-url pattern="/creditCard/actor/delete.do" access="hasAnyRole('MANAGER','CHORBI')" />
 		
-		<security:intercept-url pattern="/chirp/manager/create.do" access="hasRole('MANAGER')" /> 
+		<!-- MANAGER -->
 		
+		<security:intercept-url pattern="/event/manager/listByManager.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/event/manager/create.do" access="hasRole('MANAGER')" />
+		<security:intercept-url pattern="/event/manager/edit.do" access="hasRole('MANAGER')" />
+		
+		<security:intercept-url pattern="/chirp/manager/createBroadcast.do" access="hasRole('MANAGER')" /> 
 		
 		<!-- CHORBI -->
 		
@@ -89,15 +98,8 @@
 		<security:intercept-url pattern="/searchTemplate/chorbi/list.do" access="hasRole('CHORBI')" />   
 		<security:intercept-url pattern="/searchTemplate/chorbi/findBySearchTemplate.do" access="hasRole('CHORBI')" />
 
-	
-	    <security:intercept-url pattern="/chirp/chorbi/create.do" access="hasRole('CHORBI')" /> 
-	    <security:intercept-url pattern="/chirp/chorbi/receivedChirps.do" access="hasRole('CHORBI')" />  
-	    <security:intercept-url pattern="/chirp/chorbi/sentChirps.do" access="hasRole('CHORBI')" />  
-		<security:intercept-url pattern="/chirp/chorbi/reply.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/chirp/chorbi/resend.do" access="hasRole('CHORBI')" /> 
-		<security:intercept-url pattern="/chirp/chorbi/delete.do" access="hasRole('CHORBI')" /> 
-		
 		<security:intercept-url pattern="/chorbi/listWhoLikeMe.do" access="hasRole('CHORBI')" /> 
+		
 		<!-- ADMIN -->
 		
 		<security:intercept-url pattern="/administrator/dashboard.do" access="hasRole('ADMIN')" /> 

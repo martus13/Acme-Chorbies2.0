@@ -122,10 +122,10 @@
 			</security:authorize>
 		</li>
 		
-		<security:authorize access="hasRole('CHORBI')" >
+		<security:authorize access="hasAnyRole('MANAGER','CHORBI')" >
 			<jstl:if test="${principalUserAccount.id != chorbi.userAccount.id}">
 				<li>
-					<input type="submit" name="chirp" value="<spring:message code="chorbi.chirp" />" onclick="location='chirp/chorbi/create.do?receiverId=${chorbi.id}'"/>
+					<input type="submit" name="chirp" value="<spring:message code="chorbi.chirp" />" onclick="location='chirp/actor/create.do?receiverId=${chorbi.id}'"/>
 				</li>
 			</jstl:if>
 		</security:authorize>

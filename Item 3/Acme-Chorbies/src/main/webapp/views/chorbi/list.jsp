@@ -16,7 +16,7 @@
 	</a>
 	<br>
 </security:authorize>
-<display:table name="chorbies" id="row" requestURI="${requestURI }">
+<display:table name="chorbies" id="row" requestURI="${requestURI }" pagesize="4" class="displaytag">
 	
 	<spring:message code="chorbi.name" var="nameHeader" />
 	<display:column title="${nameHeader}" sortable="true">
@@ -108,13 +108,15 @@
 		
 		</display:column>
 			
-			
+	</security:authorize>
+	
+	<security:authorize access="hasAnyRole('MANAGER','CHORBI')">
 		<display:column>
-		<jstl:if test="${principalUserAccount.id != row.userAccount.id }">
-			<a href="chirp/chorbi/create.do?receiverId=${row.id}">
-				<spring:message code="chorbi.chirp" />
-			</a>
-		</jstl:if>
+			<jstl:if test="${principalUserAccount.id != row.userAccount.id }">
+				<a href="chirp/actor/create.do?receiverId=${row.id}">
+					<spring:message code="chorbi.chirp" />
+				</a>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 	

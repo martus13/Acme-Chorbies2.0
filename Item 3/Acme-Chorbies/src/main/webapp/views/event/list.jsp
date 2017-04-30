@@ -32,6 +32,12 @@
 	<acme:column code="event.availableSeats" property="availableSeats" style="${style }" />
 	<acme:column code="event.manager" property="manager.name" style="${style }" />
 	
+	<display:column sortable="false" style="${style}" >
+		<a href="event/display.do?eventId=${row.id}">
+			<spring:message code="event.display" />
+		</a>
+	</display:column>
+	
 	<security:authorize access="hasRole('CHORBI')">
 		<jstl:set var="registered" value="false" />
 		<jstl:forEach items="${row.chorbies }" var="chorbi">
@@ -68,15 +74,16 @@
 		</display:column>
 		
 		<display:column sortable="false" style="${style}" >
-			<jstl:if test="${row.manager.userAccount.id==principalUserAccount.id && row.chorbies.size()!=0}">
-				<a href="chirp/manager/create.do?eventId=${row.id}">
-					<spring:message code="event.broadcast" />
-				</a>
-			</jstl:if>
-			
-			<jstl:if test="${row.manager.userAccount.id==principalUserAccount.id && row.chorbies.size()==0}">
+			<jstl:choose>
+				<jstl:when test="${row.manager.userAccount.id==principalUserAccount.id && row.chorbies.size()!=0}">
+					<a href="chirp/manager/createBroadcast.do?eventId=${row.id}">
+						<spring:message code="event.broadcast" />
+					</a>
+				</jstl:when>
+				<jstl:otherwise>
 					<spring:message code="event.emptyEvent"/>
-			</jstl:if>
+				</jstl:otherwise>
+			</jstl:choose>
 		</display:column>
 		
 	</security:authorize>

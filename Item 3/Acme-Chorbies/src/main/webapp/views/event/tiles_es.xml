@@ -21,6 +21,11 @@
 		<put-attribute name="body" value="/views/event/list.jsp" />
 	</definition>
 	
+	<definition name="event/display" extends="master.page">	
+		<put-attribute name="title" value="Evento: Mostrar" />
+		<put-attribute name="body" value="/views/event/display.jsp" />
+	</definition>
+	
 	<definition name="event/edit" extends="master.page">	
 		<put-attribute name="title" value="Evento: Editar" />
 		<put-attribute name="body" value="/views/event/edit.jsp" />

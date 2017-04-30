@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.EventService;
@@ -66,6 +67,21 @@ public class EventController extends AbstractController {
 		result.addObject("events", events);
 		result.addObject("currentDate", currentCalendar.getTime());
 		result.addObject("currentPlusOneMonthDate", currentPlusOneMonth.getTime());
+
+		return result;
+	}
+
+	// Display ----------------------------------------------------------------		
+	@RequestMapping(value = "/display", method = RequestMethod.GET)
+	public ModelAndView display(@RequestParam final int eventId) {
+		ModelAndView result;
+		Event event;
+
+		event = this.eventService.findOne(eventId);
+
+		result = new ModelAndView("event/display");
+		result.addObject("requestURI", "event/display.do?eventId=" + eventId);
+		result.addObject("event", event);
 
 		return result;
 	}

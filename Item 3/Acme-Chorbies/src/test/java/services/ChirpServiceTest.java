@@ -165,7 +165,7 @@ public class ChirpServiceTest extends AbstractTest {
 			chirp = this.chirpService.findOne(chirpId);
 			this.chirpService.deleteSentChirp(chirp);
 
-			chirps = this.chirpService.findAllMySentChirps(this.chorbiService.findByPrincipal());
+			chirps = this.chirpService.findAllSentByActor(this.chorbiService.findByPrincipal());
 			Assert.isTrue(!chirps.contains(chirp));
 
 			System.out.println("Chirp " + chirpId + " has been deleted");
@@ -192,7 +192,7 @@ public class ChirpServiceTest extends AbstractTest {
 			chirp = this.chirpService.findOne(chirpId);
 			this.chirpService.deleteReceivedChirp(chirp);
 
-			chirps = this.chirpService.findAllMyReceivedChirps(this.chorbiService.findByPrincipal());
+			chirps = this.chirpService.findAllReceivedByActor(this.chorbiService.findByPrincipal());
 			Assert.isTrue(!chirps.contains(chirp));
 
 			System.out.println("Chirp " + chirpId + " has been deleted");
@@ -214,7 +214,7 @@ public class ChirpServiceTest extends AbstractTest {
 		try {
 			final Collection<Chirp> chirps;
 
-			chirps = this.chirpService.findAllMySentChirps(this.chorbiService.findOne(chorbiId));
+			chirps = this.chirpService.findAllSentByActor(this.chorbiService.findOne(chorbiId));
 			System.out.println("Chirps sent by user " + chorbiId + ": " + chirps.size());
 
 		} catch (final Throwable oops) {
@@ -232,7 +232,7 @@ public class ChirpServiceTest extends AbstractTest {
 		try {
 			final Collection<Chirp> chirps;
 
-			chirps = this.chirpService.findAllMyReceivedChirps(this.chorbiService.findOne(chorbiId));
+			chirps = this.chirpService.findAllReceivedByActor(this.chorbiService.findOne(chorbiId));
 			System.out.println("Chirps received by user " + chorbiId + ": " + chirps.size());
 
 		} catch (final Throwable oops) {

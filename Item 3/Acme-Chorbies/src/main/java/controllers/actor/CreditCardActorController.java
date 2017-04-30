@@ -207,7 +207,7 @@ public class CreditCardActorController extends AbstractController {
 	protected ModelAndView createEditModelAndViewEdit(final CreditCardForm creditCardForm, final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("creditCard/create");
+		result = new ModelAndView("creditCard/edit");
 		result.addObject("creditCard", creditCardForm);
 		result.addObject("requestURI", "creditCard/actor/edit.do");
 		result.addObject("message", message);
