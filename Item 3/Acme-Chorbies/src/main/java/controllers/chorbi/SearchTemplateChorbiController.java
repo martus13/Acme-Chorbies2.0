@@ -93,6 +93,7 @@ public class SearchTemplateChorbiController extends AbstractController {
 			System.out.println("Invalid Credit Card");
 			result = new ModelAndView("master.page");
 			result.addObject("message", "searchTemplate.commit.errorCC");
+		
 		} else {
 
 			chorbies = this.searchTemplateService.findChorbiesBySearchTemplate(searchTemplate);

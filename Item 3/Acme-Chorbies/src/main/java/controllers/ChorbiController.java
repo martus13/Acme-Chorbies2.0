@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ChorbiService;
+import services.CreditCardService;
 import domain.Chorbi;
+import domain.CreditCard;
 import domain.Genre;
+import domain.Manager;
 import domain.RelationshipType;
 import forms.ChorbiForm;
 
@@ -25,6 +28,9 @@ public class ChorbiController extends AbstractController {
 	// Services ---------------------------------------------------------------
 	@Autowired
 	private ChorbiService	chorbiService;
+	
+	@Autowired
+	private CreditCardService creditCardService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -77,21 +83,24 @@ public class ChorbiController extends AbstractController {
 	@RequestMapping(value="/listWhoLikeMe" , method=RequestMethod.GET)
 	public ModelAndView listMyLikes(){
 		ModelAndView result;
+		Chorbi principal;
 		
+		principal = this.chorbiService.findByPrincipal();
+		CreditCard creditCard = this.creditCardService.findByActor(principal.getId());
+		
+		if (this.creditCardService.checkValidation(creditCard) == false || creditCard == null) {
+			System.out.println("Invalid Credit Card");
+			result = new ModelAndView("master.page");
+			result.addObject("message", "creditCard.invalid");
+		
+		}else{
 		Collection<Chorbi> chorbies = this.chorbiService.findChorbiesLikedMe();
-		
-//		try{
 		result = new ModelAndView("chorbi/list");
 		result.addObject("requestURI", "chorbi/listWhoLikeMe.do");
 		result.addObject("chorbies", chorbies);
-//		}catch  (final Throwable oops) {
-//			System.out.println(oops);
-//
-//			result = new ModelAndView("creditCard/create");
-//			result.addObject("message", "chorbi.invalidCreditCard");
-//		}
-
 		
+		}
+
 		return result;
 		
 	}
