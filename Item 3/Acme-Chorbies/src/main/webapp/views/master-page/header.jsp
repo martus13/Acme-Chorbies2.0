@@ -52,7 +52,7 @@
 		<security:authorize access="hasRole('CHORBI')">
 			<li><a class="fNiv" href="creditCard/actor/list.do"><spring:message code="master.page.actor.creditCard" /></a></li>
 			<li><a class="fNiv" href="searchTemplate/chorbi/display.do"><spring:message code="master.page.chorbi.searchTemplate" /></a></li>
-			<li><a class="fNiv" href="/chorbi/listWhoLikeMe.do"><spring:message code="master.page.chorbi.likedMe" /></a></li>
+			<li><a class="fNiv" href="chorbi/listWhoLikeMe.do"><spring:message code="master.page.chorbi.likedMe" /></a></li>
 			
 			<li><a class="fNiv"><spring:message	code="master.page.chorbi.chirps" /></a>
 				<ul>
