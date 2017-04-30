@@ -183,10 +183,13 @@ public class ChirpChorbiController {
 		ModelAndView result;
 
 		result = new ModelAndView("chirp/create");
+		result.addObject("requestURI"," chirp/chorbi/create.do");
 		result.addObject("chirp", chirp);
 		result.addObject("message", message);
 
 		return result;
 	}
+	
+	
 
 }

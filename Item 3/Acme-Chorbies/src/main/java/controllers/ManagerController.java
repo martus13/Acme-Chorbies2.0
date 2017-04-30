@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ChorbiService;
 import services.ManagerService;
+import domain.Chorbi;
 import domain.Manager;
 import forms.ManagerForm;
 
@@ -21,6 +25,9 @@ public class ManagerController extends AbstractController {
 	// Services ---------------------------------------------------------------
 	@Autowired
 	private ManagerService	managerService;
+	
+	@Autowired
+	private ChorbiService chorbiService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -69,6 +76,7 @@ public class ManagerController extends AbstractController {
 		return result;
 
 	}
+
 
 	// Ancillary methods ------------------------------------------------------
 

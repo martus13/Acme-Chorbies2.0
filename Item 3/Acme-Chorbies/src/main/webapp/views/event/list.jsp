@@ -66,6 +66,19 @@
 				</a>
 			</jstl:if>
 		</display:column>
+		
+		<display:column sortable="false" style="${style}" >
+			<jstl:if test="${row.manager.userAccount.id==principalUserAccount.id && row.chorbies.size()!=0}">
+				<a href="chirp/manager/create.do?eventId=${row.id}">
+					<spring:message code="event.broadcast" />
+				</a>
+			</jstl:if>
+			
+			<jstl:if test="${row.manager.userAccount.id==principalUserAccount.id && row.chorbies.size()==0}">
+					<spring:message code="event.emptyEvent"/>
+			</jstl:if>
+		</display:column>
+		
 	</security:authorize>
 	
 </display:table>

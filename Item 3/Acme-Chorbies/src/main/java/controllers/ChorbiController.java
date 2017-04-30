@@ -1,6 +1,8 @@
 
 package controllers;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,6 +72,28 @@ public class ChorbiController extends AbstractController {
 			}
 		return result;
 
+	}
+	
+	@RequestMapping(value="/listWhoLikeMe" , method=RequestMethod.GET)
+	public ModelAndView listMyLikes(){
+		ModelAndView result;
+		
+		Collection<Chorbi> chorbies = this.chorbiService.findChorbiesLikedMe();
+		
+//		try{
+		result = new ModelAndView("chorbi/list");
+		result.addObject("requestURI", "chorbi/listWhoLikeMe.do");
+		result.addObject("chorbies", chorbies);
+//		}catch  (final Throwable oops) {
+//			System.out.println(oops);
+//
+//			result = new ModelAndView("creditCard/create");
+//			result.addObject("message", "chorbi.invalidCreditCard");
+//		}
+
+		
+		return result;
+		
 	}
 
 	// Ancillary methods ------------------------------------------------------

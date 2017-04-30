@@ -68,6 +68,7 @@ public class ChirpService {
 		return result;
 	}
 
+	
 	public Chirp create(final Actor receiver) {
 		Assert.notNull(receiver);
 
