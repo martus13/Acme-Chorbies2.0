@@ -74,16 +74,15 @@
 		</display:column>
 		
 		<display:column sortable="false" style="${style}" >
-			<jstl:choose>
-				<jstl:when test="${row.manager.userAccount.id==principalUserAccount.id && row.chorbies.size()!=0}">
-					<a href="chirp/manager/createBroadcast.do?eventId=${row.id}">
-						<spring:message code="event.broadcast" />
-					</a>
-				</jstl:when>
-				<jstl:otherwise>
-					<spring:message code="event.emptyEvent"/>
-				</jstl:otherwise>
-			</jstl:choose>
+			<jstl:if test="${row.manager.userAccount.id==principalUserAccount.id && row.chorbies.size()!=0}">
+				<a href="chirp/manager/createBroadcast.do?eventId=${row.id}">
+					<spring:message code="event.broadcast" />
+				</a>
+			</jstl:if>
+			<jstl:if test="${row.manager.userAccount.id==principalUserAccount.id && row.chorbies.size()==0}">
+				<spring:message code="event.emptyEvent"/>
+			</jstl:if>
+			
 		</display:column>
 		
 	</security:authorize>
