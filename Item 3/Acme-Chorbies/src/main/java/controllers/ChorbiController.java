@@ -17,7 +17,6 @@ import services.CreditCardService;
 import domain.Chorbi;
 import domain.CreditCard;
 import domain.Genre;
-import domain.Manager;
 import domain.RelationshipType;
 import forms.ChorbiForm;
 
@@ -27,10 +26,10 @@ public class ChorbiController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
-	private ChorbiService	chorbiService;
-	
+	private ChorbiService		chorbiService;
+
 	@Autowired
-	private CreditCardService creditCardService;
+	private CreditCardService	creditCardService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -79,30 +78,30 @@ public class ChorbiController extends AbstractController {
 		return result;
 
 	}
-	
-	@RequestMapping(value="/listWhoLikeMe" , method=RequestMethod.GET)
-	public ModelAndView listMyLikes(){
+
+	@RequestMapping(value = "/listWhoLikeMe", method = RequestMethod.GET)
+	public ModelAndView listMyLikes() {
 		ModelAndView result;
 		Chorbi principal;
-		
+
 		principal = this.chorbiService.findByPrincipal();
-		CreditCard creditCard = this.creditCardService.findByActor(principal.getId());
-		
+		final CreditCard creditCard = this.creditCardService.findByActor(principal.getId());
+
 		if (this.creditCardService.checkValidation(creditCard) == false || creditCard == null) {
 			System.out.println("Invalid Credit Card");
 			result = new ModelAndView("master.page");
 			result.addObject("message", "creditCard.invalid");
-		
-		}else{
-		Collection<Chorbi> chorbies = this.chorbiService.findChorbiesLikedMe();
-		result = new ModelAndView("chorbi/list");
-		result.addObject("requestURI", "chorbi/listWhoLikeMe.do");
-		result.addObject("chorbies", chorbies);
-		
+
+		} else {
+			final Collection<Chorbi> chorbies = this.chorbiService.findChorbiesLikedMe();
+			result = new ModelAndView("chorbi/list");
+			result.addObject("requestURI", "chorbi/listWhoLikeMe.do");
+			result.addObject("chorbies", chorbies);
+
 		}
 
 		return result;
-		
+
 	}
 
 	// Ancillary methods ------------------------------------------------------

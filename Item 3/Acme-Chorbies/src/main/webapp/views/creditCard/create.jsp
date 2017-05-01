@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<form:form action="${requestURI}" modelAttribute="creditCard">
+<form:form action="${requestURI}" modelAttribute="${creditCard}">
 	
 	<acme:input path="holderName" code="creditCard.holderName" />
 	<div>

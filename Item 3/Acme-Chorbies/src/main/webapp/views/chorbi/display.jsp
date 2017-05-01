@@ -80,9 +80,11 @@
 		
 		<li>
 			<b><spring:message code="chorbi.receivedLikes" />:</b><br />
-			<display:table name="${chorbi.receivedLikes}" id="row" >
+			<display:table name="${chorbi.receivedLikes}" id="row" pagesize="5" class="displaytag" >
 			
 				<acme:column code="chorbi.like.likeMoment" property="likeMoment" format="{0,date,dd/MM/yyyy HH:mm}" />
+				
+				<acme:column code="chorbi.like.starsNumber" property="starsNumber" />
 				
 				<spring:message code="chorbi.like.comment" var="commentHeader" />
 				<display:column title="${commentHeader}" sortable="false">

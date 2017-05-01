@@ -9,7 +9,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="f" uri="http://example.com/functions" %>
 
-<display:table name="chirps" id="row" requestURI="${requestURI}">
+<display:table name="chirps" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 
 	
 	<spring:message code="chirp.subject" var="subjectHeader" />

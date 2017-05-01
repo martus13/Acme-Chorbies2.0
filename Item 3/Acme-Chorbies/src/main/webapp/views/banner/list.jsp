@@ -7,7 +7,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
-<display:table name="banners" id="row" requestURI="${requestURI }">
+<display:table name="banners" id="row" requestURI="${requestURI }" pagesize="5" class="displaytag">
 	
 	<acme:columnImages code="banner.picture" properties="${row.picture}" maxHeight="150px" />
 	

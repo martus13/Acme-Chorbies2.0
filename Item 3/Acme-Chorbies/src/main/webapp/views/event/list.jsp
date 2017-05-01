@@ -8,7 +8,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 
 <security:authentication var="principalUserAccount" property="principal" />
-<display:table name="events" id="row" requestURI="${requestURI }" class="table">
+<display:table name="events" id="row" requestURI="${requestURI }" pagesize="5" class="displaytag">
 	
 	<jstl:set var="style" value="background-color:#FFFFFF" />
 	<jstl:if test="${currentDate != null && currentPlusOneMonthDate!=null}">

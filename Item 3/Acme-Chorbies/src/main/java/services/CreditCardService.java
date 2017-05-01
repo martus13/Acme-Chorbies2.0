@@ -131,19 +131,53 @@ public class CreditCardService {
 		return result;
 	}
 
-	public CreditCard reconstruct(final CreditCardForm creditCardForm, final String type) {
+	public CreditCard reconstructCreate(final CreditCardForm creditCardForm) {
 		Assert.notNull(creditCardForm);
 
-		CreditCard creditCard = null;
+		CreditCard creditCard;
+		Calendar calendar;
+		Calendar expirationCalendar;
 
-		if (type == "create")
-			creditCard = this.create();
-		else if (type == "edit") {
-			Actor actor;
+		calendar = Calendar.getInstance();
+		expirationCalendar = Calendar.getInstance();
 
-			actor = this.actorService.findByPrincipal();
-			creditCard = this.findByActor(actor.getId());
-		}
+		// expiration date -> al menos un día más
+		expirationCalendar.set(creditCardForm.getExpirationYear(), creditCardForm.getExpirationMonth() - 1, 1);
+		expirationCalendar.set(Calendar.DAY_OF_MONTH, expirationCalendar.getActualMaximum(Calendar.DAY_OF_MONTH) - 1); // cogemos el último día del mes menos uno, porque tiene que ser un día más
+
+		Assert.isTrue(calendar.before(expirationCalendar) || calendar.equals(expirationCalendar));
+
+		creditCard = this.create();
+
+		creditCard.setHolderName(creditCardForm.getHolderName());
+		creditCard.setBrandName(creditCardForm.getBrandName());
+		creditCard.setNumber(creditCardForm.getNumber());
+		creditCard.setExpirationMonth(creditCardForm.getExpirationMonth());
+		creditCard.setExpirationYear(creditCardForm.getExpirationYear());
+		creditCard.setCvv(creditCardForm.getCvv());
+
+		return creditCard;
+	}
+
+	public CreditCard reconstructEdit(final CreditCardForm creditCardForm) {
+		Assert.notNull(creditCardForm);
+
+		CreditCard creditCard;
+		Actor actor;
+		Calendar calendar;
+		Calendar expirationCalendar;
+
+		calendar = Calendar.getInstance();
+		expirationCalendar = Calendar.getInstance();
+
+		// expiration date -> al menos un día más
+		expirationCalendar.set(creditCardForm.getExpirationYear(), creditCardForm.getExpirationMonth() - 1, 1);
+		expirationCalendar.set(Calendar.DAY_OF_MONTH, expirationCalendar.getActualMaximum(Calendar.DAY_OF_MONTH) - 1); // cogemos el último día del mes menos uno, porque tiene que ser un día más
+
+		Assert.isTrue(calendar.before(expirationCalendar) || calendar.equals(expirationCalendar));
+
+		actor = this.actorService.findByPrincipal();
+		creditCard = this.findByActor(actor.getId());
 
 		creditCard.setHolderName(creditCardForm.getHolderName());
 		creditCard.setBrandName(creditCardForm.getBrandName());

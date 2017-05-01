@@ -23,6 +23,8 @@
 			
 			<acme:column code="creditCard.expirationYear" property="expirationYear" />
 			
+			<acme:column code="creditCard.cvv" property="cvv" />
+			
 			<display:column>
 				<jstl:if test="${row.actor.id==principalId }">
 					<a href="creditCard/actor/edit.do?creditCardId=${row.id }"><spring:message code="creditCard.edit" /></a>

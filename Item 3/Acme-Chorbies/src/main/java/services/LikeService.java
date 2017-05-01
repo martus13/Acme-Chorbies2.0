@@ -76,7 +76,6 @@ public class LikeService {
 		like.setGivenBy(principal);
 		like.setGivenTo(givenTo);
 		like.setLikeMoment(calendar.getTime());
-		like.setStarsNumber(0);
 
 		return like;
 	}
@@ -140,7 +139,7 @@ public class LikeService {
 
 		return result;
 	}
-	
+
 	public Object[] findMinMaxAvgStarsPerChorbi() {
 		Object[] result;
 

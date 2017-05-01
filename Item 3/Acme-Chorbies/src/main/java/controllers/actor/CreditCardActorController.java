@@ -82,7 +82,7 @@ public class CreditCardActorController extends AbstractController {
 
 		} else
 			try {
-				creditCard = this.creditCardService.reconstruct(creditCardForm, "create");
+				creditCard = this.creditCardService.reconstructCreate(creditCardForm);
 				creditCard = this.creditCardService.save(creditCard);
 				result = new ModelAndView("redirect:list.do");
 
@@ -125,7 +125,7 @@ public class CreditCardActorController extends AbstractController {
 
 		} else
 			try {
-				creditCard = this.creditCardService.reconstruct(creditCardForm, "edit");
+				creditCard = this.creditCardService.reconstructEdit(creditCardForm);
 				creditCard = this.creditCardService.save(creditCard);
 				result = new ModelAndView("redirect:list.do");
 
@@ -161,20 +161,6 @@ public class CreditCardActorController extends AbstractController {
 		return result;
 	}
 
-	//	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
-	//	public ModelAndView delete(final CreditCard creditCard, final BindingResult binding) {
-	//		ModelAndView result;
-	//
-	//		try {
-	//			this.creditCardService.delete(creditCard);
-	//			result = new ModelAndView("redirect:../../creditCard/chorbi/list.do");
-	//		} catch (final Throwable oops) {
-	//			result = new ModelAndView("redirect:../../creditCard/chorbi/list.do");
-	//		}
-	//
-	//		return result;
-	//	}
-
 	// Ancillary methods ------------------------------------------------------
 
 	protected ModelAndView createEditModelAndView(final CreditCardForm creditCardForm) {
@@ -189,7 +175,8 @@ public class CreditCardActorController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("creditCard/create");
-		result.addObject("creditCard", creditCardForm);
+		result.addObject("creditCardForm", creditCardForm);
+		result.addObject("creditCard", "creditCardForm");
 		result.addObject("requestURI", "creditCard/actor/create.do");
 		result.addObject("message", message);
 
@@ -208,7 +195,8 @@ public class CreditCardActorController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("creditCard/edit");
-		result.addObject("creditCard", creditCardForm);
+		result.addObject("creditCardForm", creditCardForm);
+		result.addObject("creditCard", "creditCardForm");
 		result.addObject("requestURI", "creditCard/actor/edit.do");
 		result.addObject("message", message);
 
