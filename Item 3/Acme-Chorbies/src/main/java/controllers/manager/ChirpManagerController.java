@@ -73,7 +73,7 @@ public class ChirpManagerController extends AbstractController {
 		} else
 			try {
 				this.chirpService.sendChorbiesRegistered(event, chirp.getSubject(), chirp.getText(), chirp.getAttachments());
-				result = new ModelAndView("redirect:../../event/list.do");
+				result = new ModelAndView("redirect:../../chirp/actor/sentChirps.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
@@ -86,25 +86,6 @@ public class ChirpManagerController extends AbstractController {
 	}
 
 	// Ancillary methods ------------------------------------------------------
-
-	protected ModelAndView createEditModelAndView(final Chirp chirp) {
-		ModelAndView result;
-
-		result = this.createEditModelAndView(chirp, null);
-
-		return result;
-	}
-
-	protected ModelAndView createEditModelAndView(final Chirp chirp, final String message) {
-		ModelAndView result;
-
-		result = new ModelAndView("chirp/create");
-		result.addObject("requestURI", "chirp/manager/create.do");
-		result.addObject("chirp", chirp);
-		result.addObject("message", message);
-
-		return result;
-	}
 
 	protected ModelAndView createEditModelAndView(final Chirp chirp, final int eventId) {
 		ModelAndView result;
@@ -120,7 +101,6 @@ public class ChirpManagerController extends AbstractController {
 		result = new ModelAndView("chirp/create");
 		result.addObject("requestURI", "chirp/manager/createBroadcast.do?eventId=" + eventId);
 		result.addObject("chirp", chirp);
-		result.addObject("eventId", eventId);
 		result.addObject("message", message);
 
 		return result;

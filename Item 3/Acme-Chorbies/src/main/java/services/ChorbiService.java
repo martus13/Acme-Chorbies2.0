@@ -170,7 +170,7 @@ public class ChorbiService {
 		administrator = this.administratorService.findByPrincipal();
 		Assert.notNull(administrator);
 
-		chorbies = this.findAll();
+		chorbies = this.findNotBanned();
 		configuration = this.configurationService.findConfiguration();
 
 		for (Chorbi c : chorbies) {

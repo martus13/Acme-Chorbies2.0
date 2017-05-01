@@ -145,7 +145,10 @@ public class EventManagerController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Event event, final String message) {
 		ModelAndView result;
 
-		result = new ModelAndView("event/edit");
+		if (event.getId() == 0)
+			result = new ModelAndView("event/create");
+		else
+			result = new ModelAndView("event/edit");
 		result.addObject("event", event);
 		result.addObject("message", message);
 

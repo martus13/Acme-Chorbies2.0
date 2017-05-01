@@ -26,6 +26,11 @@
 		<put-attribute name="body" value="/views/event/display.jsp" />
 	</definition>
 	
+	<definition name="event/create" extends="master.page">	
+		<put-attribute name="title" value="Evento: Crear" />
+		<put-attribute name="body" value="/views/event/edit.jsp" />
+	</definition>
+	
 	<definition name="event/edit" extends="master.page">	
 		<put-attribute name="title" value="Event: Edit" />
 		<put-attribute name="body" value="/views/event/edit.jsp" />

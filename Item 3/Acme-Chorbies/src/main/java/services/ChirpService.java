@@ -203,6 +203,10 @@ public class ChirpService {
 	}
 
 	public void sendChorbiesRegistered(final Event event, final String subject, final String text, final Collection<String> attachments) {
+		Assert.notNull(event);
+		Assert.notNull(subject);
+		Assert.notNull(text);
+
 		int i = 0;
 		Integer pageSize;
 		Page<Chorbi> pagesChorbies;
