@@ -62,7 +62,7 @@ public class ChirpManagerController extends AbstractController {
 	//Save and send with broadcast 
 
 	@RequestMapping(value = "/createBroadcast", method = RequestMethod.POST, params = "save")
-	public ModelAndView saveAndBroadcast(@Valid final Chirp chirp, @RequestParam final int eventId, final BindingResult binding) {
+	public ModelAndView saveAndBroadcast(@RequestParam final int eventId, @Valid final Chirp chirp, final BindingResult binding) {
 		ModelAndView result = new ModelAndView();
 		final Event event = this.eventService.findOne(eventId);
 
@@ -70,7 +70,7 @@ public class ChirpManagerController extends AbstractController {
 			System.out.println(binding.toString());
 			result = this.createEditModelAndView(chirp, eventId);
 
-		} else
+		} else {
 			try {
 				this.chirpService.sendChorbiesRegistered(event, chirp.getSubject(), chirp.getText(), chirp.getAttachments());
 				result = new ModelAndView("redirect:../../chirp/actor/sentChirps.do");
@@ -80,7 +80,7 @@ public class ChirpManagerController extends AbstractController {
 
 				result = this.createEditModelAndView(chirp, eventId, "chirp.commit.error");
 			}
-
+		}
 		return result;
 
 	}
