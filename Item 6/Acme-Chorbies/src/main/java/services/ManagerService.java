@@ -81,10 +81,12 @@ public class ManagerService {
 	public Manager save(Manager manager) {
 		Assert.notNull(manager);
 
-		Administrator administrator;
+		if (manager.getId() == 0) {
+			Administrator administrator;
 
-		administrator = this.administratorService.findByPrincipal();
-		Assert.notNull(administrator);
+			administrator = this.administratorService.findByPrincipal();
+			Assert.notNull(administrator);
+		}
 
 		manager = this.managerRepository.save(manager);
 

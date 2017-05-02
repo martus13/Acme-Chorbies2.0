@@ -4,6 +4,7 @@ package services;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 
 import org.joda.time.DateTime;
 import org.joda.time.Period;
@@ -161,42 +162,68 @@ public class ChorbiService {
 		return chorbi;
 	}
 
+	public void updateFee(Chorbi chorbi) {
+		Calendar calendar;
+		DateTime startTime;
+		DateTime endTime;
+		Period period;
+		long monthsDiff;
+		Configuration configuration;
+
+		configuration = this.configurationService.findConfiguration();
+
+		calendar = Calendar.getInstance();
+		calendar.add(Calendar.MILLISECOND, -10);
+
+		startTime = new DateTime(chorbi.getLastFeeDate());
+		endTime = new DateTime(calendar.getTime());
+
+		period = new Period(startTime, endTime);
+		monthsDiff = period.getMonths();
+		if (monthsDiff > 0) {
+			chorbi.setLastFeeDate(calendar.getTime());
+			chorbi.setFee(chorbi.getFee() + (monthsDiff * configuration.getChorbiFee()));
+
+			chorbi = this.save(chorbi);
+		}
+	}
+
 	public void updateAllFees() {
 
 		Administrator administrator;
-		Collection<Chorbi> chorbies;
-		Configuration configuration;
+		Integer pageSize;
+		Integer i;
+		Page<Chorbi> pagesChorbies;
+		List<Chorbi> chorbies;
 
 		administrator = this.administratorService.findByPrincipal();
 		Assert.notNull(administrator);
 
-		chorbies = this.findNotBanned();
-		configuration = this.configurationService.findConfiguration();
+		i = 0;
+		pageSize = Math.min(1000, Math.max(10, this.find10percentChorbies()));
+		pagesChorbies = this.findNotBannedPaged(i, pageSize);
+		chorbies = pagesChorbies.getContent();
 
-		for (Chorbi c : chorbies) {
-			Calendar calendar;
-			DateTime startTime;
-			DateTime endTime;
-			Period period;
-			long monthsDiff;
+		for (final Chorbi c : chorbies)
+			this.updateFee(c);
 
-			calendar = Calendar.getInstance();
-			calendar.add(Calendar.MILLISECOND, -10);
+		while (pagesChorbies.hasNextPage()) {
+			i++;
+			Page<Chorbi> nextPageChorbiesPages;
+			List<Chorbi> nextPageChorbiesList;
 
-			startTime = new DateTime(c.getLastFeeDate());
-			endTime = new DateTime(calendar.getTime());
+			nextPageChorbiesPages = this.findNotBannedPaged(i, pageSize);
+			nextPageChorbiesList = nextPageChorbiesPages.getContent();
 
-			period = new Period(startTime, endTime);
-			monthsDiff = period.getMonths();
-			if (monthsDiff > 0) {
-				c.setLastFeeDate(calendar.getTime());
-				c.setFee(c.getFee() + (monthsDiff * configuration.getChorbiFee()));
-
-				c = this.save(c);
-			}
+			if (!nextPageChorbiesList.isEmpty())
+				for (final Chorbi c : nextPageChorbiesList)
+					this.updateFee(c);
+			else
+				break;
 
 		}
 	}
+
 	// Other business methods -------------------------------------------------
 
 	public Page<Chorbi> findByEventIdPaged(final int eventId, final Integer pageNumber, final Integer pageSize) {
@@ -209,6 +236,18 @@ public class ChorbiService {
 
 		return result;
 	}
+
+	public Page<Chorbi> findNotBannedPaged(final Integer pageNumber, final Integer pageSize) {
+		PageRequest request;
+		Page<Chorbi> result;
+
+		request = new PageRequest(pageNumber, pageSize);
+
+		result = this.chorbiRepository.findNotBannedPaged(request);
+
+		return result;
+	}
+
 	public Chorbi findByPrincipal() {
 		Chorbi result;
 		UserAccount userAccount;
@@ -404,6 +443,17 @@ public class ChorbiService {
 		//return Integer.valueOf(""+Math.round(result));
 
 	}
+
+	public Integer find10percentChorbies() {
+
+		Double result;
+
+		result = this.chorbiRepository.find10percentChorbies();
+
+		return (int) Math.round(result);
+
+	}
+
 	// Queries -----
 
 	public Collection<Object[]> findGroupByCountryAndCity() {

@@ -17,6 +17,9 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 	@Query("select c from Chorbi c join c.events e where e.id=?1 and c.banned=false")
 	Page<Chorbi> findByEventIdPaged(int eventId, Pageable pageRequest);
 
+	@Query("select c from Chorbi c where c.banned=false")
+	Page<Chorbi> findNotBannedPaged(Pageable pageRequest);
+
 	@Query("select c from Chorbi c where c.userAccount.id = ?1")
 	Chorbi findByUserAccountId(int userAccountId);
 
@@ -28,6 +31,9 @@ public interface ChorbiRepository extends JpaRepository<Chorbi, Integer> {
 
 	@Query("select 0.1*e.chorbies.size from Event e where e.id=?1")
 	Double find10percentChorbiesByEventId(int eventId);
+
+	@Query("select 0.1*count(c) from Chorbi c")
+	Double find10percentChorbies();
 
 	// C1: A listing with the number of chorbies per country and city.
 	@Query("select c.coordinates.country, c.coordinates.city, count(c) from Chorbi c group by c.coordinates.country, c.coordinates.city")
