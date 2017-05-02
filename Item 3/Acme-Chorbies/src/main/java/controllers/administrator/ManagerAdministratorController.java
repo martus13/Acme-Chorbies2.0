@@ -17,7 +17,7 @@ import forms.ManagerForm;
 
 @Controller
 @RequestMapping("/managerActor/administrator")
-public class ManagerController extends AbstractController {
+public class ManagerAdministratorController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 	@Autowired
@@ -26,7 +26,7 @@ public class ManagerController extends AbstractController {
 
 	// Constructors -----------------------------------------------------------
 
-	public ManagerController() {
+	public ManagerAdministratorController() {
 		super();
 	}
 
