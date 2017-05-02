@@ -1,5 +1,5 @@
 
-package controllers;
+package controllers.administrator;
 
 import javax.validation.Valid;
 
@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ManagerService;
+import controllers.AbstractController;
 import domain.Manager;
 import forms.ManagerForm;
 
 @Controller
-@RequestMapping("/manager")
+@RequestMapping("/managerActor/administrator")
 public class ManagerController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
@@ -58,7 +59,7 @@ public class ManagerController extends AbstractController {
 			try {
 				manager = this.managerService.reconstructCreate(managerForm);
 				this.managerService.save(manager);
-				result = new ModelAndView("redirect:/security/login.do");
+				result = new ModelAndView("redirect:../../welcome/index.do");
 
 			} catch (final Throwable oops) {
 				System.out.println(oops);
@@ -86,7 +87,7 @@ public class ManagerController extends AbstractController {
 		result = new ModelAndView("manager/register");
 		result.addObject("managerForm", managerForm);
 		result.addObject("actorForm", "managerForm");
-		result.addObject("requestURI", "manager/register.do");
+		result.addObject("requestURI", "managerActor/administrator/register.do");
 		result.addObject("message", message);
 
 		return result;

@@ -110,7 +110,6 @@ public class ManagerService {
 		String password;
 
 		Assert.isTrue(managerForm.getPassword().equals(managerForm.getConfirmPassword())); // Comprobamos que las dos contraseñas sean la misma
-		Assert.isTrue(managerForm.getIsAgree()); // Comprobamos que acepte las condiciones
 
 		manager = this.create();
 		password = this.encryptPassword(managerForm.getPassword());

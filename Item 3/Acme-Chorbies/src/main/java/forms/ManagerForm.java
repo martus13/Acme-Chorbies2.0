@@ -21,7 +21,6 @@ public class ManagerForm {
 	private String	phoneNumber;
 	private String	company;
 	private String	vatNumber;
-	private boolean	isAgree;
 
 
 	@Size(min = 5, max = 32)
@@ -102,7 +101,6 @@ public class ManagerForm {
 		this.phoneNumber = phoneNumber;
 	}
 
-	@Size(min = 5, max = 32)
 	@SafeHtml(whitelistType = WhiteListType.SIMPLE_TEXT)
 	@NotBlank
 	@NotNull
@@ -126,11 +124,4 @@ public class ManagerForm {
 		this.vatNumber = vatNumber;
 	}
 
-	public boolean getIsAgree() {
-		return this.isAgree;
-	}
-
-	public void setIsAgree(final boolean isAgree) {
-		this.isAgree = isAgree;
-	}
 }
