@@ -13,6 +13,7 @@ import repositories.ManagerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Administrator;
 import domain.Manager;
 import forms.ManagerForm;
 
@@ -22,10 +23,12 @@ public class ManagerService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private ManagerRepository	managerRepository;
-
+	private ManagerRepository		managerRepository;
 
 	// Supporting services ----------------------------------------------------
+	@Autowired
+	private AdministratorService	administratorService;
+
 
 	// Constructors -----------------------------------------------------------
 	public ManagerService() {
@@ -56,6 +59,10 @@ public class ManagerService {
 		Manager result;
 		UserAccount userAccount;
 		Authority authority;
+		Administrator administrator;
+
+		administrator = this.administratorService.findByPrincipal();
+		Assert.notNull(administrator);
 
 		result = new Manager();
 
@@ -73,6 +80,11 @@ public class ManagerService {
 
 	public Manager save(Manager manager) {
 		Assert.notNull(manager);
+
+		Administrator administrator;
+
+		administrator = this.administratorService.findByPrincipal();
+		Assert.notNull(administrator);
 
 		manager = this.managerRepository.save(manager);
 
@@ -110,7 +122,6 @@ public class ManagerService {
 		String password;
 
 		Assert.isTrue(managerForm.getPassword().equals(managerForm.getConfirmPassword())); // Comprobamos que las dos contraseñas sean la misma
-		Assert.isTrue(managerForm.getIsAgree()); // Comprobamos que acepte las condiciones
 
 		manager = this.create();
 		password = this.encryptPassword(managerForm.getPassword());

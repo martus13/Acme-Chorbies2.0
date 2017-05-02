@@ -51,7 +51,6 @@
 		<!-- isAnonymous() -->
 		
 		<security:intercept-url pattern="/chorbi/register.do" access="isAnonymous()" />
-		<security:intercept-url pattern="/managerActor/register.do" access="isAnonymous()" />  
 		
 		<!-- isAuthenticated() -->
 		
@@ -114,6 +113,8 @@
 		<security:intercept-url pattern="/chorbi/administrator/updateFee.do" access="hasRole('ADMIN')" /> 
 		
 		<security:intercept-url pattern="/configuration/administrator/edit.do" access="hasRole('ADMIN')" /> 
+		
+		<security:intercept-url pattern="/managerActor/administrator/register.do" access="hasRole('ADMIN')" />  
 		
 		<!--  -->
 	

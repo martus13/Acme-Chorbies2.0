@@ -41,7 +41,6 @@
 		
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="chorbi/register.do"><spring:message code="master.page.chorbi.register" /></a></li>
-			<li><a class="fNiv" href="managerActor/register.do"><spring:message code="master.page.manager.register" /></a></li>
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
 		</security:authorize>
 		
@@ -76,6 +75,7 @@
 				</ul>
 			</li>
 			<li><a class="fNiv" href="configuration/administrator/edit.do"><spring:message code="master.page.admin.configuration" /></a></li>
+			<li><a class="fNiv" href="managerActor/administrator/register.do"><spring:message code="master.page.admin.registerManger" /></a></li>
 			<li><a class="fNiv" href="administrator/dashboard.do"><spring:message code="master.page.admin.dashboard" /></a></li>
 		</security:authorize>
 		
