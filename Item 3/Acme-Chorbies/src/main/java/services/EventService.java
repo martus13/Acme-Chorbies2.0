@@ -114,9 +114,13 @@ public class EventService {
 
 		} else {
 			Collection<Chorbi> chorbies;
+			Integer availableSeats;
 
 			chorbies = event.getChorbies();
-			event.setAvailableSeats(event.getSeatsNumber() - chorbies.size());
+			availableSeats = event.getSeatsNumber() - chorbies.size();
+			Assert.isTrue(availableSeats >= 0); // No se pueden editar menos asientos de los que ya estan registrados
+
+			event.setAvailableSeats(availableSeats);
 
 		}
 
@@ -155,6 +159,7 @@ public class EventService {
 		Assert.notNull(chorbi);
 
 		Assert.isTrue(event.getAvailableSeats() > 0);
+		Assert.isTrue(!event.getChorbies().contains(chorbi)); // No debe estar registrado antes
 
 		event.addChorbi(chorbi);
 		event.setAvailableSeats(event.getAvailableSeats() - 1);
@@ -168,6 +173,7 @@ public class EventService {
 
 		chorbi = this.chorbiService.findByPrincipal();
 		Assert.notNull(chorbi);
+		Assert.isTrue(event.getChorbies().contains(chorbi)); // Debe estar registrado
 
 		event.removeChorbi(chorbi);
 		event.setAvailableSeats(event.getAvailableSeats() + 1);

@@ -71,7 +71,7 @@ public class ChorbiServiceTest extends AbstractTest {
 				(Genre) testingData[i][8], (Date) testingData[i][9], (RelationshipType) testingData[i][10], (String) testingData[i][11], (String) testingData[i][12], (Class<?>) testingData[i][13]);
 	}
 
-	// Baneado/desbaneado de un chorbi:
+	// Un administrador debe ser capaz de banear/desbanear un chorbi y ejecutar un procedimiento para actualizar la cuota mensual que debrian pagar:
 	@Test
 	public void driverBanUnban() {
 
@@ -86,6 +86,7 @@ public class ChorbiServiceTest extends AbstractTest {
 		for (int i = 0; i < testingData.length; i++) {
 			this.testBan((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
 			this.testUnban((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][2]);
+			this.testUpdateAllFees((String) testingData[i][0], (Class<?>) testingData[i][2]);
 		}
 	}
 
@@ -165,6 +166,25 @@ public class ChorbiServiceTest extends AbstractTest {
 
 			chorbi = this.chorbiService.unban(chorbi);
 			Assert.isTrue(!chorbi.getBanned());
+
+			this.unauthenticate();
+
+		} catch (final Throwable oops) {
+			caught = oops.getClass();
+		}
+
+		this.checkExceptions(expected, caught);
+
+	}
+
+	protected void testUpdateAllFees(final String username, final Class<?> expected) {
+		Class<?> caught;
+
+		caught = null;
+		try {
+			this.authenticate(username);
+
+			this.chorbiService.updateAllFees();
 
 			this.unauthenticate();
 

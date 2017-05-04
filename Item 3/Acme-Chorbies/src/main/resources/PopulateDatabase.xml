@@ -207,7 +207,7 @@
 		<property name="description" value="Description of event1"/>
 		<property name="picture" value="https://1dj7ia2prpz93pxo7t32a2j1-wpengine.netdna-ssl.com/wp-content/uploads/2013/02/special-event.jpg"/>
 		<property name="seatsNumber" value="10"/>
-		<property name="availableSeats" value="10"/>
+		<property name="availableSeats" value="9"/>
 		
 		<property name="manager" ref="manager1"/>
 		<property name="chorbies">
@@ -224,7 +224,7 @@
 		<property name="description" value="Description of event2"/>
 		<property name="picture" value="http://www.aal-europe.eu/wp-content/uploads/2013/12/events_medium.jpg"/>
 		<property name="seatsNumber" value="2"/>
-		<property name="availableSeats" value="1"/>
+		<property name="availableSeats" value="0"/>
 		
 		<property name="manager" ref="manager1"/>
 		<property name="chorbies">
@@ -241,7 +241,7 @@
 		<property name="organisedMoment" value="05/20/2017 18:15"/>
 		<property name="description" value="Description of event3"/>
 		<property name="picture" value="https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/The_Event_2010_Intertitle.svg/1200px-The_Event_2010_Intertitle.svg.png"/>
-		<property name="seatsNumber" value="2"/>
+		<property name="seatsNumber" value="6"/>
 		<property name="availableSeats" value="3"/>
 		
 		<property name="manager" ref="manager2"/>
@@ -261,7 +261,7 @@
 		<property name="description" value="Description of event4"/>
 		<property name="picture" value="http://www.hutdogs.com/ext/blog/wp-content/uploads/2013/05/EventIcon.jpg"/>
 		<property name="seatsNumber" value="6"/>
-		<property name="availableSeats" value="0"/>
+		<property name="availableSeats" value="6"/>
 		
 		<property name="manager" ref="manager2"/>
 		<property name="chorbies">
@@ -746,7 +746,7 @@
 		<property name="recipient" ref="chorbi3"/>		
 	</bean>
 	
-		<bean id="chirp10" class="domain.Chirp">
+	<bean id="chirp10" class="domain.Chirp">
 		<property name="sentMoment" value="04/17/2017 17:34" />
 		<property name="subject" value="Valoración"/>
 		<property name="text" value="Vi que asististe a nuestro evento ¿Qué te pareció?"/>
