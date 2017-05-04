@@ -1,6 +1,7 @@
 
 package services;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -463,19 +464,29 @@ public class ChorbiService {
 	}
 
 	public Object[] findMinMaxAvgAges() {
-		Object[] results;
+		Object[] result;
+		DecimalFormat df;
 
-		results = this.chorbiRepository.findMinMaxAvgAges();
+		result = this.chorbiRepository.findMinMaxAvgAges();
 
-		return results;
+		df = new DecimalFormat("0.0#");
+		result[0] = Double.parseDouble(df.format(result[0]));
+		result[1] = Double.parseDouble(df.format(result[1]));
+		result[2] = Double.parseDouble(df.format(result[2]));
+
+		return result;
 	}
 
 	public Double findRatioInvalidCreditCard() {
 		Double result;
 		Calendar calendar;
+		DecimalFormat df;
 
 		calendar = Calendar.getInstance();
 		result = this.chorbiRepository.findRatioInvalidCreditCard(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH));
+
+		df = new DecimalFormat("0.0#");
+		result = Double.parseDouble(df.format(result));
 
 		return result;
 	}
@@ -485,17 +496,20 @@ public class ChorbiService {
 		final Object[] auxActivities = new Object[2];
 		final Object[] auxLove = new Object[2];
 		final Object[] auxFriendship = new Object[2];
+		DecimalFormat df;
+
+		df = new DecimalFormat("0.0#");
 
 		auxActivities[0] = RelationshipType.activities;
-		auxActivities[1] = this.chorbiRepository.findRatioActivities();
+		auxActivities[1] = df.format(this.chorbiRepository.findRatioActivities());
 		result.add(auxActivities);
 
 		auxLove[0] = RelationshipType.love;
-		auxLove[1] = this.chorbiRepository.findRatioLove();
+		auxLove[1] = df.format(this.chorbiRepository.findRatioLove());
 		result.add(auxLove);
 
 		auxFriendship[0] = RelationshipType.friendship;
-		auxFriendship[1] = this.chorbiRepository.findRatioFriendship();
+		auxFriendship[1] = df.format(this.chorbiRepository.findRatioFriendship());
 		result.add(auxFriendship);
 
 		return result;
@@ -540,6 +554,12 @@ public class ChorbiService {
 	public Collection<Object[]> findChorbiesSortedByAvgStars() {
 
 		final Collection<Object[]> result = this.chorbiRepository.findChorbisSortedByAvgStars();
+
+		DecimalFormat df;
+
+		df = new DecimalFormat("0.0#");
+		for (final Object[] o : result)
+			o[1] = df.format(o[1]);
 
 		return result;
 	}

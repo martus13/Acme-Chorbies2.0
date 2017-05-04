@@ -13,6 +13,7 @@ import repositories.ManagerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import domain.Administrator;
 import domain.Manager;
 import forms.ManagerForm;
 
@@ -22,10 +23,12 @@ public class ManagerService {
 
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private ManagerRepository	managerRepository;
-
+	private ManagerRepository		managerRepository;
 
 	// Supporting services ----------------------------------------------------
+	@Autowired
+	private AdministratorService	administratorService;
+
 
 	// Constructors -----------------------------------------------------------
 	public ManagerService() {
@@ -73,6 +76,13 @@ public class ManagerService {
 
 	public Manager save(Manager manager) {
 		Assert.notNull(manager);
+
+		if (manager.getId() == 0) {
+			Administrator administrator;
+
+			administrator = this.administratorService.findByPrincipal();
+			Assert.notNull(administrator);
+		}
 
 		manager = this.managerRepository.save(manager);
 

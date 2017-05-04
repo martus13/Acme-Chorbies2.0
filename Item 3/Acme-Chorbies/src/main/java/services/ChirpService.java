@@ -1,6 +1,7 @@
 
 package services;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -282,10 +283,13 @@ public class ChirpService {
 	public Double[] findMinMaxAvgReceived() {
 
 		final Double[] result = new Double[3];
+		DecimalFormat df;
 
-		result[0] = this.chirpRepository.findMinReceived();
-		result[1] = this.chirpRepository.findMaxReceived();
-		result[2] = this.chirpRepository.findAvgReceived();
+		df = new DecimalFormat("0.0#");
+
+		result[0] = Double.parseDouble(df.format(this.chirpRepository.findMinReceived()));
+		result[1] = Double.parseDouble(df.format(this.chirpRepository.findMaxReceived()));
+		result[2] = Double.parseDouble(df.format(this.chirpRepository.findAvgReceived()));
 
 		return result;
 	}
@@ -293,10 +297,12 @@ public class ChirpService {
 	public Double[] findMinMaxAvgSent() {
 
 		final Double[] result = new Double[3];
+		DecimalFormat df;
 
-		result[0] = this.chirpRepository.findMinChirpsSent();
-		result[1] = this.chirpRepository.findMaxChirpsSent();
-		result[2] = this.chirpRepository.findAvgChirpsSent();
+		df = new DecimalFormat("0.0#");
+		result[0] = Double.parseDouble(df.format(this.chirpRepository.findMinChirpsSent()));
+		result[1] = Double.parseDouble(df.format(this.chirpRepository.findMaxChirpsSent()));
+		result[2] = Double.parseDouble(df.format(this.chirpRepository.findAvgChirpsSent()));
 
 		return result;
 	}

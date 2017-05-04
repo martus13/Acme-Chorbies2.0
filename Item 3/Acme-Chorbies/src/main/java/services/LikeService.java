@@ -1,6 +1,7 @@
 
 package services;
 
+import java.text.DecimalFormat;
 import java.util.Calendar;
 import java.util.Collection;
 
@@ -134,16 +135,28 @@ public class LikeService {
 
 	public Object[] findMinMaxAvgReceivedPerChorbi() {
 		Object[] result;
+		DecimalFormat df;
 
 		result = this.likeRepository.findMinMaxAvgReceivedPerChorbi();
+
+		df = new DecimalFormat("0.0#");
+		result[0] = df.format(result[0]);
+		result[1] = df.format(result[1]);
+		result[2] = df.format(result[2]);
 
 		return result;
 	}
 
 	public Object[] findMinMaxAvgStarsPerChorbi() {
 		Object[] result;
+		DecimalFormat df;
 
 		result = this.likeRepository.findMinMaxAvgStatsPerChorbi();
+
+		df = new DecimalFormat("0.0#");
+		result[0] = df.format(result[0]);
+		result[1] = df.format(result[1]);
+		result[2] = df.format(result[2]);
 
 		return result;
 	}
