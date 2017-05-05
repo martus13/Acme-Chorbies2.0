@@ -41,19 +41,21 @@ public class LikeServiceTest extends AbstractTest {
 	public void driverCreateAndSave() {
 		final Object testingData[][] = {
 			{	// Bien
-				"chorbi1", 76, "Test save", null
+				"chorbi1", 76, "Test save",3, null
 			}, {// No se puede dar like dos veces al mismo chorbi
-				"chorbi1", 75, "Test save", IllegalArgumentException.class
+				"chorbi1", 75, "Test save",3, IllegalArgumentException.class
 			}, {// No se puede dar like a sí mismo
-				"chorbi1", 74, "Test save", IllegalArgumentException.class
+				"chorbi1", 74, "Test save",3, IllegalArgumentException.class
 			}, {// Debe estar logueado
-				null, 74, "Test save", IllegalArgumentException.class
+				null, 74, "Test save",3, IllegalArgumentException.class
+			},{// La valoración debe estar entre 0 y 3
+				null, 74, "Test save",4, IllegalArgumentException.class
 			}
 		};
 
 		for (int i = 0; i < testingData.length; i++) {
-			this.testCreate((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][3]);
-			this.testCreateAndSave((String) testingData[i][0], (int) testingData[i][1], (String) testingData[i][2], (Class<?>) testingData[i][3]);
+			this.testCreate((String) testingData[i][0], (int) testingData[i][1], (Class<?>) testingData[i][4]);
+			this.testCreateAndSave((String) testingData[i][0], (int) testingData[i][1], (String) testingData[i][2], (int) testingData[i][3], (Class<?>) testingData[i][4]);
 		}
 	}
 
@@ -112,7 +114,7 @@ public class LikeServiceTest extends AbstractTest {
 
 	}
 
-	protected void testCreateAndSave(final String username, final int chrobiId, final String commentText, final Class<?> expected) {
+	protected void testCreateAndSave(final String username, final int chrobiId, final String commentText, final int starsNumber, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
@@ -125,8 +127,10 @@ public class LikeServiceTest extends AbstractTest {
 			chorbi = this.chorbiService.findOne(chrobiId);
 			like = this.likeService.create(chorbi);
 			like.setComment(commentText);
+			like.setStarsNumber(starsNumber);
 			like = this.likeService.save(like);
 			Assert.isTrue(!like.getComment().isEmpty());
+			Assert.isTrue(like.getStarsNumber()<=3&&like.getStarsNumber()>=0);
 
 			this.unauthenticate();
 		} catch (final Throwable oops) {
