@@ -26,7 +26,6 @@ ERRORES TONTOS:
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ERRORES DEL DOCUMENTO:
 
-- editar perfil chorbi: el boton cancelar de editar coordenadas redirige a la vista de editar perfil, el boton cancelar de editar la creditcard no.
 - deberian ponerlo todo en ingles, o todo en español
 - el test 6 y 5 del caso de uso 1 son los mismos.
 	en el caso de uso 2 hay dos tests 5.
