@@ -13,7 +13,7 @@ Errores encontrados por marta:
 9. Caso de uso 18: test1 -> Se ha encontrado un error en este caso de uso, ya que si se intenta editar este evento, se muestra el siguiente error.
 10. Caso de uso 18: test2 -> En este caso de uso se ha encontrado un error derivado del test anterior, ya que al no poderse editar el evento deseado, no se debería enviar el chirp de evento. Sin embargo, el chirp se envía.
 
------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+------------------
 ERRORES TONTOS: 
 
 - Caso de uso 2: test2 -> El botón cancelar no redirige a la página principal, si no al listado de eventos.
@@ -21,3 +21,19 @@ ERRORES TONTOS:
  
  (?)
 - Caso de uso 3: test4 -> En este caso de uso se ha encontrado un error, ya que la suma se acumula cada vez que el administrador le da al botón, no lleva ningún control del mes en que se realiza.
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ERRORES DEL DOCUMENTO:
+
+- editar perfil chorbi: el boton cancelar de editar coordenadas redirige a la vista de editar perfil, el boton cancelar de editar la creditcard no.
+- deberian ponerlo todo en ingles, o todo en español
+- el test 6 y 5 del caso de uso 1 son los mismos.
+	en el caso de uso 2 hay dos tests 5.
+	el test 5 y el 7 del caso de uso 9 son los mismos.
+	el test 4 y el 6 del caso de uso 11 son los mismos.
+	el test 4 y el 6 del caso de uso 14 son los mismos.
+
+- el caso de uso 8 se llama "Crear manager" aunque lo que se hace dentro es editar el perfil del manager XD
+- He encontrado un error del caso de uso 9 en el test8 (no lo he puesto en el doc) : el sistema permite crear un chirp a un chorbie que está baneado. 
+	Por si no es un error intencionado...lo que he hecho es darle a crear el chirp a un chorbo no baneado, luego en una pestaña a parte he cerrado sesion, he iniciado sesion como admin, he baneado al chorbi al que se le esta intentando mandar el chirp, he cerrado sesion y vuelto a iniciar sesion como el chorbi logueado al principio.
