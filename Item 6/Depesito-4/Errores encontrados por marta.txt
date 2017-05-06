@@ -26,7 +26,7 @@ ERRORES TONTOS:
 -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 ERRORES DEL DOCUMENTO:
 
-- deberian ponerlo todo en ingles, o todo en español
+- en el caso de uso 4: test2 -> pone revivied
 - el test 6 y 5 del caso de uso 1 son los mismos.
 	en el caso de uso 2 hay dos tests 5.
 	el test 5 y el 7 del caso de uso 9 son los mismos.
