@@ -8,7 +8,7 @@
 <%@ taglib prefix="acme" tagdir="/WEB-INF/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="f" uri="http://example.com/functions" %>
-
+	
 <display:table name="chirps" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag">
 
 	
@@ -58,8 +58,8 @@
 	</jstl:choose>
 	
 	<display:column>
-		<form:form action="chirp/actor/delete.do?chirpId=${row.id}" modelAttribute="chirp">
-			<acme:submit name="delete" code="chirp.delete" />
+		<form:form id="formDeleteChirp" action="chirp/actor/delete.do?chirpId=${row.id}" modelAttribute="chirp">
+			<input type="submit" name="delete" value="<spring:message code="chirp.delete" />" onclick="return confirm('<spring:message code="chirp.delete.confirmation" />')" />&nbsp;
 		</form:form>
 	</display:column>
 	
