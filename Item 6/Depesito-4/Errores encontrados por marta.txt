@@ -1,11 +1,9 @@
 Errores encontrados por marta:
 
 1. Caso de uso 1: test2 -> En este caso de uso se ha encontrado un error, ya que en el listado de eventos recomendados, todas las columnas de la tabla se pueden ordenar menos los asientos disponibles.
-2. Caso de uso 2: test5 -> En este caso de uso se han encontrado algunos errores:
-	1.	Un chorbi se puede registrar dejando su contraseña en blanco.
-	2.	Si se deja el nombre de usuario en blanco no se muestra el error pertinente (Cannot commit this operation), en cambio, se muestra la siguiente pantalla de error.
-3. Caso de uso 2: test9 -> En este caso de uso se ha encontrado un error, ya que un chorbi baneado sí puede editar sus coordenadas o su tarjeta de crédito, y además, pese que al editar su perfil se muestra el error adecuado, se guardan las modificaciones.
-4. Caso de uso 5: test6 -> En este caso de uso se ha encontrado un error, ya que las búsquedas por coordenadas no funcionan, se puede añadir coordenadas y editar o borrar las existentes, pero el sistema no hace el filtro  correctamente.
+2. Caso de uso 2: test2 -> El botón cancelar no redirige a la página principal, si no al listado de eventos.
+3. Caso de uso 5: test6 -> En este caso de uso se ha encontrado un error, ya que las búsquedas por coordenadas no funcionan, se puede añadir coordenadas y editar o borrar las existentes, pero el sistema no hace el filtro  correctamente.
+4. Caso de uso 8: test5 -> El botón cancelar redirige al listado de eventos en vez de redirigir a la vista de inicio.
 5. Caso de uso 9: test8 -> En este caso de uso se ha encontrado un error, y es que un chorbi baneado es capaz de crear mensajes nuevos.
 6. Caso de uso 12: test2 -> La paginación no funciona correctamente y se muestra el siguiente error:
 7. Caso de uso 15: test4 -> El sistema no guarda el evento y muestra el siguiente error:
@@ -15,9 +13,6 @@ Errores encontrados por marta:
 
 ------------------
 ERRORES TONTOS: 
-
-- Caso de uso 2: test2 -> El botón cancelar no redirige a la página principal, si no al listado de eventos.
-- Caso de uso 8: test5 -> El botón cancelar redirige al listado de eventos en vez de redirigir a la vista de inicio.
  
  (?)
 - Caso de uso 3: test4 -> En este caso de uso se ha encontrado un error, ya que la suma se acumula cada vez que el administrador le da al botón, no lleva ningún control del mes en que se realiza.
@@ -34,5 +29,3 @@ ERRORES DEL DOCUMENTO:
 	el test 4 y el 6 del caso de uso 14 son los mismos.
 
 - el caso de uso 8 se llama "Crear manager" aunque lo que se hace dentro es editar el perfil del manager XD
-- He encontrado un error del caso de uso 9 en el test8 (no lo he puesto en el doc) : el sistema permite crear un chirp a un chorbie que está baneado. 
-	Por si no es un error intencionado...lo que he hecho es darle a crear el chirp a un chorbo no baneado, luego en una pestaña a parte he cerrado sesion, he iniciado sesion como admin, he baneado al chorbi al que se le esta intentando mandar el chirp, he cerrado sesion y vuelto a iniciar sesion como el chorbi logueado al principio.
