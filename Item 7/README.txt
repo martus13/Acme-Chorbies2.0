@@ -1,1 +1,0 @@
-A script to create the corresponding database in the pre-production environment and a war artefact that implements your project. The war artefact must be deployable and runnable on domain “www.acme.com”.
