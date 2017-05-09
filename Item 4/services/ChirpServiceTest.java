@@ -3,7 +3,6 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -33,9 +32,9 @@ public class ChirpServiceTest extends AbstractTest {
 
 	@Autowired
 	private ChorbiService	chorbiService;
-	
+
 	@Autowired
-	private EventService eventService;
+	private EventService	eventService;
 
 
 	//Tests------------------------------------------
@@ -67,7 +66,7 @@ public class ChirpServiceTest extends AbstractTest {
 		final Object testingData[][] = {
 			{	// Bien para chorbi
 				"chorbi1", 76, "Asunto test", "Test save", null
-			},{ // Bien para manager 
+			}, { // Bien para manager 
 				"manager1", 76, "Asunto test", "Test save", null
 			}, {// No se puede enviar chirps a sí mismo
 				"chorbi1", 74, "Asunto test", "Test save", IllegalArgumentException.class
@@ -110,46 +109,43 @@ public class ChirpServiceTest extends AbstractTest {
 		}
 
 	}
-	
+
 	//Gestionar los chirps; incluye responder, reenviar y eliminar un chirp
 
-		@Test
-		public void driverSendChorbiesRegistered() {
+	@Test
+	public void driverSendChorbiesRegistered() {
 
-			final Object testingData[][] = {
-				{	// Bien
-					73, "manager2", "Mensaje de prueba", "Texto", new ArrayList<String>(), null
-				}, {// Debe estar logueado
-					73, null , "Mensaje de prueba", "Texto", new ArrayList<String>(), IllegalArgumentException.class
-				}, {// El actor que realiza el envío debe ser un manager
-					73, "chorbi1" , "Mensaje de prueba", "Texto", new ArrayList<String>(), IllegalArgumentException.class
-				}
-
-			};
-
-			for (int i = 0; i < testingData.length; i++) {
-
-				this.testsendChorbiesRegistered((int) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3],  (Collection<String>) testingData[i][4],   (Class<?>) testingData[i][5]);
-				
+		final Object testingData[][] = {
+			{	// Bien
+				73, "manager2", "Mensaje de prueba", "Texto", new ArrayList<String>(), null
+			}, {// Debe estar logueado
+				73, null, "Mensaje de prueba", "Texto", new ArrayList<String>(), IllegalArgumentException.class
+			}, {// El actor que realiza el envío debe ser un manager
+				73, "chorbi1", "Mensaje de prueba", "Texto", new ArrayList<String>(), IllegalArgumentException.class
 			}
 
-		}
-	
-	protected void testsendChorbiesRegistered(final int eventId, String manager,final String subject, final String text, final Collection<String> attachments, final Class<?> expected ){
+		};
+
+		for (int i = 0; i < testingData.length; i++)
+			this.testsendChorbiesRegistered((int) testingData[i][0], (String) testingData[i][1], (String) testingData[i][2], (String) testingData[i][3], (Collection<String>) testingData[i][4], (Class<?>) testingData[i][5]);
+
+	}
+
+	protected void testsendChorbiesRegistered(final int eventId, final String manager, final String subject, final String text, final Collection<String> attachments, final Class<?> expected) {
 		Class<?> caught;
 
 		caught = null;
 		try {
-		
-		Event event = this.eventService.findOne(eventId);
-		this.authenticate(manager);
-		
-		this.chirpService.sendChorbiesRegistered(event, subject, text, attachments);
-		System.out.println("Se ha enviado un chirp a todos los chorbies del evento");
-		
-		this.unauthenticate();
-		
-			}catch (final Throwable oops){
+
+			final Event event = this.eventService.findOne(eventId);
+			this.authenticate(manager);
+
+			this.chirpService.sendChorbiesRegistered(event, subject, text, attachments);
+			System.out.println("Se ha enviado un chirp a todos los chorbies del evento");
+
+			this.unauthenticate();
+
+		} catch (final Throwable oops) {
 			caught = oops.getClass();
 		}
 
