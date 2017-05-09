@@ -54,7 +54,7 @@
 					</form:form>
 				</jstl:when>
 				<jstl:otherwise>
-					<jstl:if test="${row.availableSeats>0 }">
+					<jstl:if test="${row.availableSeats>0 && (row.organisedMoment gt currentDate || row.organisedMoment == currentDate) }">
 						<form:form action="event/chorbi/register.do?eventId=${row.id}" modelAttribute="event">
 							<acme:submit name="register" code="event.register" />
 						</form:form>
