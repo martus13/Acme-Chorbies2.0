@@ -325,6 +325,8 @@ CREATE TABLE `event` (
   `title` varchar(255) DEFAULT NULL,
   `manager_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
+  KEY `UK_9rb26he9p05uh8lll80p47sei` (`availableSeats`),
+  KEY `UK_fsy5jk057qep9wfso1isjyh2v` (`organisedMoment`),
   KEY `FK_cm6wrj8rjwiu1ftcjtq0l6wuo` (`manager_id`),
   CONSTRAINT `FK_cm6wrj8rjwiu1ftcjtq0l6wuo` FOREIGN KEY (`manager_id`) REFERENCES `manager` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -543,6 +545,6 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-05-09 21:55:26
+-- Dump completed on 2017-05-09 22:16:05
 
 commit;
