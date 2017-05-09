@@ -94,7 +94,7 @@ public class ManagerServiceTest extends AbstractTest {
 		Collection<Manager> managers;
 
 		managers = this.managerService.findAll();
-		Assert.isTrue(managers.size() == 5);
+		Assert.isTrue(managers.size() == 3);
 	}
 
 	@Test
